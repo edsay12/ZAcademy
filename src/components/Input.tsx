@@ -16,7 +16,7 @@ const Input = forwardRef<HTMLInputElement, PropTypes>(
       label = "",
       helperText = "",
       ico,
-      bgColor='bg-gray-800',
+      bgColor='bg-blue-600',
       ...rest
     },
     ref
@@ -29,8 +29,8 @@ const Input = forwardRef<HTMLInputElement, PropTypes>(
         {label && <label htmlFor={inputId}>{label}</label>}
         <div
           className={` text-xl border  ${
-            hasError ? "border border-red-500" : "border-transparent"
-          } focus-within:border-cyan-500  placeholder:text-gray-400 w-full flex gap-2  ${bgColor} p-3 rounded items-center `}
+            hasError ? "border border-red-500" : "border-cyan-500"
+          } focus-within:border-yellow-700  placeholder:text-gray-400 w-full flex gap-2  ${bgColor} p-3 rounded-full items-center `}
         >
           {ico && ico}
           <input

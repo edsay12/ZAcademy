@@ -37,7 +37,7 @@ const paddingSizes = {
   big: "py-4",
 };
 function Button({
-  bg = "bg-cyan-500",
+  bg = "bg-yellow-700",
   buttonSize = "full",
   paddingY = "medium",
   margintop = "big",
