@@ -3,7 +3,7 @@ type PropTypes = {
 };
 
 function CardContainer({ children }: PropTypes) {
-  return <div className="grid grid-cols-4">{children}</div>;
+  return <div className="grid grid-cols-4 gap-10">{children}</div>;
 }
 
 export default CardContainer;
