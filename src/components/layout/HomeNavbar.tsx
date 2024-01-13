@@ -26,17 +26,11 @@ import LinkList from "../LinkList";
 import { Input } from "../Input";
 import Button from "../Button";
 
-type propTypes = {
-  setShowNav: Dispatch<SetStateAction<boolean>>;
-  showNav: boolean;
-};
 
-function HomeNavbar({ setShowNav, showNav = true }: propTypes) {
+
+function HomeNavbar() {
   const [isNavOppen, setIsNavOppen] = useState<boolean>(false);
-  const [isNotificationOppen, setNotificationOppen] = useState(false);
-  const [isUserConfigOppen, setUserConfigOppen] = useState(false);
-  const [query, setQuery] = useState("");
-  const router = useRouter();
+ 
 
   
 

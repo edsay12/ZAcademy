@@ -159,6 +159,7 @@ function Auth() {
             <Button
               type="submit"
               buttonSize="full"
+              
               rounded="rounded"
               text={`${
                 variant === "REGISTER" ? "Cadastrar-se" : "Entrar na plataforma"
@@ -174,7 +175,7 @@ function Auth() {
               <Button
                 text="Entrar com o Github"
                 type="submit"
-                bg="bg-gray-900"
+                bg="bg-black"
                 ico={<BsGithub />}
                 buttonSize="full"
                 rounded="rounded"

@@ -13,32 +13,16 @@ export default function RootLayout({
   const [showNav, setShowNav] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  const handdleSize = () => {
-    if (innerWidth <= 640) {
-      setShowNav(false);
-      setIsMobile(true);
-    } else {
-      setShowNav(true);
-      setIsMobile(false);
-    }
-  };
+  
 
-  useEffect(() => {
-    if (typeof window != undefined) {
-      window.addEventListener("resize", handdleSize);
-    }
-    return () => {
-      removeEventListener("resize", handdleSize); // CleanerUp
-    };
-  }, []);
 
   return (
     <>
       <header className="bg-blue-700">
-        <TopBar setShowNav={setShowNav} showNav={showNav} />
+        <TopBar />
         <Banner/>
       </header>
-      <div className="">{children}</div>
+      <main className="">{children}</main>
     </>
   );
 }

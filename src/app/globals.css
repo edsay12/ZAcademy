@@ -16,7 +16,9 @@ body {
   
 }
 
-.container {
+.appcontainer {
   width: 1460px;
-  padding: 5;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
 }

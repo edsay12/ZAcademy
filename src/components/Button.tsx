@@ -47,13 +47,13 @@ function Button({
   text,
   rounded = "full",
   ico,
-  textColor = "text-gray-200",
+  textColor = "text-white",
   ...rest
 }: ButtonProps) {
   return (
     <button
       {...rest}
-      className={`${bg} ${textColor} ${roundedSizes[rounded]} ${paddingSizes[paddingY]} ${marginSizes[marginBotton]}  ${marginSizes[margintop]} text-sm hover:opacity-90 py-3 mt-5 mb-5  flex gap-3 justify-center items-center ${buttonSizes[buttonSize]} ${newStyle} `}
+      className={`${bg} ${textColor} ${roundedSizes[rounded]} ${paddingSizes[paddingY]} ${marginSizes[marginBotton]}  ${marginSizes[margintop]} text-sm hover:opacity-90 py-3 mt-5 mb-5 font-extrabold shadow-sm  flex gap-3 justify-center items-center ${buttonSizes[buttonSize]} ${newStyle} `}
     >
       {ico && ico}
       {text}
