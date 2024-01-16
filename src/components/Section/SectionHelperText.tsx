@@ -9,7 +9,7 @@ type PropTypes = {
   thirthText?:string;
 };
 
-function SessionTitle({
+function SectionHelperText({
   firstTextColor = "text-black",
   secondTextColor= " text-yellow-700",
   firstText,
@@ -27,4 +27,4 @@ function SessionTitle({
   );
 }
 
-export default SessionTitle;
+export default SectionHelperText;

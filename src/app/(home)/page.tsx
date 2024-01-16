@@ -10,32 +10,44 @@ import CardBotton from "@/components/Card/CardBotton";
 
 function Home() {
   return (
-    <SectionContainer>
-      <SessionTitle
-        firstText="Our"
-        secondText="Top Courses"
-        firstTextColor={"text-black"}
-      />
+    <>
+      <SectionContainer>
+        <SessionTitle
+          firstText="Our"
+          secondText="Top Courses"
+          firstTextColor={"text-black"}
+        />
 
-      <div className="mt-10">
-        <CardContainer>
-          <Card>
-            <CardTop
-              courseImageUrl="/cardBg.webp"
-              userName="Jhon lenon"
-              userImageUrl="/cardUser.jpeg"
-            />
-            <CardBotton
-              courseLevel="Advance"
-              coursePrice="23.50"
-              courseStarNumber={5}
-              courseTitle="Project management concepts"
-              courseTotalTime="13h 20m"
-            />
-          </Card>
-        </CardContainer>
-      </div>
-    </SectionContainer>
+        <div className="mt-10">
+          <CardContainer>
+            <Card>
+              <CardTop
+                courseImageUrl="/cardBg.webp"
+                userName="Jhon lenon"
+                userImageUrl="/cardUser.jpeg"
+              />
+              <CardBotton
+                courseLevel="Advance"
+                coursePrice="23.50"
+                courseStarNumber={5}
+                courseTitle="Project management concepts"
+                courseTotalTime="13h 20m"
+              />
+            </Card>
+          </CardContainer>
+        </div>
+      </SectionContainer>
+
+      <SectionContainer>
+        <SessionTitle
+          firstText="Why We"
+          textPosition="text-center"
+          secondText="Are Better Than"
+          thirthText="Others"
+          firstTextColor={"text-black"}
+        />
+      </SectionContainer>
+    </>
   );
 }
 
