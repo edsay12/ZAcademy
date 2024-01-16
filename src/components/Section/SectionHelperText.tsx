@@ -1,29 +1,17 @@
 import { ThemeConfig } from "tailwindcss/types/config";
 
 type PropTypes = {
-  firstTextColor: string
-  secondTextColor?: string
-  firstText: string;
+  text:string
   textPosition?:string
-  secondText: string;
-  thirthText?:string;
+  
 };
 
 function SectionHelperText({
-  firstTextColor = "text-black",
-  secondTextColor= " text-yellow-700",
-  firstText,
-  textPosition,
-  thirthText,
-  secondText,
+  text,
+  textPosition
 }: PropTypes) {
   return (
-    <h1 className={`${firstTextColor} ${textPosition} font-extrabold text-2xl `}>
-      {firstText}
-      {" "}
-      <span className={`${secondTextColor}`}>{secondText}</span>
-      <span className={`${firstTextColor}`}>{thirthText}</span>
-    </h1>
+    <p className={`${textPosition} text-black mt-2`}>{text}</p>
   );
 }
 
