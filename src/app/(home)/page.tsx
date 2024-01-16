@@ -9,7 +9,9 @@ import CardTop from "@/components/Card/CardTop";
 import CardBotton from "@/components/Card/CardBotton";
 import SectionHelperText from "@/components/Section/SectionHelperText";
 import SectionTitle from "@/components/Section/SectionTitle";
-const list = [1, 2, 3, 4, 5, 6,7];
+import CertificationElementCard from "@/components/CertificationElementCard";
+import { PiCertificateDuotone } from "react-icons/pi";
+const list = [1, 2, 3, 4, 5, 6, 7];
 function Home() {
   return (
     <>
@@ -70,7 +72,37 @@ function Home() {
           text="see some of our certificates"
           textPosition="text-center"
         />
+
+        <div className="w-full flex justify-between">
+          <CertificationElementCard
+            title="Certifiqued Plataform"
+            description="Loren ipsun alhuma coisa aqui ola mundo do mundo azul na lua da mulher do "
+            ico={<PiCertificateDuotone />}
+          />
+          <CertificationElementCard
+            title="Certifiqued Plataform"
+            description="Loren ipsun alhuma coisa aqui ola mundo do mundo azul na lua da mulher do "
+            ico={<PiCertificateDuotone />}
+          />
+          <CertificationElementCard
+            title="Certifiqued Plataform"
+            description="Loren ipsun alhuma coisa aqui ola mundo do mundo azul na lua da mulher do "
+            ico={<PiCertificateDuotone />}
+          />
+        </div>
       </SectionContainer>
+
+      <section className="bg-blue-700 pt-40">
+        <SectionContainer>
+          <SectionTitle
+            firstText="Why We"
+            textPosition="text-left"
+            secondText="Are Better Than"
+            thirthText="Others"
+            firstTextColor={"text-black"}
+          />
+        </SectionContainer>
+      </section>
     </>
   );
 }
