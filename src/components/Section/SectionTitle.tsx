@@ -22,6 +22,7 @@ function SectionTitle({
       {firstText}
       {" "}
       <span className={`${secondTextColor}`}>{secondText}</span>
+      {" "}
       <span className={`${firstTextColor}`}>{thirthText}</span>
     </h1>
   );
