@@ -12,6 +12,8 @@ import { PiCertificateDuotone } from "react-icons/pi";
 import { useState } from "react";
 import CategoriesButtons from "@/components/CategoriesButtons";
 import TestimonialCard from "@/components/TestimonialCard";
+import Image from "next/image";
+import Button from "@/components/Button";
 
 const list = [1, 2, 3, 4, 5, 6, 7];
 const categories = [
@@ -111,7 +113,7 @@ function Home() {
         </div>
       </SectionContainer>
 
-      <SectionContainer className="pt-40 bg-blue-700">
+      <SectionContainer className="pt-40 bg-blue-700 pb-32">
         <SectionTitle
           firstText="Our"
           textPosition="text-left"
@@ -148,14 +150,64 @@ function Home() {
           firstTextColor={"text-black"}
         />
 
-        <TestimonialCard
-          testimonialText="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos sunt
+        <div className="flex gap-5 w-full">
+          <TestimonialCard
+            testimonialText="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos sunt
               ratione dolor exercitationem minima quas itaque saepe quasi
               architecto vel! Accusantium, vero sint recusandae cum tempora nemo
               commodi soluta deleniti."
-          userName="Kenzie Edgar."
-          userImageUrl="/cardUser"
-        />
+            userName="Kenzie Edgar."
+            userImageUrl="/cardUser.jpeg"
+          />
+          <TestimonialCard
+            testimonialText="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos sunt
+              ratione dolor exercitationem minima quas itaque saepe quasi
+              architecto vel! Accusantium, vero sint recusandae cum tempora nemo
+              commodi soluta deleniti."
+            userName="Kenzie Edgar."
+            userImageUrl="/cardUser.jpeg"
+          />
+          <TestimonialCard
+            testimonialText="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos sunt
+              ratione dolor exercitationem minima quas itaque saepe quasi
+              architecto vel! Accusantium, vero sint recusandae cum tempora nemo
+              commodi soluta deleniti."
+            userName="Kenzie Edgar."
+            userImageUrl="/cardUser.jpeg"
+          />
+        </div>
+      </SectionContainer>
+
+      <SectionContainer className="mt-40">
+        <div className="flex justify-between gap-40 ">
+          <Image
+            alt="mulher apontando"
+            src={"/Woman.svg"}
+            width={100}
+            height={100}
+            className="  max-w-[600px] w-full"
+          />
+          <div className="mt-20 ml-">
+            <SectionTitle
+              firstText="What people say"
+              textPosition="text-left"
+              secondText="About us"
+              firstTextColor={"text-black"}
+            />
+
+            <div>
+              <p className="text-black">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Laborum perferendis eos molestiae dolore et harum, laboriosam
+                necessitatibus, explicabo fugit cupiditate aperiam, optio iste
+                tenetur neque. Itaque minus aliquid sapiente quae.
+              </p>
+            </div>
+            <div className="mt-10">
+              <Button text="Start Teach Now =>" buttonSize="medium"></Button>
+            </div>
+          </div>
+        </div>
       </SectionContainer>
     </>
   );
