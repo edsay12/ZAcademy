@@ -148,7 +148,14 @@ function Home() {
           firstTextColor={"text-black"}
         />
 
-        <TestimonialCard/>
+        <TestimonialCard
+          testimonialText="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos sunt
+              ratione dolor exercitationem minima quas itaque saepe quasi
+              architecto vel! Accusantium, vero sint recusandae cum tempora nemo
+              commodi soluta deleniti."
+          userName="Kenzie Edgar."
+          userImageUrl="/cardUser"
+        />
       </SectionContainer>
     </>
   );

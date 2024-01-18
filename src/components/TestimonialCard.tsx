@@ -1,6 +1,15 @@
 import Image from "next/image";
+type PropTypes = {
+  userImageUrl: string;
+  userName: string;
+  testimonialText: string;
+};
 
-function TestimonialCard() {
+function TestimonialCard({
+  testimonialText,
+  userImageUrl,
+  userName,
+}: PropTypes) {
   return (
     <>
       <div className="px-3 md:w-1/3 mt-20">
@@ -8,7 +17,7 @@ function TestimonialCard() {
           <div className="w-full flex mb-4 items-center">
             <div className="overflow-hidden rounded-full w-10 h-10 bg-gray-50 border border-gray-200">
               <Image
-                src="/cardUser.jpeg"
+                src={userImageUrl}
                 alt=""
                 width={100}
                 height={100}
@@ -17,7 +26,7 @@ function TestimonialCard() {
             </div>
             <div className="flex-grow pl-3">
               <h6 className="font-bold text-sm uppercase text-gray-600">
-                Kenzie Edgar.
+                {userName}
               </h6>
             </div>
           </div>
@@ -26,10 +35,8 @@ function TestimonialCard() {
               <span className="text-lg leading-none italic font-bold text-gray-400 mr-1">
                 &quot;
               </span>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos sunt
-              ratione dolor exercitationem minima quas itaque saepe quasi
-              architecto vel! Accusantium, vero sint recusandae cum tempora nemo
-              commodi soluta deleniti.
+              {testimonialText}
+              
               <span className="text-lg leading-none italic font-bold text-gray-400 ml-1">
                 &quot;
               </span>
