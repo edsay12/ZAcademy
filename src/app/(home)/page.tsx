@@ -11,6 +11,7 @@ import CertificationElementCard from "@/components/CertificationElementCard";
 import { PiCertificateDuotone } from "react-icons/pi";
 import { useState } from "react";
 import CategoriesButtons from "@/components/CategoriesButtons";
+import TestimonialCard from "@/components/TestimonialCard";
 
 const list = [1, 2, 3, 4, 5, 6, 7];
 const categories = [
@@ -146,6 +147,8 @@ function Home() {
           secondText="About us"
           firstTextColor={"text-black"}
         />
+
+        <TestimonialCard/>
       </SectionContainer>
     </>
   );
