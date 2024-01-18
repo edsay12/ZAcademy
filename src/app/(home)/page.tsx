@@ -1,7 +1,5 @@
 "use client";
-import cardBg from "../../../public/cardBg.webp";
 
-import SessionTitle from "@/components/Section/SectionTitle";
 import SectionContainer from "@/components/Section/SectionContainer";
 import CardContainer from "@/components/Card/CardContainer";
 import Card from "@/components/Card/Card";
@@ -11,8 +9,30 @@ import SectionHelperText from "@/components/Section/SectionHelperText";
 import SectionTitle from "@/components/Section/SectionTitle";
 import CertificationElementCard from "@/components/CertificationElementCard";
 import { PiCertificateDuotone } from "react-icons/pi";
+import { useState } from "react";
+import CategoriesButtons from "@/components/CategoriesButtons";
+
 const list = [1, 2, 3, 4, 5, 6, 7];
+const categories = [
+  "BUSINESS",
+  "DESIGNER",
+  "DEVELOPMENT",
+  "MANAGEMENT",
+  "TECNOLOGY",
+  "PHOTOGRAPHY",
+];
+
 function Home() {
+  const [itens, setItens] = useState(list);
+  const [filter, setFilter] = useState(list);
+  console.log(filter);
+
+  const filterItens = (cat: string = "") => {
+    const items = itens.filter((item) => item === 1);
+
+    setFilter(items);
+  };
+
   return (
     <>
       <SectionContainer>
@@ -22,42 +42,40 @@ function Home() {
           firstTextColor={"text-black"}
         />
 
-        <div className="mt-10">
-          <CardContainer>
-            {list.map((item) => {
-              return (
-                <Card key={item}>
-                  <CardTop
-                    courseImageUrl="/cardBg.webp"
-                    userName="Jhon lenon"
-                    userImageUrl="/cardUser.jpeg"
-                  />
-                  <CardBotton
-                    courseLevel="Advance"
-                    coursePrice="23.50"
-                    courseStarNumber={5}
-                    courseTitle="Project management concepts"
-                    courseTotalTime="13h 20m"
-                  />
-                </Card>
-              );
-            })}
-            <Card>
-              <CardTop
-                courseImageUrl="/cardBg.webp"
-                userName="Jhon lenon"
-                userImageUrl="/cardUser.jpeg"
-              />
-              <CardBotton
-                courseLevel="Advance"
-                coursePrice="23.50"
-                courseStarNumber={5}
-                courseTitle="Project management concepts"
-                courseTotalTime="13h 20m"
-              />
-            </Card>
-          </CardContainer>
-        </div>
+        <CardContainer>
+          {list.map((item) => {
+            return (
+              <Card key={item}>
+                <CardTop
+                  courseImageUrl="/cardBg.webp"
+                  userName="Jhon lenon"
+                  userImageUrl="/cardUser.jpeg"
+                />
+                <CardBotton
+                  courseLevel="Advance"
+                  coursePrice="23.50"
+                  courseStarNumber={5}
+                  courseTitle="Project management concepts"
+                  courseTotalTime="13h 20m"
+                />
+              </Card>
+            );
+          })}
+          <Card>
+            <CardTop
+              courseImageUrl="/cardBg.webp"
+              userName="Jhon lenon"
+              userImageUrl="/cardUser.jpeg"
+            />
+            <CardBotton
+              courseLevel="Advance"
+              coursePrice="23.50"
+              courseStarNumber={5}
+              courseTitle="Project management concepts"
+              courseTotalTime="13h 20m"
+            />
+          </Card>
+        </CardContainer>
       </SectionContainer>
 
       <SectionContainer>
@@ -95,12 +113,50 @@ function Home() {
       <section className="bg-blue-700 pt-40">
         <SectionContainer>
           <SectionTitle
-            firstText="Why We"
+            firstText="Our"
             textPosition="text-left"
+            secondText="Online Courses"
+            firstTextColor={"text-white"}
+          />
+
+          <CategoriesButtons
+            categories={categories}
+            filterItens={filterItens}
+          />
+
+          <CardContainer>
+            <Card>
+              <CardTop
+                courseImageUrl="/cardBg.webp"
+                userName="Jhon lenon"
+                userImageUrl="/cardUser.jpeg"
+              />
+              <CardBotton
+                courseLevel="Advance"
+                coursePrice="23.50"
+                courseStarNumber={5}
+                courseTitle="Project management concepts"
+                courseTotalTime="13h 20m"
+              />
+            </Card>
+          </CardContainer>
+
+          <SectionTitle
+            firstText="Why We"
+            textPosition="text-center"
             secondText="Are Better Than"
             thirthText="Others"
-            firstTextColor={"text-black"}
+            firstTextColor={"text-white"}
           />
+          <SectionHelperText
+            text="see some of our certificates"
+            textPosition="text-center"
+            textColor="white"
+          />
+
+
+
+          
         </SectionContainer>
       </section>
     </>
@@ -108,3 +164,5 @@ function Home() {
 }
 
 export default Home;
+
+// buttons asdasda (Categoryes,OnClick())

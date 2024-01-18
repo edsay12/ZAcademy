@@ -16,7 +16,7 @@ function CardTop({ courseImageUrl, userImageUrl, userName }: PropTypes) {
         alt="Course image"
         width={100}
         height={50}
-        className="w-full  border rounded-t-3xl"
+        className="w-full  rounded-t-3xl"
       />
 
       <Link

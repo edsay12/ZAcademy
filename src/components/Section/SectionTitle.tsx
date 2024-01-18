@@ -11,19 +11,19 @@ type PropTypes = {
 
 function SectionTitle({
   firstTextColor = "text-black",
-  secondTextColor= " text-yellow-700",
+  secondTextColor= "text-yellow-700",
   firstText,
   textPosition,
   thirthText,
   secondText,
 }: PropTypes) {
   return (
-    <h1 className={`${firstTextColor} ${textPosition} font-extrabold text-2xl `}>
+    <h1 className={`${firstTextColor} ${textPosition} font-extrabold text-2xl mt-10 mb-10 `}>
       {firstText}
       {" "}
       <span className={`${secondTextColor}`}>{secondText}</span>
       {" "}
-      <span className={`${firstTextColor}`}>{thirthText}</span>
+      <span className={`${firstTextColor} `}>{thirthText}</span>
     </h1>
   );
 }

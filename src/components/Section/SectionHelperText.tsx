@@ -3,15 +3,17 @@ import { ThemeConfig } from "tailwindcss/types/config";
 type PropTypes = {
   text:string
   textPosition?:string
+  textColor?:string
   
 };
 
 function SectionHelperText({
   text,
-  textPosition
+  textPosition,
+  textColor
 }: PropTypes) {
   return (
-    <p className={`${textPosition} text-black mt-2`}>{text}</p>
+    <p className={`${textPosition} ${textColor}  -mt-8`}>{text}</p>
   );
 }
 
