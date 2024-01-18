@@ -110,55 +110,43 @@ function Home() {
         </div>
       </SectionContainer>
 
-      <section className="bg-blue-700 pt-40">
-        <SectionContainer>
-          <SectionTitle
-            firstText="Our"
-            textPosition="text-left"
-            secondText="Online Courses"
-            firstTextColor={"text-white"}
-          />
+      <SectionContainer className="pt-40 bg-blue-700">
+        <SectionTitle
+          firstText="Our"
+          textPosition="text-left"
+          secondText="Online Courses"
+          firstTextColor={"text-white"}
+        />
 
-          <CategoriesButtons
-            categories={categories}
-            filterItens={filterItens}
-          />
+        <CategoriesButtons categories={categories} filterItens={filterItens} />
 
-          <CardContainer>
-            <Card>
-              <CardTop
-                courseImageUrl="/cardBg.webp"
-                userName="Jhon lenon"
-                userImageUrl="/cardUser.jpeg"
-              />
-              <CardBotton
-                courseLevel="Advance"
-                coursePrice="23.50"
-                courseStarNumber={5}
-                courseTitle="Project management concepts"
-                courseTotalTime="13h 20m"
-              />
-            </Card>
-          </CardContainer>
+        <CardContainer>
+          <Card>
+            <CardTop
+              courseImageUrl="/cardBg.webp"
+              userName="Jhon lenon"
+              userImageUrl="/cardUser.jpeg"
+            />
+            <CardBotton
+              textColor="text-white"
+              courseLevel="Advance"
+              coursePrice="23.50"
+              courseStarNumber={5}
+              courseTitle="Project management concepts"
+              courseTotalTime="13h 20m"
+            />
+          </Card>
+        </CardContainer>
+      </SectionContainer>
 
-          <SectionTitle
-            firstText="Why We"
-            textPosition="text-center"
-            secondText="Are Better Than"
-            thirthText="Others"
-            firstTextColor={"text-white"}
-          />
-          <SectionHelperText
-            text="see some of our certificates"
-            textPosition="text-center"
-            textColor="white"
-          />
-
-
-
-          
-        </SectionContainer>
-      </section>
+      <SectionContainer>
+        <SectionTitle
+          firstText="What people say"
+          textPosition="text-left"
+          secondText="About us"
+          firstTextColor={"text-black"}
+        />
+      </SectionContainer>
     </>
   );
 }

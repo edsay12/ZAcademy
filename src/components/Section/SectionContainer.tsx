@@ -1,13 +1,24 @@
 import { ReactNode } from "react";
+import { twMerge } from "tailwind-merge";
 
 type propTypes = {
-  children:ReactNode
-  bgColor?:string
-}
+  children: ReactNode;
 
+  className?: string;
+};
 
-function SectionContainer({ children,bgColor }: propTypes) {
-return <section className={`appcontainer   h-full block mt-16 ${bgColor}`}>{children}</section>;
+function SectionContainer({ children, className }: propTypes) {
+  return (
+    <section
+      className={twMerge(
+        `h-full block mt-16`,
+
+        className
+      )}
+    >
+      <div className="appcontainer">{children}</div>
+    </section>
+  );
 }
 
 export default SectionContainer;

@@ -14,6 +14,7 @@ type PropTypes = {
   courseTotalTime: string;
   courseStarNumber: 1 | 2 | 3 | 4 | 5;
   coursePrice: string;
+  textColor?: string;
 };
 
 function CardBotton({
@@ -22,9 +23,10 @@ function CardBotton({
   coursePrice,
   courseStarNumber,
   courseTotalTime,
+  textColor
 }: PropTypes) {
   return (
-    <div className="p-6 text-black shadow-2xl">
+    <div className={`p-6 text-black shadow-2xl ${textColor}`}>
       <h3 className=" font-bold text-xl opacity-75">{courseTitle}</h3>
       <div className="flex mt-4 opacity-50 gap-4">
         <div className="flex gap-1 text-xs items-center">
@@ -47,7 +49,7 @@ function CardBotton({
         </div>
       </div>
 
-      <hr className="mt-6"/>
+      <hr className="mt-6" />
 
       <div className="flex justify-between items-center mt-1">
         <div className="text-lg font-extrabold">
@@ -55,7 +57,10 @@ function CardBotton({
         </div>
 
         {/* Criar um button melhor */}
-        <button title="button"  className="text-yellow-700 flex gap-1 items-center text-lg">
+        <button
+          title="button"
+          className="text-yellow-700 flex gap-1 items-center text-lg"
+        >
           <span className="">
             <AiOutlineShoppingCart />
           </span>
