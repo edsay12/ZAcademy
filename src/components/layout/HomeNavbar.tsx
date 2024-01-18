@@ -65,7 +65,7 @@ function HomeNavbar() {
     <>
       <nav className={`flex items-center relative z-[1000000] top-0 left-0 right-0 w-full bg-blue-700  shadow-md `}>
         <div
-          className={`w-[1460px] p-5 mx-auto h-24 relative  bg-blue-700 pr-11   text-gray-400 flex justify-between items-center transition-all duration-300  `}
+          className={`appcontainer  mx-auto h-24 relative  bg-blue-700    text-gray-400 flex justify-between items-center transition-all duration-300  `}
         >
           <>
             <div className="w-36 z-10">

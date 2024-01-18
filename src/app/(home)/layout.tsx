@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import TopBar from "@/components/layout/HomeNavbar";
 import { useEffect, useState } from "react";
 import Banner from "@/components/layout/Banner";
+import Footer from "@/components/layout/Footer";
 
 export default function RootLayout({
   children,
@@ -23,6 +24,7 @@ export default function RootLayout({
         <Banner/>
       </header>
       <main className="">{children}</main>
+      <Footer/>
     </>
   );
 }
