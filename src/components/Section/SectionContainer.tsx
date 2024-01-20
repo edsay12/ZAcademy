@@ -11,7 +11,7 @@ function SectionContainer({ children, className }: propTypes) {
   return (
     <section
       className={twMerge(
-        `h-full block mt-16`,
+        `h-full block mt-16 w-full`,
 
         className
       )}

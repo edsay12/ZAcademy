@@ -5,7 +5,7 @@ type PropTypes = {
 
 function CategoriesButtons({ categories, filterItens }: PropTypes) {
   return (
-    <div className="flex gap-10 mt-20 mb-20">
+    <div className="flex gap-5 mt-20 mb-20 text-xs lg:text-lg md:text-sm    w-full flex-wrap">
       <button>All</button>
       {categories.map((item) => {
         return (

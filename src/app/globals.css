@@ -17,8 +17,10 @@ body {
 }
 
 .appcontainer {
-  width: 1460px;
+  max-width: 1460px;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   padding:20px 20px 0 20px;
+  
 }

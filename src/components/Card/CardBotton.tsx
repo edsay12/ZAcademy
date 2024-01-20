@@ -9,6 +9,7 @@ import Divider from "../Divider";
 import Button from "../Button";
 
 type PropTypes = {
+  courseId:number;
   courseTitle: string;
   courseLevel: "Beginner" | "Intermediate" | "Advance";
   courseTotalTime: string;
@@ -23,7 +24,8 @@ function CardBotton({
   coursePrice,
   courseStarNumber,
   courseTotalTime,
-  textColor
+  textColor,
+  courseId,
 }: PropTypes) {
   return (
     <div className={`p-6 text-black shadow-2xl ${textColor}`}>
@@ -59,7 +61,7 @@ function CardBotton({
         {/* Criar um button melhor */}
         <button
           title="button"
-          className="text-yellow-700 flex gap-1 items-center text-lg"
+          className="text-yellow-700 flex gap-1 items-center text-lg hover:text-red-400"
         >
           <span className="">
             <AiOutlineShoppingCart />

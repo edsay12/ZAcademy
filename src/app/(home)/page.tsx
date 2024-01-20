@@ -50,11 +50,13 @@ function Home() {
             return (
               <Card key={item}>
                 <CardTop
+                  courseId={1}
                   courseImageUrl="/cardBg.webp"
                   userName="Jhon lenon"
                   userImageUrl="/cardUser.jpeg"
                 />
                 <CardBotton
+                  courseId={1}
                   courseLevel="Advance"
                   coursePrice="23.50"
                   courseStarNumber={5}
@@ -64,20 +66,6 @@ function Home() {
               </Card>
             );
           })}
-          <Card>
-            <CardTop
-              courseImageUrl="/cardBg.webp"
-              userName="Jhon lenon"
-              userImageUrl="/cardUser.jpeg"
-            />
-            <CardBotton
-              courseLevel="Advance"
-              coursePrice="23.50"
-              courseStarNumber={5}
-              courseTitle="Project management concepts"
-              courseTotalTime="13h 20m"
-            />
-          </Card>
         </CardContainer>
       </SectionContainer>
 
@@ -94,7 +82,7 @@ function Home() {
           textPosition="text-center"
         />
 
-        <div className="w-full flex justify-between">
+        <div className="w-full flex justify-between flex-col lg:flex-row gap-5">
           <CertificationElementCard
             title="Certifiqued Plataform"
             description="Loren ipsun alhuma coisa aqui ola mundo do mundo azul na lua da mulher do "
@@ -126,11 +114,13 @@ function Home() {
         <CardContainer>
           <Card>
             <CardTop
+              courseId={1}
               courseImageUrl="/cardBg.webp"
               userName="Jhon lenon"
               userImageUrl="/cardUser.jpeg"
             />
             <CardBotton
+              courseId={1}
               textColor="text-white"
               courseLevel="Advance"
               coursePrice="23.50"
@@ -150,7 +140,7 @@ function Home() {
           firstTextColor={"text-black"}
         />
 
-        <div className="flex gap-5 w-full">
+        <div className="flex gap-5 w-full flex-col lg:flex-row">
           <TestimonialCard
             testimonialText="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos sunt
               ratione dolor exercitationem minima quas itaque saepe quasi
@@ -178,20 +168,20 @@ function Home() {
         </div>
       </SectionContainer>
 
-      <SectionContainer className="mt-40">
-        <div className="flex justify-between gap-40 ">
+      <SectionContainer className=" mt-0 mb-20 lg:mb-0 lg:mt-40">
+        <div className="flex justify-between gap-40  ">
           <Image
             alt="mulher apontando"
             src={"/Woman.svg"}
             width={100}
             height={100}
-            className="  max-w-[600px] w-full"
+            className=" max-w-[600px]  w-full hidden lg:block"
           />
           <div className="mt-20 ml-">
             <SectionTitle
-              firstText="What people say"
+              firstText="Work "
               textPosition="text-left"
-              secondText="About us"
+              secondText="with us"
               firstTextColor={"text-black"}
             />
 

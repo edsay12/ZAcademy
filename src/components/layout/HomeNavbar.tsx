@@ -22,7 +22,7 @@ import { useRouter } from "next/navigation";
 
 import Logo from "../Logo";
 import { LinkType } from "@/app/@types";
-import LinkList from "../LinkList";
+import LinkList from "../Link/LinkList";
 import { Input } from "../Input";
 import Button from "../Button";
 

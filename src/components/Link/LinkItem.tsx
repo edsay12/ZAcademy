@@ -7,7 +7,7 @@ type propTypes = {
 
 function LinkItem({ path, title }: propTypes) {
   return (
-    <Link key={title} href={path}>
+    <Link key={title} href={path} className="hover:text-white transition-colors ease-in duration-100">
       <li className="capitalize">{title}</li>
     </Link>
   );

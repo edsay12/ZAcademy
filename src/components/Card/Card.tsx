@@ -6,7 +6,7 @@ type PropTypes = {
 };
 
 function Card({ children }: PropTypes) {
-  return <div className="max-w-96 w-full">{children}</div>;
+  return <div className=" w-full">{children}</div>;
 }
 
 export default Card;

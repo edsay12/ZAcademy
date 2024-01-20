@@ -13,7 +13,7 @@ function SectionHelperText({
   textColor
 }: PropTypes) {
   return (
-    <p className={`${textPosition} ${textColor}  -mt-8`}>{text}</p>
+    <p className={`${textPosition} ${textColor}  -mt-8 text-black`}>{text}</p>
   );
 }
 
