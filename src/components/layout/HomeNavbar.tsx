@@ -1,9 +1,11 @@
+"use client"
 import {
   AiFillEdit,
   AiOutlineClose,
   AiOutlineLogout,
   AiOutlineMenu,
   AiOutlineSearch,
+  AiOutlineShoppingCart,
   AiOutlineVideoCameraAdd,
 } from "react-icons/ai";
 
@@ -25,14 +27,10 @@ import { LinkType } from "@/app/@types";
 import LinkList from "../Link/LinkList";
 import { Input } from "../Input";
 import Button from "../Button";
-
-
+import Link from "next/link";
 
 function HomeNavbar() {
   const [isNavOppen, setIsNavOppen] = useState<boolean>(false);
- 
-
-  
 
   const links: LinkType[] = [
     {
@@ -40,21 +38,10 @@ function HomeNavbar() {
       path: "/",
     },
     {
-      name: "cousers",
+      name: "become a instructor",
       path: "/courses",
     },
-    {
-      name: "pricing",
-      path: "/pricing",
-    },
-    {
-      name: "about",
-      path: "/about",
-    },
-    {
-      name: "blog",
-      path: "/blog",
-    },
+    
   ];
 
   const toggleMenu = () => {
@@ -63,7 +50,9 @@ function HomeNavbar() {
 
   return (
     <>
-      <nav className={`flex items-center relative z-[1000000] top-0 left-0 right-0 w-full bg-blue-700  shadow-md `}>
+      <nav
+        className={`flex items-center relative z-[1000000] top-0 left-0 right-0 pb-2 w-full bg-blue-700  shadow-md `}
+      >
         <div
           className={`appcontainer  mx-auto h-24 relative  bg-blue-700    text-gray-400 flex justify-between items-center transition-all duration-300  `}
         >
@@ -75,8 +64,11 @@ function HomeNavbar() {
               className="text-2xl cursor-pointer flex lg:hidden"
               onClick={toggleMenu}
             >
-              {isNavOppen ? <AiOutlineClose></AiOutlineClose>   : <AiOutlineMenu></AiOutlineMenu>}
-              
+              {isNavOppen ? (
+                <AiOutlineClose></AiOutlineClose>
+              ) : (
+                <AiOutlineMenu></AiOutlineMenu>
+              )}
             </div>
 
             <div
@@ -84,9 +76,11 @@ function HomeNavbar() {
                 isNavOppen ? "top-[100%]" : "top-[-490px]"
               }`}
             >
-              
               <div className="">
-                <LinkList Links={links} className="flex lg:flex-row lg:items-center flex-col  gap-6 " />
+                <LinkList
+                  Links={links}
+                  className="flex lg:flex-row lg:items-center flex-col  gap-6 "
+                />
               </div>
               <div>
                 <Input
@@ -94,10 +88,30 @@ function HomeNavbar() {
                   type="Text"
                   ico={<AiOutlineSearch />}
                   autoComplete="off"
+                 
                 />
               </div>
-              <div className="w-32 w-50">
-                <Button text="Entrar" textColor="text-white" />
+              <div className="flex gap-10 items-center ">
+                <div>
+                  <div className="relative">
+                    <Link href={"#"} className="text-2xl text-white">
+                      <AiOutlineShoppingCart />
+                    </Link>
+                    <div className=" absolute w-4 h-4 bg-red-500 rounded-full flex items-center justify-center text-[10px] text-white -top-1 -right-2">2</div>
+                  </div>
+                </div>
+
+                <div className="w-14 bg-transparent">
+                  <Button
+                    text="sign up"
+                    textColor="text-white"
+                    bg="bg-transparent"
+                  />
+                </div>
+
+                <div className="w-32 w-50">
+                  <Button text="sign in" textColor="text-white" />
+                </div>
               </div>
             </div>
           </>
