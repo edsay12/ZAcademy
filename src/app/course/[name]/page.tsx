@@ -4,47 +4,39 @@ import { AiFillStar } from "react-icons/ai";
 
 function Course() {
   return (
-    <SectionContainer>
-      <div className="w-full  grid grid-cols-3">
-        <div className="col-span-2 ">
-          <div
-            className="w-full
-                    "
-          >
-            <div className="flex flex-col gap-5 bg-gray-800 p-5 rounded-lg">
-              <h1 className="font-bold text-4xl">
-                Curso de Python 3 do básico ao avançado - com projetos reais{" "}
-              </h1>
-              <p>
-                Python 3 completo: PySide6, Django, Selenium, Regexp, Testes,
-                TDD, POO, Design Patterns GoF, algoritmos e programação
-              </p>
-              <div className="flex flex-col gap-2 text-sm">
-                <div className="flex gap-1">
-                  <div className="text-yellow-400">
-                    4,8
-                    {/* Componente de Star */}
-                  </div>
-                  <a href="#" className="text-blue-500">(39.118) classificações</a>
-                  <p >137.185 alunos</p>
-                </div>
-
-                <div className="flex gap-1">
-                  <p>Criado por:</p>
-                  <span className="text-blue-500">
-                    <Link href={"#"}>Luiz otavio miranda</Link>
-                  </span>
-                </div>
-              </div>
+    <SectionContainer className="bg-blue-700 mt-0 pt-14 pb-14 ">
+      <div className="flex items-center xl:justify-between justify-center  xl:flex-nowrap flex-wrap-reverse ">
+        <div className="flex flex-col gap-5">
+          <h1 className="xl:text-[42px] xl:mt-0 text-3xl mt-5 font-bold max-w-[900px]">
+            API REST em Node.JS aplicando testes (TDD) desde o princípio
+          </h1>
+          <p className="xl:text-xl text-base max-w-[800px]">
+            Utilize o TDD para desenvolver um gerenciador financeiro com a
+            segurança dos testes automatizados sempre a seu lado
+          </p>
+          <div className="flex gap-2 xl:text-base text-sm ">
+            <div className="flex items-center gap-2 ">
+              <span>5.0</span>
+              <span className="flex">
+                <AiFillStar />
+                <AiFillStar />
+                <AiFillStar />
+                <AiFillStar />
+                <AiFillStar />
+              </span>
             </div>
-            {/* parte de baixo */}
-            <div>asda</div>
-            <div>asda</div>
-            <div>asda</div>
+            <a href="#" className="text-blue-800 underline">(1.702 classificações)</a>
+            <span>2.000 alunos</span>
+          </div>
+          <div>
+            <span>Criado por:</span>
+            <Link href={"/user/1231"} className="text-blue-800 underline"> Tomas Andre </Link>
           </div>
         </div>
-        {/* outrolado */}
-        <div className="col-span-1 bg-green-400">asdasda</div>
+
+        <div className="xl:max-w-[500px] max-w-[900px] rounded-lg overflow-hidden">
+          <video src="/videoDeExemplo.mp4" controls></video>
+        </div>
       </div>
     </SectionContainer>
   );
