@@ -2,6 +2,11 @@ import SectionContainer from "@/components/Section/SectionContainer";
 import Description from "@/components/Description";
 import Link from "next/link";
 import { AiFillStar } from "react-icons/ai";
+import Button from "@/components/Button";
+import { IoCellularOutline } from "react-icons/io5";
+import { FaClock, FaRegClock, FaSignal } from "react-icons/fa";
+import { FaArrowsSpin, FaRegCircleUser } from "react-icons/fa6";
+import { PiCertificateBold } from "react-icons/pi";
 
 function Course() {
   return (
@@ -17,7 +22,7 @@ function Course() {
               segurança dos testes automatizados sempre a seu lado
             </p>
             <div className="flex gap-2 xl:text-base text-sm ">
-              <div className="flex items-center gap-2 ">
+              <div className="flex items-center gap-2 text-yellow-400">
                 <span>5.0</span>
                 <span className="flex">
                   <AiFillStar />
@@ -48,8 +53,9 @@ function Course() {
       </SectionContainer>
       <SectionContainer>
         <div className="grid grid-cols-4 gap-5">
+          {/* leftside */}
           <div className="col-span-3 max-w-[900px]">
-            <div >
+            <div className="p-5">
               <Description title="Visão geral do curso">
                 Seja bem vindo(a) ao curso API Rest em NodeJS aplicando testes
                 (TDD) desde o início. Nesse curso vamos, inicialmente, aprender
@@ -80,8 +86,63 @@ function Course() {
                 Abraços e nos vemos na próxima aula, até lá!
               </Description>
             </div>
+            <div className="p-5">
+              asdasda
+            </div>
           </div>
-          <div className="bg-blue-500 "></div>
+          {/* righttside */}
+          <div className=" flex flex-col gap-5 ">
+            <div className="w-full border border-gray-300 rounded-md p-4 shadow-xl">
+              <h3 className="font-bold text-3xl text-black">
+                {(23.5).toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                })}
+              </h3>
+              <div>
+                <Button text="Comprar agora" className="bg-blue-700"></Button>
+                <Button
+                  text="Adicionar ao carrinho"
+                  className="bg-yellow-700"
+                ></Button>
+              </div>
+            </div>
+            <div className="w-full border border-gray-300 rounded-md p-4 shadow-xl">
+              <h5 className="text-black font-bold">Detalhes do curso</h5>
+              <ul className="mt-5 font-medium space-y-2">
+                <li className="text-black flex gap-2 items-center">
+                  <span>
+                    <FaSignal />
+                  </span>
+                  Iniciante
+                </li>
+                <li className="text-black flex gap-2 items-center">
+                  <span>
+                    <FaRegClock />
+                  </span>
+                  5 horas de duração
+                </li>
+                <li className="text-black flex gap-2 items-center">
+                  <span>
+                    <FaRegCircleUser />
+                  </span>
+                  Comunidade privada
+                </li>
+                <li className="text-black flex gap-2 items-center">
+                  <span>
+                    <FaArrowsSpin />
+                  </span>
+                  Acesso vitalicio
+                </li>
+                <li className="text-black flex gap-2 items-center">
+                  <span>
+                  <PiCertificateBold />
+                  </span>
+                  Certificado de conclusão
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </SectionContainer>
     </>

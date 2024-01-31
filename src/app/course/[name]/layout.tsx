@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import HomeNavbar from "@/components/layout/HomeNavbar";
+import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   title: "curso",
@@ -15,6 +16,7 @@ export default function RootLayout({
     <>
       <HomeNavbar />
       {children}
+      <Footer/>
     </>
   );
 }

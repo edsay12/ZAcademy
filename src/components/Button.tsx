@@ -1,5 +1,6 @@
 "use client";
 import { ButtonHTMLAttributes, HtmlHTMLAttributes } from "react";
+import { twMerge } from "tailwind-merge";
 
 type ButtonProps = {
   buttonSize?: "full" | "medium" | "small" ;
@@ -43,6 +44,7 @@ function Button({
   margintop = "big",
   newStyle='',
   marginBotton = "big",
+  className,
 
   text,
   rounded = "full",
@@ -53,7 +55,14 @@ function Button({
   return (
     <button
       {...rest}
-      className={`${bg} ${textColor} ${roundedSizes[rounded]} ${paddingSizes[paddingY]} ${marginSizes[marginBotton]}  ${marginSizes[margintop]} text-sm hover:opacity-90 py-3 mt-5 mb-5 font-extrabold shadow-sm  flex gap-3 justify-center items-center ${buttonSizes[buttonSize]} ${newStyle} `}
+      className={
+        twMerge(
+          `${bg} ${textColor} ${roundedSizes[rounded]} ${paddingSizes[paddingY]} ${marginSizes[marginBotton]}  ${marginSizes[margintop]} text-sm hover:opacity-90 py-3 mt-5 mb-5 font-extrabold shadow-sm  flex gap-3 justify-center items-center ${buttonSizes[buttonSize]} ${newStyle} `,
+  
+          className
+        )
+      }
+     
     >
       {ico && ico}
       {text}
