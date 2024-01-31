@@ -8,6 +8,9 @@ import { FaClock, FaRegClock, FaSignal } from "react-icons/fa";
 import { FaArrowsSpin, FaRegCircleUser } from "react-icons/fa6";
 import { PiCertificateBold } from "react-icons/pi";
 
+import AcordeonItem from "@/components/Acordeon/AcordeonItem";
+import { acordeaoData } from "@/fakeData/acordeaoData";
+
 function Course() {
   return (
     <>
@@ -87,12 +90,14 @@ function Course() {
               </Description>
             </div>
             <div className="p-5">
-              asdasda
+              {acordeaoData.map((item) => {
+                return <AcordeonItem key={item.id} data={item} />;
+              })}
             </div>
           </div>
           {/* righttside */}
           <div className=" flex flex-col gap-5 ">
-            <div className="w-full border border-gray-300 rounded-md p-4 shadow-xl">
+            <div className="w-full border border-gray-300 rounded-md p-4 pb-5 shadow-xl">
               <h3 className="font-bold text-3xl text-black">
                 {(23.5).toLocaleString("pt-BR", {
                   style: "currency",
@@ -103,11 +108,11 @@ function Course() {
                 <Button text="Comprar agora" className="bg-blue-700"></Button>
                 <Button
                   text="Adicionar ao carrinho"
-                  className="bg-yellow-700"
+                  className="bg-yellow-700 mb-0"
                 ></Button>
               </div>
             </div>
-            <div className="w-full border border-gray-300 rounded-md p-4 shadow-xl">
+            <div className="w-full border border-gray-300 rounded-md p-4 pb-5 shadow-xl">
               <h5 className="text-black font-bold">Detalhes do curso</h5>
               <ul className="mt-5 font-medium space-y-2">
                 <li className="text-black flex gap-2 items-center">
@@ -136,7 +141,7 @@ function Course() {
                 </li>
                 <li className="text-black flex gap-2 items-center">
                   <span>
-                  <PiCertificateBold />
+                    <PiCertificateBold />
                   </span>
                   Certificado de conclusão
                 </li>
