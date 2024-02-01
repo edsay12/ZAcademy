@@ -10,8 +10,11 @@ import { PiCertificateBold } from "react-icons/pi";
 
 import AcordeonItem from "@/components/Acordeon/AcordeonItem";
 import { acordeaoData } from "@/fakeData/acordeaoData";
+import InstructorDetailsCard from "@/components/InstructorDetailsCard";
+import { fakeInstructors } from "@/fakeData/FakeInstructors";
 
 function Course() {
+  const instructor = fakeInstructors[0];
   return (
     <>
       <SectionContainer className="bg-blue-700 mt-0 pt-14 pb-14 ">
@@ -54,7 +57,7 @@ function Course() {
           </div>
         </div>
       </SectionContainer>
-      <SectionContainer>
+      <SectionContainer className="mb-20">
         <div className="grid grid-cols-4 gap-5 relative">
           {/* leftside */}
           <div className="col-span-3 max-w-[900px] ">
@@ -98,12 +101,11 @@ function Course() {
               })}
             </div>
 
-            <div>
-              <div className="p-5">
+            <div  className="p-5">
+              <div>
                 <h3 className="font-bold text-black text-lg mb-5">Instrutor</h3>
               </div>
-
-              
+              <InstructorDetailsCard {...instructor} />
             </div>
           </div>
           {/* righttside */}

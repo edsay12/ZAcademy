@@ -11,3 +11,16 @@ export type AcordeaoData = {
     title: string;
   }[];
 };
+
+
+export type  InstructorBasicDetails = {
+  id:number
+  name:string
+  role:string
+  image:string
+  description:string
+  classification:number
+  assessmentsNumber:number
+  studentsNumber:number
+  courcesNumber:number
+}
