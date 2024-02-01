@@ -59,7 +59,7 @@ function InstructorDetailsCard({
         <p className=" text-black ">{role}</p>
       </div>
 
-      <div className="mt-3 flex gap-5 mt-2">
+      <div className=" flex gap-5 mt-2">
         <Image
           src={image}
           alt=""

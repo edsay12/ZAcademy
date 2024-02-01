@@ -39,7 +39,7 @@ function Description({ children, title  }: proptypes) {
             isOpen ? " " : "line-clamp-6"
           } transition-all ease-in-out duration-500`}
         >
-          <p className="" ref={descriptionRef}>
+          <p className="text-justify" ref={descriptionRef} >
             {children}
           </p>
         </div>

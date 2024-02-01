@@ -57,10 +57,10 @@ function Course() {
           </div>
         </div>
       </SectionContainer>
-      <SectionContainer className="mb-20">
-        <div className="grid grid-cols-4 gap-5 relative">
+      <SectionContainer className="mb-20 relative">
+        <div className="grid  grid-cols-2 lg:grid-cols-4  mx-auto gap-5 relative">
           {/* leftside */}
-          <div className="col-span-3 max-w-[900px] ">
+          <div className="col-span-3 lg:max-w-[900px] w-full mt-28 lg:mt-0 ">
             <div className="p-5">
               <Description title="Visão geral do curso">
                 Seja bem vindo(a) ao curso API Rest em NodeJS aplicando testes
@@ -109,15 +109,15 @@ function Course() {
             </div>
           </div>
           {/* righttside */}
-          <div className=" flex flex-col gap-5 sticky right-0 top-0 ">
-            <div className="w-full border border-gray-300 rounded-md p-4 pb-5 shadow-xl">
+          <div className=" flex flex-col gap-5 ">
+            <div className="w-full border border-gray-300 rounded-md p-4 pb-5 shadow-xl lg:static absolute bg-white -top-[120px]  ">
               <h3 className="font-bold text-3xl text-black">
                 {(23.5).toLocaleString("pt-BR", {
                   style: "currency",
                   currency: "BRL",
                 })}
               </h3>
-              <div>
+              <div className="">
                 <Button text="Comprar agora" className="bg-blue-700"></Button>
                 <Button
                   text="Adicionar ao carrinho"
@@ -125,7 +125,7 @@ function Course() {
                 ></Button>
               </div>
             </div>
-            <div className="w-full border border-gray-300 rounded-md p-4 pb-5 shadow-xl">
+            <div className="w-full border border-gray-300 rounded-md p-4 pb-5 shadow-xl hidden lg:block ">
               <h5 className="text-black font-bold">Detalhes do curso</h5>
               <ul className="mt-5 font-medium space-y-2">
                 <li className="text-black flex gap-2 items-center">
