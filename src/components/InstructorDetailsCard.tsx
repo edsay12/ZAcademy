@@ -65,11 +65,11 @@ function InstructorDetailsCard({
           alt=""
           width={100}
           height={100}
-          className="max-w-36 max-h-36 rounded-full"
+          className="w-24 h-24 md:w-32 md:h-32 rounded-full"
         />
         <ul>
           {instructorMoreDetails.map((details) => (
-            <li className="flex items-center gap-3" key={details.text}>
+            <li className="flex items-center gap-3 text-xs md:text-sm" key={details.text}>
               <span>{details.icon}</span>
               <span>{details.text}</span>
             </li>
