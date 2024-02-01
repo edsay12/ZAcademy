@@ -6,10 +6,10 @@ type PropTypes = {
   courseId:number;
   courseImageUrl: string;
   userImageUrl: string;
-  userName: string;
+  instructorName: string;
 };
 
-function CardTop({ courseImageUrl, userImageUrl, userName,courseId }: PropTypes) {
+function CardTop({ courseImageUrl, userImageUrl, instructorName,courseId }: PropTypes) {
   return (
     <div className="relative w-full">
       <Link href={`/course/${courseId}`}>
@@ -31,7 +31,7 @@ function CardTop({ courseImageUrl, userImageUrl, userName,courseId }: PropTypes)
           className="w-10 h-10 rounded-full"
         />
 
-        <p className="text-white">{userName}</p>
+        <p className="text-white">{instructorName}</p>
       </div>
 
       <div className="absolute top-5 right-4 bg-orange-600 text-white w-12 h-12 flex items-center justify-center rounded-full text-xl cursor-pointer hover:opacity-85">

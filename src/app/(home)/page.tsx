@@ -52,7 +52,7 @@ function Home() {
                 <CardTop
                   courseId={1}
                   courseImageUrl="/cardBg.webp"
-                  userName="Jhon lenon"
+                  instructorName="Jhon lenon"
                   userImageUrl="/cardUser.jpeg"
                 />
                 <CardBotton
@@ -116,7 +116,7 @@ function Home() {
             <CardTop
               courseId={1}
               courseImageUrl="/cardBg.webp"
-              userName="Jhon lenon"
+              instructorName="Jhon lenon"
               userImageUrl="/cardUser.jpeg"
             />
             <CardBotton
