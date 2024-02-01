@@ -94,7 +94,7 @@ function HomeNavbar() {
               <div className="flex gap-10 items-center ">
                 <div>
                   <div className="relative">
-                    <Link href={"/card"} className="text-2xl text-white">
+                    <Link href={"/cart"} className="text-2xl text-white">
                       <AiOutlineShoppingCart />
                     </Link>
                     <div className=" absolute w-4 h-4 bg-red-500 rounded-full flex items-center justify-center text-[10px] text-white -top-1 -right-2">2</div>
