@@ -55,9 +55,9 @@ function Course() {
         </div>
       </SectionContainer>
       <SectionContainer>
-        <div className="grid grid-cols-4 gap-5">
+        <div className="grid grid-cols-4 gap-5 relative">
           {/* leftside */}
-          <div className="col-span-3 max-w-[900px]">
+          <div className="col-span-3 max-w-[900px] ">
             <div className="p-5">
               <Description title="Visão geral do curso">
                 Seja bem vindo(a) ao curso API Rest em NodeJS aplicando testes
@@ -90,13 +90,24 @@ function Course() {
               </Description>
             </div>
             <div className="p-5">
+              <div>
+                <h3 className="font-bold text-black text-lg mb-5">Conteudo</h3>
+              </div>
               {acordeaoData.map((item) => {
                 return <AcordeonItem key={item.id} data={item} />;
               })}
             </div>
+
+            <div>
+              <div className="p-5">
+                <h3 className="font-bold text-black text-lg mb-5">Instrutor</h3>
+              </div>
+
+              
+            </div>
           </div>
           {/* righttside */}
-          <div className=" flex flex-col gap-5 ">
+          <div className=" flex flex-col gap-5 sticky right-0 top-0 ">
             <div className="w-full border border-gray-300 rounded-md p-4 pb-5 shadow-xl">
               <h3 className="font-bold text-3xl text-black">
                 {(23.5).toLocaleString("pt-BR", {
