@@ -1,4 +1,4 @@
-import AcordeonItem from "@/components/Acordeon/AcordeonItem";
+'use client'
 import Button from "@/components/Button";
 import CartItem from "@/components/CartItem";
 import Description from "@/components/Description";
@@ -6,12 +6,14 @@ import InstructorDetailsCard from "@/components/InstructorDetailsCard";
 import SectionContainer from "@/components/Section/SectionContainer";
 import { acordeaoData } from "@/fakeData/acordeaoData";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { FaRegClock, FaSignal } from "react-icons/fa";
 import { FaArrowsSpin, FaRegCircleUser } from "react-icons/fa6";
 import { PiCertificateBold } from "react-icons/pi";
 
 function Cart() {
   const isCart = false;
+  const route = useRouter();
   return (
     <>
       <SectionContainer className="-mb-16">
@@ -65,8 +67,11 @@ Curso mais didático e completo de "
               height={100}
               className="max-w-[400px] w-full"
             />
-            <p className="text-black">Seu carrinho está vazio. Continue comprando para encontrar um curso!</p>
-            <Button text="Continue comprando" buttonSize="medium"/>
+            <p className="text-black">
+              Seu carrinho está vazio. Continue comprando para encontrar um
+              curso!
+            </p>
+            <Button text="Continue comprando" buttonSize="medium" onClick={()=> route.push("/")} />
           </div>
         </SectionContainer>
       )}
