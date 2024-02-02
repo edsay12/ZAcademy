@@ -12,7 +12,7 @@ import { FaArrowsSpin, FaRegCircleUser } from "react-icons/fa6";
 import { PiCertificateBold } from "react-icons/pi";
 
 function Cart() {
-  const isCart = false;
+  const isCart = true;
   const route = useRouter();
   return (
     <>
