@@ -24,3 +24,19 @@ body {
   padding:20px 20px 0 20px;
   
 }
+
+.styledScrolbar:-webkit-scrollbar{
+   
+    width: 6px;
+}
+.styledScrolbar:-webkit-scrollbar
+  
+  ::-webkit-scrollbar-track {
+    background-color: #f4f4f4;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #dad7d7;
+  }
+
+
