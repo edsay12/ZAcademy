@@ -7,11 +7,17 @@ import SectionContainer from "@/components/Section/SectionContainer";
 import ActiveItem from "@/components/video/ActiveItem";
 import { acordeaoData } from "@/fakeData/acordeaoData";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { FaRegClock, FaSignal } from "react-icons/fa";
 import { FaArrowLeft, FaArrowsSpin, FaRegCircleUser } from "react-icons/fa6";
 import { PiCertificateBold } from "react-icons/pi";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import VideoContainer from "@/components/video/VideoContainer";
+import VideoPlayer from "@/components/video/VideoPlayer";
+import ActiveItensContainer from "@/components/video/ActiveItemsContainer";
+import VideoMenuBotton from "@/components/video/VideoMenuBotton";
+import BreadCrumb from "@/components/BreadCrumb";
+import VideoMenuButton from "@/components/video/VideoMenuButton";
 
 type Params = {
   params: {
@@ -22,6 +28,7 @@ type Params = {
 
 function Learn({ params }: Params) {
   const seach = useSearchParams();
+  const path = usePathname();
 
   console.log("seache", seach);
   console.log(params.cursonome);
@@ -29,46 +36,49 @@ function Learn({ params }: Params) {
   return (
     <>
       <SectionContainer className="-mt-[5px] bg-blue-600 p-5">
-        <div
-          className="grid grid-cols-3 mx-auto gap-20
-         "
-        >
-          <div className="col-start-1 xl:col-end-3 col-end-4  w-full xl:mt-0   ">
-            <video
-              src="/videoDeExemplo.mp4 "
-              controls
-              className="w-full h-full"
-              width={100}
+        <VideoContainer>
+          <VideoPlayer videoUrl="/videoDeExemplo.mp4" />
+          <ActiveItensContainer>
+            <ActiveItem
+              videoCoverImageUrl="/cardBg.webp"
+              videoTitle="Trabalhando com funçoes em javascript"
+              VideoUrl="/course/learn/asdasda/asdasda2"
             />
-          </div>
-          <div className=" col-start-3 col-end-4  w-full h-[520px]   overflow-y-auto hidden xl:block  scrollbar-thin scrollbar-thumb-gray-600  scrollbar-track-blue-700">
-            <ActiveItem />
-            <ActiveItem />
-            <ActiveItem />
-            <ActiveItem />
-            <ActiveItem />
-            <ActiveItem />
-            <ActiveItem />
-            <ActiveItem />
-          </div>
-        </div>
+            <ActiveItem
+              videoCoverImageUrl="/cardBg.webp"
+              videoTitle="Trabalhando com funçoes em javascript"
+              VideoUrl="/course/learn/asdasda/asdasda3"
+            />
+            <ActiveItem
+              videoCoverImageUrl="/cardBg.webp"
+              videoTitle="Trabalhando com funçoes em javascript"
+              VideoUrl="/course/learn/asdasda/asdasda4"
+            />
+            <ActiveItem
+              videoCoverImageUrl="/cardBg.webp"
+              videoTitle="Trabalhando com funçoes em javascript"
+              VideoUrl="/course/learn/asdasda/asdasda5"
+            />
+            <ActiveItem
+              videoCoverImageUrl="/cardBg.webp"
+              videoTitle="Trabalhando com funçoes em javascript"
+              VideoUrl="/course/learn/asdasda/asdasda6"
+            />
+          </ActiveItensContainer>
+        </VideoContainer>
       </SectionContainer>
-      <SectionContainer className="-mt-[5px] p-2 bg-gray-200  w-full">
-        <div className="bg-gray-200 flex justify-end items-center w-full h-[50px] ">
-          <button
-            title="Seta para esquerda"
-            className="text-black border border-gray-400 p-2 hover:bg-white hover:border-white"
-          >
-            <IoIosArrowBack />
-          </button>
-          <button
-            title="Seta para direita"
-            className="text-black border  border-gray-400 p-2 hover:bg-white hover:border-white "
-          >
-            <IoIosArrowForward />
-          </button>
+      <VideoMenuBotton>
+        <div className="mr-auto">
+          <BreadCrumb
+            pathName={`/course/learn/javascript/avancado`}
+            removedFirstQuantity={2}
+          />
         </div>
-      </SectionContainer>
+        <div className=" ">
+          <VideoMenuButton icon={<IoIosArrowBack />} message="Voltar" />
+          <VideoMenuButton icon={<IoIosArrowForward />} message="Proximo" />
+        </div>
+      </VideoMenuBotton>
 
       <SectionContainer className="mb-20 mt-0 relative">
         <div className="grid grid-cols-3 text-black grid-rows-3 gap-20">
