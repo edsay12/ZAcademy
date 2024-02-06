@@ -36,7 +36,7 @@ function CartItem({
         </Link>
       </div>
       <div className="flex flex-col">
-        <h4 className="text-black font-medium">{courseTitle}</h4>
+        <h4 className="text-black  text-xs md:text-base font-medium">{courseTitle}</h4>
         <span className="text-black text-sm mb-2 mt-2">
           Por {instructorName}
         </span>
