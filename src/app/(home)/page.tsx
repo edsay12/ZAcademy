@@ -14,6 +14,7 @@ import CategoriesButtons from "@/components/CategoriesButtons";
 import TestimonialCard from "@/components/TestimonialCard";
 import Image from "next/image";
 import Button from "@/components/Button";
+import DataFormater from "../../../utils/DataFormater";
 
 const list = [1, 2, 3, 4, 5, 6, 7];
 const categories = [
@@ -29,6 +30,7 @@ function Home() {
   const [itens, setItens] = useState(list);
   const [filter, setFilter] = useState(list);
   console.log(filter);
+  DataFormater("2023-01-17T03:24:00")
 
   const filterItens = (cat: string = "") => {
     const items = itens.filter((item) => item === 1);
