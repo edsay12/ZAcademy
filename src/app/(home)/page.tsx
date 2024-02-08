@@ -14,8 +14,8 @@ import CategoriesButtons from "@/components/CategoriesButtons";
 import TestimonialCard from "@/components/TestimonialCard";
 import Image from "next/image";
 import Button from "@/components/Button";
-import DataFormater from "../../../utils/DataFormater";
-import FormateDateDifference from "../../../utils/DataFormater";
+import DataFormater from "../../../utils/FormateDateDifference";
+import FormateDateDifference from "../../../utils/FormateDateDifference";
 
 const list = [1, 2, 3, 4, 5, 6, 7];
 const categories = [

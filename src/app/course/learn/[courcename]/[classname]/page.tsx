@@ -18,6 +18,11 @@ import ActiveItensContainer from "@/components/video/ActiveItemsContainer";
 import VideoMenuBotton from "@/components/video/VideoMenuBotton";
 import BreadCrumb from "@/components/BreadCrumb";
 import VideoMenuButton from "@/components/video/VideoMenuButton";
+import CommentAdd from "@/components/Comment/CommentAdd";
+import CommentContainer from "@/components/Comment/CommentsContainer";
+import CommentNumber from "@/components/Comment/CommentNumber";
+import CommentsContainer from "@/components/Comment/CommentsContainer";
+import Comments from "@/components/Comment/Comments";
 
 type Params = {
   params: {
@@ -80,9 +85,9 @@ function Learn({ params }: Params) {
         </div>
       </VideoMenuBotton>
 
-      <SectionContainer className="mb-20 mt-0 relative">
-        <div className="grid grid-cols-3 text-black grid-rows-3 gap-20">
-          <div className=" w-full col-start-1 xl:col-end-3  col-end-4  ">
+      <SectionContainer className="mb-5 mt-0 relative">
+        <div className="grid grid-cols-3 text-black gap-20 ">
+          <div className=" w-full col-start-1 xl:col-end-3  col-end-4 ">
             <Description title="Visão geral do curso">
               Seja bem vindo(a) ao curso API Rest em NodeJS aplicando testes
               (TDD) desde o início. Nesse curso vamos, inicialmente, aprender a
@@ -130,13 +135,15 @@ function Learn({ params }: Params) {
               </div>
             </div>
           </div>
-          <div className="bg-red-200 w-full col-start-1 xl:col-end-3  col-end-4">
-            numero 3
+          <div className=" w-full col-start-1 xl:col-end-3  col-end-4">
+            <CommentsContainer>
+              <CommentNumber commentsNumber={25} />
+              <CommentAdd />
+              <Comments />
+            </CommentsContainer>
           </div>
         </div>
       </SectionContainer>
-      {/* asda
-asdasd */}
     </>
   );
 }
