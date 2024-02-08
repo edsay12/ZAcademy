@@ -1,9 +1,35 @@
 import Image from "next/image";
 import { useState } from "react";
 import FormateDateDifference from "../../../utils/FormateDateDifference";
+import CommentReplyInput from "./CommentReplyInput";
 
-function CommentItem() {
+// type Responses = {
+//   idUsuario: string;
+//   nome: string;
+//   dataDeCriacao: string;
+//   resposta: string;
+// };
+
+type PropTypes = {
+  id: string;
+  idUsuario: string;
+  nome: string;
+  dataDeCriacao: string;
+  comentario: string;
+};
+
+function CommentItem({
+  comentario,
+  dataDeCriacao,
+  id,
+  idUsuario,
+  nome,
+}: PropTypes) {
   const [isOppen, setIsOppen] = useState<boolean>(false);
+  const [isReplyOppen, setIsReplyOppen] = useState<boolean>(false);
+  const handdleReplyOppen = () => {
+    setIsReplyOppen((reply) => !reply);
+  };
   const handdleOppen = () => {
     setIsOppen((state) => !state);
   };
@@ -19,11 +45,11 @@ function CommentItem() {
               src="/carduser.jpeg"
               alt="Michael Gough"
             />
-            Michael Gough
+            {nome}
           </p>
           <p className="text-sm text-gray-600 ">
             <time title="February 8th, 2022">
-              {FormateDateDifference("2023-12-17T03:24:00")}
+              {FormateDateDifference(dataDeCriacao)}
             </time>
           </p>
         </div>
@@ -32,7 +58,9 @@ function CommentItem() {
           id="dropdownComment1Button"
           onClick={handdleOppen}
           data-dropdown-toggle="dropdownComment1"
-              className={`${isOppen ? 'z-20' :'' } absolute top-5 right-5  p-2 text-sm font-medium text-center text-gray-500  bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 `}
+          className={`${
+            isOppen ? "z-20" : ""
+          } absolute top-5 right-5  p-2 text-sm font-medium text-center text-gray-500  bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 `}
           type="button"
         >
           <svg
@@ -73,19 +101,20 @@ function CommentItem() {
               </a>
             </li>
           </ul>
-          {/* overlay */}
         </div>
-        <div className={`${!isOppen && 'hidden'} fixed top-0 left-0 bottom-0 right-0  z-10 `} onClick={()=> handdleOppen()}></div>
+        {/* overlay */}
+        <div
+          className={`${
+            !isOppen && "hidden"
+          } fixed top-0 left-0 bottom-0 right-0  z-10 `}
+          onClick={() => handdleOppen()}
+        ></div>
       </footer>
-      <p className="text-gray-500 ">
-        Very straight-to-point article. Really worth time reading. Thank you!
-        But tools are just the instruments for the UX designers. The knowledge
-        of the design tools are as important as the creation of the design
-        strategy.
-      </p>
+      <p className="text-gray-500 ">{comentario}</p>
       <div className="flex items-center mt-4 space-x-4">
         <button
           type="button"
+          onClick={handdleReplyOppen}
           className="flex items-center text-sm text-gray-500 hover:underline  font-medium"
         >
           <svg
@@ -106,6 +135,10 @@ function CommentItem() {
           Reply
         </button>
       </div>
+      <CommentReplyInput
+        isCommentReplyoppen={isReplyOppen}
+        handdleReplyOppen={handdleReplyOppen}
+      />
     </article>
   );
 }
