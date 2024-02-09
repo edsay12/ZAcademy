@@ -107,7 +107,7 @@ function CommentItem({
           className={`${
             !isOppen && "hidden"
           } fixed top-0 left-0 bottom-0 right-0  z-10 `}
-          onClick={() => handdleOppen()}
+          onMouseEnter={() => handdleOppen()}
         ></div>
       </footer>
       <p className="text-gray-500 ">{comentario}</p>
