@@ -38,7 +38,7 @@ function Comments() {
             </>
           );
         })}
-        <div onClick={showMoreItens} className={`${isShowMoreVisible && 'hidden'} border p-2 text-center mt-2 cursor-pointer hover:bg-slate-100  transition-all duration-150`}>Show More</div>
+        <div onClick={showMoreItens} className={`${isShowMoreVisible && 'hidden'} border p-2 text-center mt-2 cursor-pointer hover:bg-slate-100  transition-all duration-150`}>Mostrar mais</div>
       </div>
     </div>
   );
