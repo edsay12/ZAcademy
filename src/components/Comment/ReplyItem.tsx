@@ -8,7 +8,7 @@ type Responses = {
   dataDeCriacao: string;
   resposta: string;
 };
-function CommentReply({ dataDeCriacao, idUsuario, nome, resposta }: Responses) {
+function ReplyItem({ dataDeCriacao, idUsuario, nome, resposta }: Responses) {
   const [isOppen, setIsOppen] = useState<boolean>(false);
   const handdleOppen = () => {
     setIsOppen((state) => !state);
@@ -94,4 +94,4 @@ function CommentReply({ dataDeCriacao, idUsuario, nome, resposta }: Responses) {
   );
 }
 
-export default CommentReply;
+export default ReplyItem;
