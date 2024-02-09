@@ -19,9 +19,7 @@ function ActiveItem({ videoCoverImageUrl, videoTitle, VideoUrl }: PropTypes) {
     <>
       <Link
         href={VideoUrl}
-        className={`p-5 hover:bg-blue-400 bg-opacity-20 rounded-sm ${
-          isActive && "bg-blue-400"
-        } flex gap-3 items-center w-full`}
+        className={`p-5 hover:bg-blue-400 hover:bg-opacity-10    rounded-sm ${isActive && "bg-blue-400 bg-opacity-10"} flex gap-3 items-center w-full `}
       >
         <Image
           src={videoCoverImageUrl}
