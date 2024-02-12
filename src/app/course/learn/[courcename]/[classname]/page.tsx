@@ -23,6 +23,8 @@ import CommentContainer from "@/components/Comment/CommentsContainer";
 import CommentNumber from "@/components/Comment/CommentNumber";
 import CommentsContainer from "@/components/Comment/CommentsContainer";
 import Comments from "@/components/Comment/Comments";
+import Rating from "@/components/Rating";
+import ProgressBar from "@/components/ProgressBar";
 
 type Params = {
   params: {
@@ -119,19 +121,18 @@ function Learn({ params }: Params) {
             </Description>
           </div>
           <div className=" w-full xl:col-start-3 xl:col-end-4 col-start-1 col-end-4  ">
-            <div className="w-full border border-gray-300 rounded-md p-4 pb-5 shadow-xl  bg-white  ">
-              <h3 className="font-bold text-3xl text-black">
-                {(23.5).toLocaleString("pt-BR", {
-                  style: "currency",
-                  currency: "BRL",
-                })}
-              </h3>
-              <div className="">
-                <Button text="Comprar agora" className="bg-blue-700"></Button>
-                <Button
-                  text="Adicionar ao carrinho"
-                  className="bg-yellow-700 mb-0"
-                ></Button>
+            <div className="flex flex-col gap-3 w-full border border-gray-300 rounded-md p-4 pb-5 shadow-xl  bg-white  ">
+              <div className="text-center">
+                <h3>Como você avalia este conteúdo?</h3>
+              </div>
+              <div className="flex justify-center ">
+                <Rating />
+              </div>
+              <div>
+                <Button text="Concluido" buttonSize="full" bg="bg-blue-700 " />
+              </div>
+              <div>
+                <ProgressBar percentage={60} />
               </div>
             </div>
           </div>
