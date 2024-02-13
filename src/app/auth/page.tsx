@@ -13,7 +13,7 @@ import Divider from "@/components/Divider";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import Logo from "@/components/Logo";
+import Logo2 from "@/components/Logo2";
 
 type VarientType = "LOGIN" | "REGISTER";
 
@@ -103,9 +103,9 @@ function Auth() {
       <section className="w-screen h-screen flex  flex-col items-center justify-center ">
         <div className=" md:w-96 w-4/5">
           <div className="text-7xl text-cian-800 w-full flex justify-center mb-4 text-cyan-400">
-            <Logo/>
+            <Logo2 className="w-16" />
           </div>
-          
+          <h1 className="text-2xl text-center text-white mb-3">Academy</h1>
           <p className="text-gray-400 text-sm text-center">
             {variant === "REGISTER"
               ? "Cadastre-se e comece a usar"
@@ -158,7 +158,6 @@ function Auth() {
             <Button
               type="submit"
               buttonSize="full"
-              
               rounded="rounded"
               text={`${
                 variant === "REGISTER" ? "Cadastrar-se" : "Entrar na plataforma"
@@ -182,7 +181,7 @@ function Auth() {
             </>
           ) : (
             <>
-             <Divider />
+              <Divider />
               <Button
                 text="Entrar com o Github"
                 type="submit"
