@@ -13,6 +13,7 @@ import Divider from "@/components/Divider";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Logo from "@/components/Logo";
 
 type VarientType = "LOGIN" | "REGISTER";
 
@@ -102,11 +103,9 @@ function Auth() {
       <section className="w-screen h-screen flex  flex-col items-center justify-center ">
         <div className=" md:w-96 w-4/5">
           <div className="text-7xl text-cian-800 w-full flex justify-center mb-4 text-cyan-400">
-            <FaReact />
+            <Logo/>
           </div>
-          <h1 className="text-2xl text-center text-white mb-3">
-            ByteTechMaster
-          </h1>
+          
           <p className="text-gray-400 text-sm text-center">
             {variant === "REGISTER"
               ? "Cadastre-se e comece a usar"
@@ -169,9 +168,21 @@ function Auth() {
         </div>
 
         <div className="space-y-4  flex flex-col justify-center items-center text-gray-500 md:w-96  w-4/5">
-          {variant === "REGISTER" && (
+          {variant === "REGISTER" ? (
             <>
               <Divider />
+              <Button
+                text="Cadastro com o Github"
+                type="submit"
+                bg="bg-black"
+                ico={<BsGithub />}
+                buttonSize="full"
+                rounded="rounded"
+              />
+            </>
+          ) : (
+            <>
+             <Divider />
               <Button
                 text="Entrar com o Github"
                 type="submit"
