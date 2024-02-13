@@ -1,6 +1,5 @@
 import { useState } from "react";
 import {
-  BsEmojiAngry,
   BsEmojiAngryFill,
   BsEmojiAstonishedFill,
   BsEmojiExpressionlessFill,
@@ -38,7 +37,7 @@ const itens = [
 ];
 function Rating() {
   const [ratingValue, setRating] = useState<Number>();
-  console.log(ratingValue)
+  
   return (
     <form className="flex gap-3">
       {itens.map((item, index ) => [

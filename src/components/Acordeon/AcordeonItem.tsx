@@ -18,7 +18,7 @@ function AcordeonItem({ data }: PropTypes) {
   return (
     <div className="flex flex-col ">
       <div
-        className="flex justify-between items-center border border-gray-300 bg-gray-100 p-4 pb-5 shadow-xl text-black cursor-pointer"
+        className="flex justify-between items-center border rounded-lg bg-gray-100 p-4 pb-5 shadow-xl text-black cursor-pointer"
         onClick={toggle}
       >
         <h6>{data.title}</h6>
