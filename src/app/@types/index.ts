@@ -24,3 +24,8 @@ export type  InstructorBasicDetails = {
   studentsNumber:number
   courcesNumber:number
 }
+
+export type CatergoriesLinkTypes = {
+    
+  links:LinkType[]
+};
