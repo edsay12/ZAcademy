@@ -45,7 +45,7 @@ function CategoriesButtons({
           <button
             key={item}
             onClick={() => setCategory(item)}
-            className="border-b-2 border-b-white"
+            className={` ${item === category && 'border-b-2 border-b-white' }`}
           >
             {item}
           </button>

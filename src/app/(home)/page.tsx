@@ -17,6 +17,7 @@ import Button from "@/components/Button";
 import DataFormater from "../../../utils/FormateDateDifference";
 import FormateDateDifference from "../../../utils/FormateDateDifference";
 import { coursesData } from "@/fakeData/CourseCardData";
+import Link from "next/link";
 
 const categories = [
   "ALL",
@@ -97,7 +98,7 @@ function Home() {
         </div>
       </SectionContainer>
 
-      <SectionContainer className="pt-40 bg-blue-700 pb-32">
+      <SectionContainer className="pt-40 bg-blue-700 pb-36">
         <SectionTitle
           firstText="Our"
           textPosition="text-left"
@@ -138,6 +139,9 @@ function Home() {
 
           {filter.length === 0 && <h1 className="text-white">Nada encontrado</h1>}
         </CardContainer>
+
+        
+        <Link href={'/course/search'} className="mt-11 underline hover:opacity-50 text-blue-500 text-end block mx-auto" >Ver Tudo</Link>
       </SectionContainer>
 
       <SectionContainer>
