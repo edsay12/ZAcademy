@@ -29,3 +29,18 @@ export type CatergoriesLinkTypes = {
     
   links:LinkType[]
 };
+
+export type CardData = {
+  courseId: number;
+  courseImageUrl: string;
+  instructorName: string;
+  userImageUrl: string;
+  courseLevel: "Beginner" | "Intermediate" | "Advance";
+  coursePrice: string;
+  courseStarNumber: 2 | 1 | 5 | 3 | 4;
+  courseTitle: string;
+  courseTotalTime: string;
+  category: string;
+};
+
+

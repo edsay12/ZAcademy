@@ -16,9 +16,10 @@ import Image from "next/image";
 import Button from "@/components/Button";
 import DataFormater from "../../../utils/FormateDateDifference";
 import FormateDateDifference from "../../../utils/FormateDateDifference";
+import { coursesData } from "@/fakeData/CourseCardData";
 
-const list = [1, 2, 3, 4, 5, 6, 7];
 const categories = [
+  "ALL",
   "BUSINESS",
   "DESIGNER",
   "DEVELOPMENT",
@@ -28,17 +29,8 @@ const categories = [
 ];
 
 function Home() {
-  const [itens, setItens] = useState(list);
-  const [filter, setFilter] = useState(list);
-  console.log(filter);
-  console.log(FormateDateDifference("2023-01-17T03:24:00"))
-  
-
-  const filterItens = (cat: string = "") => {
-    const items = itens.filter((item) => item === 1);
-
-    setFilter(items);
-  };
+  const [itens, setItens] = useState(coursesData);
+  const [filter, setFilterItens] = useState(coursesData);
 
   return (
     <>
@@ -50,22 +42,22 @@ function Home() {
         />
 
         <CardContainer>
-          {list.map((item) => {
+          {coursesData.map((item) => {
             return (
-              <Card key={item}>
+              <Card key={item.courseId}>
                 <CardTop
-                  courseId={1}
-                  courseImageUrl="/cardBg.webp"
-                  instructorName="Jhon lenon"
-                  userImageUrl="/cardUser.jpeg"
+                  courseId={item.courseId}
+                  courseImageUrl={item.courseImageUrl}
+                  instructorName={item.instructorName}
+                  userImageUrl={item.userImageUrl}
                 />
                 <CardBotton
-                  courseId={1}
-                  courseLevel="Advance"
-                  coursePrice="23.50"
-                  courseStarNumber={5}
-                  courseTitle="Project management concepts"
-                  courseTotalTime="13h 20m"
+                  courseId={item.courseId}
+                  courseLevel={item.courseLevel}
+                  coursePrice={item.coursePrice}
+                  courseStarNumber={item.courseStarNumber}
+                  courseTitle={item.courseTitle}
+                  courseTotalTime={item.courseTotalTime}
                 />
               </Card>
             );
@@ -113,26 +105,38 @@ function Home() {
           firstTextColor={"text-white"}
         />
 
-        <CategoriesButtons categories={categories} filterItens={filterItens} />
+        <CategoriesButtons
+          categories={categories}
+          itens={itens}
+          filter={filter}
+          setFilterItens={setFilterItens}
+          limit={4}
+        />
 
         <CardContainer>
-          <Card>
-            <CardTop
-              courseId={1}
-              courseImageUrl="/cardBg.webp"
-              instructorName="Jhon lenon"
-              userImageUrl="/cardUser.jpeg"
-            />
-            <CardBotton
-              courseId={1}
-              textColor="text-white"
-              courseLevel="Advance"
-              coursePrice="23.50"
-              courseStarNumber={5}
-              courseTitle="Project management concepts"
-              courseTotalTime="13h 20m"
-            />
-          </Card>
+          {filter.map((item) => {
+            return (
+              <Card key={item.courseId}>
+                <CardTop
+                  courseId={item.courseId}
+                  courseImageUrl={item.courseImageUrl}
+                  instructorName={item.instructorName}
+                  userImageUrl={item.userImageUrl}
+                />
+                <CardBotton
+                  courseId={item.courseId}
+                  courseLevel={item.courseLevel}
+                  coursePrice={item.coursePrice}
+                  textColor="text-white"
+                  courseStarNumber={item.courseStarNumber}
+                  courseTitle={item.courseTitle}
+                  courseTotalTime={item.courseTotalTime}
+                />
+              </Card>
+            );
+          })}
+
+          {filter.length === 0 && <h1 className="text-white">Nada encontrado</h1>}
         </CardContainer>
       </SectionContainer>
 
