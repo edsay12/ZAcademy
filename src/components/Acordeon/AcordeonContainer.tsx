@@ -5,12 +5,11 @@ import { FaRegCirclePlay } from "react-icons/fa6";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 
 type PropTypes = {
-  data: AcordeaoData;
-  toggle?: () => void;
-  open?: boolean;
+  children: React.ReactNode;
+  title: string;
 };
 
-function AcordeonItem({ data }: PropTypes) {
+function AcordeonItem({ children, title }: PropTypes) {
   const [open, setIsOppen] = useState(false);
   const toggle = () => {
     setIsOppen((open) => !open);
@@ -21,7 +20,7 @@ function AcordeonItem({ data }: PropTypes) {
         className="flex justify-between items-center border rounded-lg bg-gray-100 p-4 pb-5 shadow-xl text-black cursor-pointer"
         onClick={toggle}
       >
-        <h6>{data.title}</h6>
+        <h6>{title}</h6>
         <span className="text-xl">
           {open ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
         </span>
@@ -32,16 +31,7 @@ function AcordeonItem({ data }: PropTypes) {
           open ? "max-h-full border border-t-0 p-4" : "max-h-0 opacity-0"
         }`}
       >
-        {data.lessons.map((item, index) => {
-          return (
-            <div key={item.id} className="flex gap-2 items-center ">
-              <span>
-                <FaRegCirclePlay />
-              </span>
-              {item.title}
-            </div>
-          );
-        })}
+        {children}
       </div>
     </div>
   );

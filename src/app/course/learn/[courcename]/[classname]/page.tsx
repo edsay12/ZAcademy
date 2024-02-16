@@ -1,5 +1,5 @@
 "use client";
-import AcordeonItem from "@/components/Acordeon/AcordeonItem";
+import AcordeonItem from "@/components/Acordeon/AcordeonContainer";
 import Button from "@/components/Button";
 import Description from "@/components/Description";
 import InstructorDetailsCard from "@/components/InstructorDetailsCard";

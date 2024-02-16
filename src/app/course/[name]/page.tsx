@@ -8,10 +8,12 @@ import { FaClock, FaRegClock, FaSignal } from "react-icons/fa";
 import { FaArrowsSpin, FaRegCircleUser } from "react-icons/fa6";
 import { PiCertificateBold } from "react-icons/pi";
 
-import AcordeonItem from "@/components/Acordeon/AcordeonItem";
+import AcordeonItem from "@/components/Acordeon/AcordeonContainer";
 import { acordeaoData } from "@/fakeData/acordeaoData";
 import InstructorDetailsCard from "@/components/InstructorDetailsCard";
 import { fakeInstructors } from "@/fakeData/FakeInstructors";
+import AcordeonBasicItem from "@/components/Acordeon/components/AcordeonBasicItem";
+
 
 function Course() {
   const instructor = fakeInstructors[0];
@@ -97,7 +99,21 @@ function Course() {
                 <h3 className="font-bold text-black text-lg mb-5">Conteudo</h3>
               </div>
               {acordeaoData.map((item) => {
-                return <AcordeonItem key={item.id} data={item} />;
+                return (
+                  <AcordeonItem key={item.id} title={item.title}>
+
+                    {item.lessons.map((item)=>{
+                      return (
+
+                        <AcordeonBasicItem key={item.id} itemId={item.id} itemTitle={item.title} />
+
+                      )
+                    })}
+
+
+
+                  </AcordeonItem>
+                );
               })}
             </div>
 

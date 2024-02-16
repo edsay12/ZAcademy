@@ -1,4 +1,5 @@
-import AcordeonItem from "@/components/Acordeon/AcordeonItem";
+import AcordeonItem from "@/components/Acordeon/AcordeonContainer";
+import AcordeonBasicItem from "@/components/Acordeon/components/AcordeonBasicItem";
 import Button from "@/components/Button";
 import Description from "@/components/Description";
 import ProgressBar from "@/components/ProgressBar";
@@ -9,7 +10,7 @@ function CourseDetails() {
   return (
     <SectionContainer className="min-h-[600px] mb-20">
       <div className="grid lg:grid-cols-2 gap-10 grid-cols-1">
-        <div >
+        <div>
           <h3 className="text-black font-medium text-2xl">
             Curso de javascript do basico ao avançado
           </h3>
@@ -26,15 +27,31 @@ function CourseDetails() {
           </Description>
 
           <div className="mt-5">
-            <ProgressBar percentage={80}/>
+            <ProgressBar percentage={80} />
           </div>
           <div className="mt-10">
-            <Button text="Continuar onde parei" rounded="rounded" bg="bg-blue-700"/>
+            <Button
+              text="Continuar onde parei"
+              rounded="rounded"
+              bg="bg-blue-700"
+            />
           </div>
         </div>
         <div className="space-y-4">
           {acordeaoData.map((item) => {
-            return <AcordeonItem key={item.id} data={item} />;
+            return (
+              <AcordeonItem key={item.id} title={item.title}>
+                {item.lessons.map((item) => {
+                  return (
+                    <AcordeonBasicItem
+                      key={item.id}
+                      itemId={item.id}
+                      itemTitle={item.title}
+                    />
+                  );
+                })}
+              </AcordeonItem>
+            );
           })}
         </div>
       </div>
