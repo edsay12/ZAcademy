@@ -1,5 +1,5 @@
 import { CardData } from "@/app/@types";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 type PropTypes = {
   categories: Array<string>;
@@ -16,24 +16,25 @@ function CategoriesButtons({
   limit,
   setFilterItens,
 }: PropTypes) {
-  const handdleClick = (category = "ALL") => {
+  const [category, setCategory] = useState("ALL");
+
+  useEffect(() => {
     if (category === "ALL") {
-      if(limit){
-
-        return setFilterItens(itens .splice(0,limit));
+      if (limit > 0) {
+        setFilterItens(itens.slice(0, limit));
+      } else {
+        setFilterItens(itens);
       }
-      return setFilterItens(itens)
-
     } else {
       let filteredItens = itens.filter((item) => item.category === category);
-
-      if (limit) {
-        return setFilterItens(filteredItens.slice(0, limit));
+      if (limit > 0) {
+        setFilterItens(filteredItens.slice(0, limit));
+      } else {
+        setFilterItens(filteredItens);
       }
-
-      return setFilterItens(filteredItens);
     }
-  };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [category, itens, limit]);
 
   console.log(filter);
 
@@ -43,7 +44,7 @@ function CategoriesButtons({
         return (
           <button
             key={item}
-            onClick={() => handdleClick(item)}
+            onClick={() => setCategory(item)}
             className="border-b-2 border-b-white"
           >
             {item}
