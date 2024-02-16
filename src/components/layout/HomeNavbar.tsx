@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
   AiFillEdit,
   AiOutlineClose,
@@ -16,6 +16,7 @@ import {
   FormEvent,
   SetStateAction,
   useEffect,
+  useRef,
   useState,
 } from "react";
 import { BsArrowLeftShort } from "react-icons/bs";
@@ -30,8 +31,6 @@ import Button from "../Button";
 import Link from "next/link";
 
 function HomeNavbar() {
-  const [isNavOppen, setIsNavOppen] = useState<boolean>(false);
-
   const links: LinkType[] = [
     {
       name: "home",
@@ -41,11 +40,23 @@ function HomeNavbar() {
       name: "become a instructor",
       path: "/courses",
     },
-    
   ];
+  const [isNavOppen, setIsNavOppen] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   const toggleMenu = () => {
     setIsNavOppen((current) => !current);
+  };
+
+  const handdleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const inputValue = inputRef.current?.value;
+    if (inputValue != "") {
+      router.push(`/course/search?src=${inputValue}`);
+    }
+    //
+    return;
   };
 
   return (
@@ -82,14 +93,18 @@ function HomeNavbar() {
                   className="flex lg:flex-row lg:items-center flex-col  gap-6 "
                 />
               </div>
-              <div>
-                <Input
-                  placeholder="Search Courses"
-                  type="Text"
-                  ico={<AiOutlineSearch />}
-                  autoComplete="off"
-                 
-                />
+              <div className="group">
+                <form onSubmit={(event) => handdleSubmit(event)} className="flex gap-2  ">
+                  <Input
+                    placeholder="Search Courses"
+                    type="Text"
+                    ico={<AiOutlineSearch />}
+                    autoComplete="off"
+                    ref={inputRef}
+                  />
+
+                  
+                </form>
               </div>
               <div className="flex gap-10 items-center ">
                 <div>
@@ -97,7 +112,9 @@ function HomeNavbar() {
                     <Link href={"/cart"} className="text-2xl text-white">
                       <AiOutlineShoppingCart />
                     </Link>
-                    <div className=" absolute w-4 h-4 bg-red-500 rounded-full flex items-center justify-center text-[10px] text-white -top-1 -right-2">2</div>
+                    <div className=" absolute w-4 h-4 bg-red-500 rounded-full flex items-center justify-center text-[10px] text-white -top-1 -right-2">
+                      2
+                    </div>
                   </div>
                 </div>
 
