@@ -11,6 +11,9 @@ import Pagination from "@/components/Pagination";
 import { coursesData } from "@/fakeData/CourseCardData";
 import { useEffect, useState } from "react";
 import { CardData } from "@/app/@types";
+import Image from "next/image";
+import Button from "@/components/Button";
+import DefaultListError from "@/components/DefaultListError";
 
 const filterLevel = {
   title: "Nivel",
@@ -133,7 +136,7 @@ function Search() {
                 );
               })}
               {itensData.length === 0 && (
-                <h2 className="text-black text-lg">Nenhum item emcontrado</h2>
+                <DefaultListError message="Nenhum resultado encontrado"></DefaultListError>
               )}
             </div>
           </div>
