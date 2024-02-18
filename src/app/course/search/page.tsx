@@ -7,6 +7,10 @@ import { useRouter } from "next/navigation";
 import { acordeaoData } from "@/fakeData/acordeaoData";
 import CartItem from "@/components/CartItem";
 import CartItemDetails from "@/components/CardItemDetails";
+import Pagination from "@/components/Pagination";
+import { coursesData } from "@/fakeData/CourseCardData";
+import { useEffect, useState } from "react";
+import { CardData } from "@/app/@types";
 
 const filterLevel = {
   title: "Nivel",
@@ -46,8 +50,20 @@ const filterPrice = {
 
 function Search() {
   const params = useSearchParams();
+  const [itens, setItens] = useState<CardData[]>([]);
 
   console.log(params.get("src"));
+
+  const itensPerPage = 4;
+  const numberOfPages = Math.ceil(coursesData.length / itensPerPage);
+  const currentPages = Number(params.get("page") ?? "1"); // current page
+
+  const start = (currentPages - 1) * itensPerPage;
+  const final = start + itensPerPage;
+
+  console.log(params.get("page"));
+  const itensData = coursesData.slice(start, final);
+
   return (
     <>
       <SectionContainer className="mb-20 relative min-h-[500px] text-black ">
@@ -101,33 +117,31 @@ function Search() {
               </div>
             </div>
             <div className="shadow-xl bg-white border p-4 border-gray-100 rounded-md mt-5">
-              <CartItemDetails 
-                courseId={1}
-                courseImageUrl="/cardBg.webp"
-                courseLevel="Beginner"
-                courseStarNumber={5}
-                courseTitle="C# COMPLETO Programação Orientada a Objetos + Projetos
-Curso mais didático e completo de "
-                courseTotalTime="13,20"
-                instructorName="Julio Davi"
-                coursePrice={14.45}
-              />
-              <CartItemDetails 
-                courseId={1}
-                courseImageUrl="/cardBg.webp"
-                courseLevel="Beginner"
-                courseStarNumber={5}
-                courseTitle="C# COMPLETO Programação Orientada a Objetos + Projetos
-Curso mais didático e completo de "
-                courseTotalTime="13,20"
-                instructorName="Julio Davi"
-                coursePrice={14.45}
-              />
-              
+              {itensData.map((item) => {
+                return (
+                  <CartItemDetails
+                    key={item.courseId}
+                    courseId={item.courseId}
+                    courseImageUrl={item.courseImageUrl}
+                    courseLevel={item.courseLevel}
+                    courseStarNumber={5}
+                    courseTitle={item.courseTitle}
+                    courseTotalTime={item.courseTotalTime}
+                    instructorName={item.instructorName}
+                    coursePrice={item.coursePrice}
+                  />
+                );
+              })}
+              {itensData.length === 0 && (
+                <h2 className="text-black text-lg">Nenhum item emcontrado</h2>
+              )}
             </div>
           </div>
         </div>
       </SectionContainer>
+      <div className="flex justify-center p-12 mx-auto w-full ">
+        <Pagination numberOfPages={numberOfPages} />
+      </div>
     </>
   );
 }

@@ -12,22 +12,20 @@ export type AcordeaoData = {
   }[];
 };
 
-
-export type  InstructorBasicDetails = {
-  id:number
-  name:string
-  role:string
-  image:string
-  description:string
-  classification:number
-  assessmentsNumber:number
-  studentsNumber:number
-  courcesNumber:number
-}
+export type InstructorBasicDetails = {
+  id: number;
+  name: string;
+  role: string;
+  image: string;
+  description: string;
+  classification: number;
+  assessmentsNumber: number;
+  studentsNumber: number;
+  courcesNumber: number;
+};
 
 export type CatergoriesLinkTypes = {
-    
-  links:LinkType[]
+  links: LinkType[];
 };
 
 export type CardData = {
@@ -36,11 +34,18 @@ export type CardData = {
   instructorName: string;
   userImageUrl: string;
   courseLevel: "Beginner" | "Intermediate" | "Advance";
-  coursePrice: string;
+  coursePrice: number;
   courseStarNumber: 2 | 1 | 5 | 3 | 4;
   courseTitle: string;
   courseTotalTime: string;
-  category: string;
+  category: Categories;
 };
 
-
+export type Categories =
+  | "ALL"
+  | "BUSINESS"
+  | "DESIGNER"
+  | "DEVELOPMENT"
+  | "MANAGEMENT"
+  | "TECNOLOGY"
+  | "PHOTOGRAPHY";

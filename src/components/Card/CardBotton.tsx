@@ -14,7 +14,7 @@ type PropTypes = {
   courseLevel: "Beginner" | "Intermediate" | "Advance";
   courseTotalTime: string;
   courseStarNumber: 1 | 2 | 3 | 4 | 5;
-  coursePrice: string;
+  coursePrice: number;
   textColor?: string;
 };
 
