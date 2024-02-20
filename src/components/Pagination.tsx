@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Pagination({ numberOfPages }: { numberOfPages: number }) {
   const params = useSearchParams();
@@ -13,6 +13,17 @@ function Pagination({ numberOfPages }: { numberOfPages: number }) {
   const router = useRouter();
   const [maxPagelimit, setMaxPageLimit] = useState(5);
   const [minPageLimit, setMinPageLimit] = useState(0);
+ 
+  
+  // se o numero de paginas mudar redireciona para a pagina 01
+  useEffect(()=> {
+    const current = new URLSearchParams(Array.from(params.entries()));
+    current.set("page", '1');
+    router.push(`${pathName}?${current}`);
+    
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[numberOfPages] )
 
   const pages = [...Array(numberOfPages)].map(function () {
     return 0;
