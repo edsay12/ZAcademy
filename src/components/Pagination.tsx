@@ -18,7 +18,7 @@ function Pagination({ numberOfPages }: { numberOfPages: number }) {
     return 0;
   });
 
-  const currentPage = Number(params.get("page"));
+  const currentPage = Number(params.get("page") ?? '1');
 
   // Atualizar o parâmetro page
   const updatePage = (page: number) => {

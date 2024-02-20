@@ -9,13 +9,19 @@ import CartItem from "@/components/CartItem";
 import CartItemDetails from "@/components/CardItemDetails";
 import Pagination from "@/components/Pagination";
 import { coursesData } from "@/fakeData/CourseCardData";
-import { useEffect, useState } from "react";
-import { CardData } from "@/app/@types";
+import { ChangeEvent, useEffect, useState } from "react";
+import { CardData, Categories } from "@/app/@types";
 import Image from "next/image";
 import Button from "@/components/Button";
 import DefaultListError from "@/components/DefaultListError";
+import { categories } from "@/fakeData/categories";
 
-const filterLevel = {
+type FilterCategories = {
+  title: string;
+  filter: Array<{ id: number; title: Categories }>;
+};
+
+const filterLevelAcordeonData = {
   title: "Nivel",
   filter: [
     {
@@ -37,7 +43,7 @@ const filterLevel = {
   ],
 };
 
-const filterPrice = {
+const filterPriceAcordeonData = {
   title: "Preço",
   filter: [
     {
@@ -45,27 +51,47 @@ const filterPrice = {
       title: "Pago",
     },
     {
-      id: 1,
+      id: 2,
       title: "Gratuito",
+    },
+  ],
+};
+const filterCategoryAcordeonData: FilterCategories = {
+  title: "Categorias",
+  filter: [
+    {
+      id: 1,
+      title: "ALL",
+    },
+    {
+      id: 2,
+      title: "BUSINESS",
     },
   ],
 };
 
 function Search() {
   const params = useSearchParams();
-  const [itens, setItens] = useState<CardData[]>([]);
+  const [itens, setItens] = useState<CardData[]>(coursesData); // set itens on component
 
-  console.log(params.get("src"));
+  const filterSearchItem = itens.filter((item) =>
+    item.courseTitle
+      .toLowerCase()
+      .includes(params.get("src")?.toLocaleLowerCase() ?? "")
+  );
 
   const itensPerPage = 4;
-  const numberOfPages = Math.ceil(coursesData.length / itensPerPage);
+  const numberOfPages = Math.ceil(itens.length / itensPerPage);
   const currentPages = Number(params.get("page") ?? "1"); // current page
 
   const start = (currentPages - 1) * itensPerPage;
   const final = start + itensPerPage;
 
-  console.log(params.get("page"));
-  const itensData = coursesData.slice(start, final);
+  const itensData = filterSearchItem.slice(start, final);
+
+  const handdleCategoryChange = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+  };
 
   return (
     <>
@@ -75,13 +101,43 @@ function Search() {
         </h1>
         <div className="grid  grid-cols-2 lg:grid-cols-4  mx-auto gap-5 relative ">
           {/* leftside */}
-          <div className=" flex flex-col gap-5 w-full lg:col-span-1 col-span-3 ">
-            <div className="shadow-xl bg-white border p-4 border-gray-100 rounded-md">
+          <div className=" flex flex-col gap-5 w-full  lg:col-span-1 col-span-3 ">
+            <div className="shadow-xl bg-white border pb-10 p-4 border-gray-100 rounded-md">
               <h3 className="text-black">Filtros</h3>
 
               <div className="mt-5 ">
-                <AcordeonItem key={filterLevel.title} title={filterLevel.title}>
-                  {filterLevel.filter.map((item) => {
+                <AcordeonItem
+                  key={filterLevelAcordeonData.title}
+                  title={filterLevelAcordeonData.title}
+                >
+                  <form action="" className="flex flex-col gap-3">
+                    {filterLevelAcordeonData.filter.map((item) => {
+                      return (
+                        <label
+                          htmlFor={item.title}
+                          key={item.title}
+                          className="flex gap-3 cursor-pointer"
+                        >
+                          <input
+                            type="radio"
+                            name={"categorias"}
+                            value={item.title}
+                            id={item.title}
+                            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                              handdleCategoryChange(e)
+                            }
+                          />
+                          {item.title}
+                        </label>
+                      );
+                    })}
+                  </form>
+                </AcordeonItem>
+                <AcordeonItem
+                  key={filterPriceAcordeonData.title}
+                  title={filterPriceAcordeonData.title}
+                >
+                  {filterPriceAcordeonData.filter.map((item) => {
                     return (
                       <AcordeonBasicItem
                         key={item.title}
@@ -91,14 +147,19 @@ function Search() {
                     );
                   })}
                 </AcordeonItem>
-                <AcordeonItem key={filterPrice.title} title={filterPrice.title}>
-                  {filterPrice.filter.map((item) => {
+                <AcordeonItem
+                  key={filterCategoryAcordeonData.title}
+                  title={filterCategoryAcordeonData.title}
+                >
+                  {filterCategoryAcordeonData.filter.map((item) => {
                     return (
-                      <AcordeonBasicItem
-                        key={item.title}
-                        itemId={item.id}
-                        itemTitle={item.title}
-                      />
+                      <>
+                        <AcordeonBasicItem
+                          key={item.title}
+                          itemId={item.id}
+                          itemTitle={item.title}
+                        />
+                      </>
                     );
                   })}
                 </AcordeonItem>
@@ -136,7 +197,7 @@ function Search() {
                 );
               })}
               {itensData.length === 0 && (
-                <DefaultListError message="Nenhum resultado encontrado"></DefaultListError>
+                <DefaultListError message="Nenhum resultado encontrado" />
               )}
             </div>
           </div>

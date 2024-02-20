@@ -1,6 +1,7 @@
-'use client'
+"use client";
 import Button from "@/components/Button";
 import CartItem from "@/components/CartItem";
+import DefaultListError from "@/components/DefaultListError";
 import Description from "@/components/Description";
 import InstructorDetailsCard from "@/components/InstructorDetailsCard";
 import SectionContainer from "@/components/Section/SectionContainer";
@@ -59,20 +60,16 @@ Curso mais didático e completo de "
         </SectionContainer>
       ) : (
         <SectionContainer className="min-h-[600px] ">
-          <div className="max-w-[1000px] mx-auto  flex flex-col items-center justify-center mt-10 gap-8">
-            <Image
-              alt="imagem de curso insistente"
-              src={"/cartNotFound.svg"}
-              width={100}
-              height={100}
-              className="max-w-[400px] w-full"
+          <DefaultListError
+            message=" Seu carrinho está vazio. Continue comprando para encontrar um
+              curso!"
+          >
+            <Button
+              text="Continue comprando"
+              buttonSize="medium"
+              onClick={() => route.push("/")}
             />
-            <p className="text-black">
-              Seu carrinho está vazio. Continue comprando para encontrar um
-              curso!
-            </p>
-            <Button text="Continue comprando" buttonSize="medium" onClick={()=> route.push("/")} />
-          </div>
+          </DefaultListError>
         </SectionContainer>
       )}
     </>
