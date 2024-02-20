@@ -49,3 +49,4 @@ export type Categories =
   | "MANAGEMENT"
   | "TECNOLOGY"
   | "PHOTOGRAPHY";
+export type CourseLevels = "Beginner" | "Intermediate" | "Advance"

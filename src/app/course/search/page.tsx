@@ -6,15 +6,15 @@ import { useSearchParams } from "next/navigation";
 import CartItemDetails from "@/components/CardItemDetails";
 import Pagination from "@/components/Pagination";
 import { coursesData } from "@/fakeData/CourseCardData";
-import { ChangeEvent, useEffect, useState } from "react";
-import { CardData, Categories } from "@/app/@types";
+import { ChangeEvent, useEffect, useReducer, useState } from "react";
+import { CardData, Categories, CourseLevels } from "@/app/@types";
 import DefaultListError from "@/components/DefaultListError";
-import { categories } from "@/fakeData/categories";
 
 type FilterCategories = {
   title: string;
   filter: Array<{ id: number; value: Categories; label: string }>;
 };
+type Levels =  CourseLevels | 'ALL'
 
 const filterLevelAcordeonData = {
   title: "Nivel",
@@ -22,7 +22,7 @@ const filterLevelAcordeonData = {
     {
       id: 1,
       label: "Todos os niveis",
-      value: "All",
+      value: "ALL",
     },
     {
       id: 2,
@@ -42,21 +42,6 @@ const filterLevelAcordeonData = {
   ],
 };
 
-const filterPriceAcordeonData = {
-  title: "Preço",
-  filter: [
-    {
-      id: 1,
-      label: "Pago",
-      value: "pago",
-    },
-    {
-      id: 2,
-      label: "Gratuito",
-      value: "gratuito",
-    },
-  ],
-};
 const filterCategoryAcordeonData: FilterCategories = {
   title: "Categorias",
   filter: [
@@ -98,89 +83,70 @@ const filterCategoryAcordeonData: FilterCategories = {
   ],
 };
 
+function categoryFilter(defaultData:CardData[],data: CardData[],type:Categories) {
+  if (type === "ALL") {
+    return defaultData
+  } else {
+    return data.filter((item) => item.category === type);
+  }
+}
+
+function levelFilter(defaultData:CardData[],data: CardData[],type:Levels) {
+  if (type === "ALL") {
+    return defaultData;
+  } else {
+    return data.filter((item) => item.courseLevel === type);
+  }
+}
+
+function sortItens(defaultData:CardData[],data: CardData[],type:string){
+  if (type === "estrelas") {
+    return data.sort((a, b) => {
+      if (a.courseStarNumber > b.courseStarNumber) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
+  } else {
+    return defaultData;
+  }
+}
+
 function Search() {
   const params = useSearchParams();
-  const [itens, setItens] = useState<CardData[]>(coursesData); // set itens on component
+  const itens = coursesData; // set itens on component
   const [category, setCategory] = useState<Categories>("ALL");
-  const [level, setLevel] = useState("All");
-  
+  const [level, setLevel] = useState<Levels>("ALL");
+  const [sort, setSort] = useState("mais relevantes");
   // search
-  const filterSearchItem = itens.filter((item) =>
-  item.courseTitle
-  .toLowerCase()
-  .includes(params.get("src")?.toLocaleLowerCase() ?? "")
+  const filterSearchItem: CardData[] = itens.filter((item) =>
+    item.courseTitle
+      .toLowerCase()
+      .includes(params.get("src")?.toLocaleLowerCase() ?? "")
   );
-  
-  let itensData = filterSearchItem;
 
+  let itensData = filterSearchItem;
+  //pagination
   const itensPerPage = 4;
   const currentPages = Number(params.get("page") ?? "1"); // current page
   const start = (currentPages - 1) * itensPerPage;
   const final = start + itensPerPage;
-  let paginationItens = []
+  let paginationItens = [];
 
-
-
-  const [sort, setSort] = useState("mais relevantes");
-
-  const handdleSortChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
-    setSort(value);
-  };
-
-  
-
-  const handdleCategoryChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value: Categories = e.target.value as Categories;
-    setCategory(value);
-  };
-  const handdleLevelChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setLevel(value);
-  };
 
   function applyFilter() {
-    let categoryFilter = [];
-    let levelFilter = [];
-    let sortItens = [];
-    
-
-    if (category === "ALL") {
-      categoryFilter = filterSearchItem;
-    } else {
-      categoryFilter = filterSearchItem.filter(
-        (item) => item.category === category
-      );
-    }
-
-    if (level === "All") {
-      levelFilter = categoryFilter;
-    } else {
-      levelFilter = categoryFilter.filter((item) => item.courseLevel === level);
-    }
-
-    if (sort === "estrelas") {
-      sortItens = levelFilter.sort((a, b) => {
-        if (a.courseStarNumber > b.courseStarNumber) {
-          return -1;
-        } else {
-          return 1;
-        }
-      });
-    } else {
-      sortItens = levelFilter;
-    }
-    
-    return sortItens
+    let categoryFilterData = categoryFilter(filterSearchItem,filterSearchItem,category);
+    let levelFilterData = levelFilter(categoryFilterData,categoryFilterData,level);
+    let sortItensData = sortItens(levelFilterData,levelFilterData,sort)
+    return sortItensData;
   }
-  
+
   itensData = applyFilter();
   const numberOfPages = Math.ceil(itensData.length / itensPerPage);
-  
-  
-  
-  paginationItens = itensData.slice(start,final)
-  
+
+  paginationItens = itensData.slice(start, final);
+
   return (
     <>
       <SectionContainer className="mb-20 relative min-h-[500px] text-black ">
@@ -212,7 +178,7 @@ function Search() {
                             value={item.value}
                             id={item.value}
                             onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                              handdleCategoryChange(e)
+                              setCategory(e.target.value as Categories)
                             }
                             checked={category === item.value}
                           />
@@ -230,17 +196,17 @@ function Search() {
                     {filterLevelAcordeonData.filter.map((item) => {
                       return (
                         <label
-                          htmlFor={item.value}
-                          key={item.value}
+                          htmlFor={item.label}
+                          key={item.label}
                           className="flex gap-3 cursor-pointer"
                         >
                           <input
                             type="radio"
                             name={"categorias"}
                             value={item.value}
-                            id={item.value}
+                            id={item.label}
                             onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                              handdleLevelChange(e)
+                              setLevel(e.target.value as Levels)
                             }
                             checked={level === item.value}
                           />
@@ -265,7 +231,7 @@ function Search() {
                   name="sort"
                   id=""
                   onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-                    handdleSortChange(e)
+                    setSort(e.target.value)
                   }
                 >
                   <option value="mais relevantes">Mais relevantes</option>
