@@ -2,19 +2,20 @@
 import AcordeonItem from "@/components/Acordeon/AcordeonContainer";
 
 import SectionContainer from "@/components/Section/SectionContainer";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import CartItemDetails from "@/components/CardItemDetails";
 import Pagination from "@/components/Pagination";
 import { coursesData } from "@/fakeData/CourseCardData";
 import { ChangeEvent, useEffect, useReducer, useState } from "react";
 import { CardData, Categories, CourseLevels } from "@/app/@types";
 import DefaultListError from "@/components/DefaultListError";
+import { useRouter } from "next/navigation";
 
 type FilterCategories = {
   title: string;
   filter: Array<{ id: number; value: Categories; label: string }>;
 };
-type Levels =  CourseLevels | 'ALL'
+type Levels = CourseLevels | "ALL";
 
 const filterLevelAcordeonData = {
   title: "Nivel",
@@ -83,15 +84,19 @@ const filterCategoryAcordeonData: FilterCategories = {
   ],
 };
 
-function categoryFilter(defaultData:CardData[],data: CardData[],type:Categories) {
+function categoryFilter(
+  defaultData: CardData[],
+  data: CardData[],
+  type: Categories
+) {
   if (type === "ALL") {
-    return defaultData
+    return defaultData;
   } else {
     return data.filter((item) => item.category === type);
   }
 }
 
-function levelFilter(defaultData:CardData[],data: CardData[],type:Levels) {
+function levelFilter(defaultData: CardData[], data: CardData[], type: Levels) {
   if (type === "ALL") {
     return defaultData;
   } else {
@@ -99,7 +104,7 @@ function levelFilter(defaultData:CardData[],data: CardData[],type:Levels) {
   }
 }
 
-function sortItens(defaultData:CardData[],data: CardData[],type:string){
+function sortItens(defaultData: CardData[], data: CardData[], type: string) {
   if (type === "estrelas") {
     return data.sort((a, b) => {
       if (a.courseStarNumber > b.courseStarNumber) {
@@ -119,6 +124,9 @@ function Search() {
   const [category, setCategory] = useState<Categories>("ALL");
   const [level, setLevel] = useState<Levels>("ALL");
   const [sort, setSort] = useState("mais relevantes");
+  const router = useRouter();
+  const pathName = usePathname();
+  let itensData = [];
   // search
   const filterSearchItem: CardData[] = itens.filter((item) =>
     item.courseTitle
@@ -126,7 +134,14 @@ function Search() {
       .includes(params.get("src")?.toLocaleLowerCase() ?? "")
   );
 
-  let itensData = [];
+  function RedirectToPage1() {
+    const current = new URLSearchParams(Array.from(params.entries()));
+    current.set("page", "1");
+    router.push(`${pathName}?${current}`);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }
+
   //pagination
   const itensPerPage = 4;
   const currentPages = Number(params.get("page") ?? "1"); // current page
@@ -134,20 +149,31 @@ function Search() {
   const final = start + itensPerPage;
   let paginationItens = [];
 
-
   function applyFilter() {
-    let categoryFilterData = categoryFilter(filterSearchItem,filterSearchItem,category);
-    let levelFilterData = levelFilter(categoryFilterData,categoryFilterData,level);
-    let sortItensData = sortItens(levelFilterData,levelFilterData,sort)
+    let categoryFilterData = categoryFilter(
+      filterSearchItem,
+      filterSearchItem,
+      category
+    );
+    let levelFilterData = levelFilter(
+      categoryFilterData,
+      categoryFilterData,
+      level
+    );
+    let sortItensData = sortItens(levelFilterData, levelFilterData, sort);
     return sortItensData;
   }
+  // redireciona para pagina 1 quando os filtros mudarem 
+  useEffect(() => {
+    RedirectToPage1();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [category, level, sort]);
 
   itensData = applyFilter();
-  
+
   const numberOfPages = Math.ceil(itensData.length / itensPerPage);
 
   paginationItens = itensData.slice(start, final);
-  
 
   return (
     <>
