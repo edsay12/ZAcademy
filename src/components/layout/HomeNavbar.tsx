@@ -119,15 +119,13 @@ function HomeNavbar() {
                 </div>
 
                 <div className="w-14 bg-transparent">
-                  <Button
-                    text="sign up"
-                    textColor="text-white"
-                    bg="bg-transparent"
-                  />
+                  
+                  <Link href={'/auth'} className="text-white">sign up</Link>
                 </div>
 
                 <div className="w-32 w-50">
-                  <Button text="sign in" textColor="text-white" />
+                  <Link href={'/auth?=signin'} className="text-white p-4 font-bold pl-7 pr-7 rounded-full bg-yellow-700 ">sign in</Link>
+                  
                 </div>
               </div>
             </div>
