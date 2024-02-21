@@ -137,10 +137,10 @@ function Search() {
 
   useEffect(() => {
       if(params.get('page') === '1') return;
+      // redirect to page 1 
       const current = new URLSearchParams(Array.from(params.entries()));
       current.set("page", '1');
       router.push(`${pathName}?${current}`);
-      console.log('to aqui')
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, level, sort]);
 

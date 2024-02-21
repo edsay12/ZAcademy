@@ -54,7 +54,7 @@ function HomeNavbar() {
     
     const inputValue = inputRef.current?.value;
     if (inputValue != "") {
-      router.push(`/course/search?src=${inputValue}`);
+      router.push(`/course/search?src=${inputValue}&page=1`);
     }
     //
     return;
