@@ -33,7 +33,7 @@ export type CardData = {
   courseImageUrl: string;
   instructorName: string;
   userImageUrl: string;
-  courseLevel: "Beginner" | "Intermediate" | "Advance";
+  courseLevel: CourseLevels;
   coursePrice: number;
   courseStarNumber: 2 | 1 | 5 | 3 | 4;
   courseTitle: string;
@@ -42,11 +42,13 @@ export type CardData = {
 };
 
 export type Categories =
-  | "ALL"
-  | "BUSINESS"
-  | "DESIGNER"
-  | "DEVELOPMENT"
-  | "MANAGEMENT"
-  | "TECNOLOGY"
-  | "PHOTOGRAPHY";
-export type CourseLevels = "Beginner" | "Intermediate" | "Advance"
+|"TUDO"
+|"NEGÓCIOS"
+|"DESIGNER"
+|"DESENVOLVIMENTO"
+|"GERENCIAMENTO"
+|"TECNOLOGIA"
+|"FOTOGRAFIA"
+
+export type CourseLevels = "Iniciante" | "Intermediário" | "Avançado"
+

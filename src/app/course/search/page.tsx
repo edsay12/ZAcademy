@@ -15,30 +15,39 @@ type FilterCategories = {
   title: string;
   filter: Array<{ id: number; value: Categories; label: string }>;
 };
-type Levels = CourseLevels | "ALL";
 
-const filterLevelAcordeonData = {
+type FilterCategoryData = {
+  title:string
+  filter: Array<{
+    id:number,
+    label:string,
+    value:Levels
+  }>
+}
+type Levels = CourseLevels | "TUDO";
+
+const filterLevelAcordeonData:FilterCategoryData = {
   title: "Nivel",
   filter: [
     {
       id: 1,
       label: "Todos os niveis",
-      value: "ALL",
+      value: "TUDO",
     },
     {
       id: 2,
       label: "Intermediario",
-      value: "Intermediate",
+      value: "Intermediário",
     },
     {
       id: 3,
       label: "Básico",
-      value: "Beginner",
+      value: "Iniciante",
     },
     {
       id: 4,
       label: "Avançado",
-      value: "Advance",
+      value: "Avançado",
     },
   ],
 };
@@ -48,12 +57,12 @@ const filterCategoryAcordeonData: FilterCategories = {
   filter: [
     {
       id: 1,
-      value: "ALL",
+      value: "TUDO",
       label: "Tudo",
     },
     {
       id: 2,
-      value: "BUSINESS",
+      value: "NEGÓCIOS",
       label: "Negocios",
     },
     {
@@ -63,22 +72,22 @@ const filterCategoryAcordeonData: FilterCategories = {
     },
     {
       id: 4,
-      value: "DEVELOPMENT",
+      value: "DESENVOLVIMENTO",
       label: "Desenvolvimento",
     },
     {
       id: 5,
-      value: "MANAGEMENT",
+      value: "GERENCIAMENTO",
       label: "Gerenciamento",
     },
     {
       id: 6,
-      value: "PHOTOGRAPHY",
+      value: "FOTOGRAFIA",
       label: "Fotografia",
     },
     {
       id: 6,
-      value: "TECNOLOGY",
+      value: "TECNOLOGIA",
       label: "Tecnologia",
     },
   ],
@@ -89,7 +98,7 @@ function categoryFilter(
   data: CardData[],
   type: Categories
 ) {
-  if (type === "ALL") {
+  if (type === "TUDO") {
     return defaultData;
   } else {
     return data.filter((item) => item.category === type);
@@ -97,7 +106,7 @@ function categoryFilter(
 }
 
 function levelFilter(defaultData: CardData[], data: CardData[], type: Levels) {
-  if (type === "ALL") {
+  if (type === "TUDO") {
     return defaultData;
   } else {
     return data.filter((item) => item.courseLevel === type);
@@ -121,8 +130,8 @@ function sortItens(defaultData: CardData[], data: CardData[], type: string) {
 function Search() {
   const params = useSearchParams();
   const itens = coursesData; // set itens on component
-  const [category, setCategory] = useState<Categories>("ALL");
-  const [level, setLevel] = useState<Levels>("ALL");
+  const [category, setCategory] = useState<Categories>("TUDO");
+  const [level, setLevel] = useState<Levels>("TUDO");
   const [sort, setSort] = useState("mais relevantes");
   const router = useRouter();
   const pathName = usePathname();

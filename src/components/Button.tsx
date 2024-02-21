@@ -58,8 +58,8 @@ function Button({
       className={
         twMerge(
           `${bg} ${textColor} ${roundedSizes[rounded]} ${paddingSizes[paddingY]} ${marginSizes[marginBotton]}  ${marginSizes[margintop]} text-sm hover:opacity-90 py-3 mt-5 mb-5 font-extrabold shadow-sm  flex gap-3 justify-center items-center ${buttonSizes[buttonSize]} ${newStyle} `,
-  
           className
+  
         )
       }
      

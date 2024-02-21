@@ -1,3 +1,4 @@
+import { CourseLevels } from "@/app/@types";
 import Image from "next/image";
 import Link from "next/link";
 import { FaClock, FaStar } from "react-icons/fa";
@@ -8,7 +9,7 @@ type PropTypes = {
   courseTitle: string;
   courseImageUrl: string;
   instructorName: string;
-  courseLevel: "Beginner" | "Intermediate" | "Advance";
+  courseLevel: CourseLevels;
   courseTotalTime: string;
   courseStarNumber: 1 | 2 | 3 | 4 | 5;
   coursePrice: number;

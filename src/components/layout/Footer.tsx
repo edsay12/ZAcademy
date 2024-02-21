@@ -9,21 +9,21 @@ function Footer() {
         </div>
         <div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
           <div className="space-y-3">
-            <h3 className="tracki uppercase dark:text-gray-50">Product</h3>
+            <h3 className="tracki uppercase dark:text-gray-50"> Produtos</h3>
             <ul className="space-y-1">
               <li>
                 <a rel="noopener noreferrer" href="#">
-                  Features
+                  Ferramentas
                 </a>
               </li>
               <li>
                 <a rel="noopener noreferrer" href="#">
-                  Integrations
+                  Intregação
                 </a>
               </li>
               <li>
                 <a rel="noopener noreferrer" href="#">
-                  Pricing
+                  Preços
                 </a>
               </li>
               <li>
@@ -34,16 +34,16 @@ function Footer() {
             </ul>
           </div>
           <div className="space-y-3">
-            <h3 className="tracki uppercase dark:text-gray-50">Company</h3>
+            <h3 className="tracki uppercase dark:text-gray-50">Companhia</h3>
             <ul className="space-y-1">
               <li>
                 <a rel="noopener noreferrer" href="#">
-                  Privacy
+                  Privacidade
                 </a>
               </li>
               <li>
                 <a rel="noopener noreferrer" href="#">
-                  Terms of Service
+                  Termos de serviço
                 </a>
               </li>
             </ul>
@@ -53,23 +53,23 @@ function Footer() {
             <ul className="space-y-1">
               <li>
                 <a rel="noopener noreferrer" href="#">
-                  Public API
+                  Api Publica
                 </a>
               </li>
               <li>
                 <a rel="noopener noreferrer" href="#">
-                  Documentation
+                  Documentação
                 </a>
               </li>
               <li>
                 <a rel="noopener noreferrer" href="#">
-                  Guides
+                  Guias
                 </a>
               </li>
             </ul>
           </div>
           <div className="space-y-3">
-            <div className="uppercase dark:text-gray-50">Social media</div>
+            <div className="uppercase dark:text-gray-50">Redes Sociais</div>
             <div className="flex justify-start space-x-3">
               <a
                 rel="noopener noreferrer"
@@ -120,7 +120,7 @@ function Footer() {
         </div>
       </div>
       <div className="py-6 text-sm text-center dark:text-gray-400">
-        © 2024 Company Co. All rights reserved.
+        Todos os direitos reservados Zacademy © 2024 
       </div>
     </footer>
   );

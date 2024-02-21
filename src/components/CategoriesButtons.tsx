@@ -16,10 +16,11 @@ function CategoriesButtons({
   limit,
   setFilterItens,
 }: PropTypes) {
-  const [category, setCategory] = useState("ALL");
+  const [category, setCategory] = useState("TUDO");
+  console.log(category)
 
   useEffect(() => {
-    if (category === "ALL") {
+    if (category === "TUDO") {
       if (limit > 0) {
         setFilterItens(itens.slice(0, limit));
       } else {

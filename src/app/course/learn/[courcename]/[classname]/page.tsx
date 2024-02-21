@@ -79,7 +79,7 @@ function Learn({ params }: Params) {
       <VideoMenuBotton>
         <div className="mr-auto">
           <BreadCrumb
-            pathName={`/course/learn/javascript/avancado`}
+            pathName={`/course/learn/javascript/avançado`}
             removedFirstQuantity={2}
           />
         </div>

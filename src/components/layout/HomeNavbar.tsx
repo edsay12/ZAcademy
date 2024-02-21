@@ -33,12 +33,12 @@ import Link from "next/link";
 function HomeNavbar() {
   const links: LinkType[] = [
     {
-      name: "home",
+      name: "Inicio",
       path: "/",
     },
     {
-      name: "become a instructor",
-      path: "/courses",
+      name: "Seja um instrutor",
+      path: "/work-with-us",
     },
   ];
   const [isNavOppen, setIsNavOppen] = useState<boolean>(false);
@@ -97,7 +97,7 @@ function HomeNavbar() {
               <div className="group">
                 <form onSubmit={(event) => handdleSubmit(event)} className="flex gap-2  ">
                   <Input
-                    placeholder="Search Courses"
+                    placeholder="Procure por cursos"
                     type="Text"
                     ico={<AiOutlineSearch />}
                     autoComplete="off"
@@ -121,11 +121,11 @@ function HomeNavbar() {
 
                 <div className="w-14 bg-transparent">
                   
-                  <Link href={'/auth?type=signup'} className="text-white">sign up</Link>
+                  <Link href={'/auth?type=signup'} className="text-white">Cadastrar</Link>
                 </div>
 
                 <div className="w-32 w-50">
-                  <Link href={'/auth'} className="text-white p-4 font-bold pl-7 pr-7 rounded-full bg-yellow-700 ">sign in</Link>
+                  <Link href={'/auth'} className="text-white p-4 font-bold pl-7 pr-7 rounded-full bg-yellow-700 ">Entrar</Link>
                   
                 </div>
               </div>

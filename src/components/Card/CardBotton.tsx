@@ -7,11 +7,12 @@ import {
 } from "react-icons/ai";
 import Divider from "../Divider";
 import Button from "../Button";
+import { CourseLevels } from "@/app/@types";
 
 type PropTypes = {
   courseId:number;
   courseTitle: string;
-  courseLevel: "Beginner" | "Intermediate" | "Advance";
+  courseLevel: CourseLevels;
   courseTotalTime: string;
   courseStarNumber: 1 | 2 | 3 | 4 | 5;
   coursePrice: number;
@@ -29,7 +30,7 @@ function CardBotton({
 }: PropTypes) {
   return (
     <div className={`p-6 text-black shadow-2xl ${textColor}`}>
-      <h3 className=" font-bold text-xl opacity-75">{courseTitle}</h3>
+      <h3 className=" font-bold text-xl opacity-75 h-[40px]">{courseTitle}</h3>
       <div className="flex mt-4 opacity-50 gap-4">
         <div className="flex gap-1 text-xs items-center">
           <span className="text-base">
@@ -66,7 +67,7 @@ function CardBotton({
           <span className="">
             <AiOutlineShoppingCart />
           </span>
-          <span>Add to cart</span>
+          <span>Adicionar ao Carrinho</span>
         </button>
       </div>
     </div>

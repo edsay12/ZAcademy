@@ -1,9 +1,9 @@
 export const categories = [
-    "ALL",
-    "BUSINESS",
-    "DESIGNER",
-    "DEVELOPMENT",
-    "MANAGEMENT",
-    "TECNOLOGY",
-    "PHOTOGRAPHY",
-  ];
+  "TUDO",
+  "NEGÓCIOS",
+  "DESIGNER",
+  "DESENVOLVIMENTO",
+  "GERENCIAMENTO",
+  "TECNOLOGIA",
+  "FOTOGRAFIA",
+];
