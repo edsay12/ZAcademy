@@ -19,10 +19,10 @@ function All() {
               />
               <CardBotton
                 courseId={1}
-                courseLevel="Advance"
+                courseLevel="Avançado"
                 coursePrice={23.50}
                 courseStarNumber={5}
-                courseTitle="Project management concepts"
+                courseTitle="Conceitos de desnvolvimento de software"
                 courseTotalTime="13h 20m"
               />
             </Card>

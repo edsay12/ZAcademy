@@ -19,7 +19,7 @@ function Stared() {
               />
               <CardBotton
                 courseId={1}
-                courseLevel="Advance"
+                courseLevel="Avançado"
                 coursePrice={23.50}
                 courseStarNumber={5}
                 courseTitle="Project management concepts"
