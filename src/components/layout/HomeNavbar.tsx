@@ -51,6 +51,7 @@ function HomeNavbar() {
 
   const handdleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    
     const inputValue = inputRef.current?.value;
     if (inputValue != "") {
       router.push(`/course/search?src=${inputValue}`);

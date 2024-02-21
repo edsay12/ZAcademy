@@ -16,14 +16,13 @@ function Pagination({ numberOfPages }: { numberOfPages: number }) {
  
   
   // se o numero de paginas mudar redireciona para a pagina 01
-  useEffect(()=> {
-    const current = new URLSearchParams(Array.from(params.entries()));
-    current.set("page", '1');
-    router.push(`${pathName}?${current}`);
-    
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[numberOfPages] )
+  // useEffect(()=> {
+  //   const current = new URLSearchParams(Array.from(params.entries()));
+  //   current.set("page", '1');
+  //   router.push(`${pathName}?${current}`);
+  
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // },[numberOfPages] )
 
   const pages = [...Array(numberOfPages)].map(function () {
     return 0;

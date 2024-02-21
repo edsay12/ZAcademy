@@ -126,7 +126,7 @@ function Search() {
       .includes(params.get("src")?.toLocaleLowerCase() ?? "")
   );
 
-  let itensData = filterSearchItem;
+  let itensData = [];
   //pagination
   const itensPerPage = 4;
   const currentPages = Number(params.get("page") ?? "1"); // current page
@@ -143,9 +143,11 @@ function Search() {
   }
 
   itensData = applyFilter();
+  
   const numberOfPages = Math.ceil(itensData.length / itensPerPage);
 
   paginationItens = itensData.slice(start, final);
+  
 
   return (
     <>
