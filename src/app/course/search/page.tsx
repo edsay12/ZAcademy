@@ -9,7 +9,7 @@ import { coursesData } from "@/fakeData/CourseCardData";
 import { ChangeEvent, useEffect, useReducer, useState } from "react";
 import { CardData, Categories, CourseLevels } from "@/app/@types";
 import DefaultListError from "@/components/DefaultListError";
-import { useRouter } from "next/navigation";
+import { useRouter} from "next/navigation";
 
 type FilterCategories = {
   title: string;
@@ -126,6 +126,7 @@ function Search() {
   const [sort, setSort] = useState("mais relevantes");
   const router = useRouter();
   const pathName = usePathname();
+
   let itensData = [];
   // search
   const filterSearchItem: CardData[] = itens.filter((item) =>
@@ -134,13 +135,14 @@ function Search() {
       .includes(params.get("src")?.toLocaleLowerCase() ?? "")
   );
 
-  function RedirectToPage1() {
-    const current = new URLSearchParams(Array.from(params.entries()));
-    current.set("page", "1");
-    router.push(`${pathName}?${current}`);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }
+  useEffect(() => {
+      if(params.get('page') === '1') return;
+      const current = new URLSearchParams(Array.from(params.entries()));
+      current.set("page", '1');
+      router.push(`${pathName}?${current}`);
+      console.log('to aqui')
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [category, level, sort]);
 
   //pagination
   const itensPerPage = 4;
@@ -163,11 +165,6 @@ function Search() {
     let sortItensData = sortItens(levelFilterData, levelFilterData, sort);
     return sortItensData;
   }
-  // redireciona para pagina 1 quando os filtros mudarem 
-  useEffect(() => {
-    RedirectToPage1();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, level, sort]);
 
   itensData = applyFilter();
 
