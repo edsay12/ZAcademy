@@ -42,7 +42,7 @@ function CommentItem({
               width={100}
               height={100}
               className="mr-2 w-6 h-6 rounded-full"
-              src="/carduser.jpeg"
+              src="/cardUser.jpeg"
               alt="Michael Gough"
             />
             {nome}
