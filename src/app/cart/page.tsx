@@ -14,7 +14,7 @@ import { PiCertificateBold } from "react-icons/pi";
 
 function Cart() {
   const isCart = true;
-  const route = useRouter();
+  const router = useRouter();
   return (
     <>
       <SectionContainer className="-mb-16">
@@ -52,6 +52,7 @@ Curso mais didático e completo de "
                   <Button
                     text="Finalizar compra"
                     className="bg-blue-700"
+                    onClick={()=> router.push('/course/learn/curso-de-javascript-moderno-do-basico-ao-avancado')}
                   ></Button>
                 </div>
               </div>
@@ -67,7 +68,7 @@ Curso mais didático e completo de "
             <Button
               text="Continue comprando"
               buttonSize="medium"
-              onClick={() => route.push("/")}
+              onClick={() => router.push("/")}
             />
           </DefaultListError>
         </SectionContainer>

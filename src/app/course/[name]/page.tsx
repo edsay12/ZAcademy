@@ -1,3 +1,4 @@
+'use client'
 import SectionContainer from "@/components/Section/SectionContainer";
 import Description from "@/components/Description";
 import Link from "next/link";
@@ -13,10 +14,11 @@ import { acordeaoData } from "@/fakeData/acordeaoData";
 import InstructorDetailsCard from "@/components/InstructorDetailsCard";
 import { fakeInstructors } from "@/fakeData/FakeInstructors";
 import AcordeonBasicItem from "@/components/Acordeon/components/AcordeonBasicItem";
-
+import { useRouter } from "next/navigation";
 
 function Course() {
   const instructor = fakeInstructors[0];
+  const router = useRouter()
   return (
     <>
       <SectionContainer className="bg-blue-700 mt-0 pt-14 pb-14 ">
@@ -134,10 +136,11 @@ function Course() {
                 })}
               </h3>
               <div className="">
-                <Button text="Comprar agora" className="bg-blue-700"></Button>
+                <Button text="Comprar agora" className="bg-blue-700" onClick={()=> router.push('/my-courses/all')}></Button>
                 <Button
                   text="Adicionar ao carrinho"
                   className="bg-yellow-700 mb-0"
+                  onClick={()=> router.push('/cart')}
                 ></Button>
               </div>
             </div>

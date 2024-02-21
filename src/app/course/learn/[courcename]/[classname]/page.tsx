@@ -25,6 +25,7 @@ import CommentsContainer from "@/components/Comment/CommentsContainer";
 import Comments from "@/components/Comment/Comments";
 import Rating from "@/components/Rating";
 import ProgressBar from "@/components/ProgressBar";
+import { useRouter } from "next/navigation";
 
 type Params = {
   params: {
@@ -36,6 +37,7 @@ type Params = {
 function Learn({ params }: Params) {
   const seach = useSearchParams();
   const path = usePathname();
+  const router = useRouter();
 
   console.log("seache", seach);
   console.log(params.cursonome);
@@ -49,27 +51,27 @@ function Learn({ params }: Params) {
             <ActiveItem
               videoCoverImageUrl="/cardBg.webp"
               videoTitle="Trabalhando com funçoes em javascript"
-              VideoUrl="/course/learn/asdasda/asdasda2"
+              VideoUrl="/course/learn/cursodejava/variaveis"
             />
             <ActiveItem
               videoCoverImageUrl="/cardBg.webp"
               videoTitle="Trabalhando com funçoes em javascript"
-              VideoUrl="/course/learn/asdasda/asdasda3"
+              VideoUrl="/course/learn/cursodejava/variaveis1"
             />
             <ActiveItem
               videoCoverImageUrl="/cardBg.webp"
               videoTitle="Trabalhando com funçoes em javascript"
-              VideoUrl="/course/learn/asdasda/asdasda4"
+              VideoUrl="/course/learn/cursodejava/variaveis2"
             />
             <ActiveItem
               videoCoverImageUrl="/cardBg.webp"
               videoTitle="Trabalhando com funçoes em javascript"
-              VideoUrl="/course/learn/asdasda/asdasda5"
+              VideoUrl="/course/learn/cursodejava/variaveis3"
             />
             <ActiveItem
               videoCoverImageUrl="/cardBg.webp"
               videoTitle="Trabalhando com funçoes em javascript"
-              VideoUrl="/course/learn/asdasda/asdasda6"
+              VideoUrl="/course/learn/cursodejava/variaveis4"
             />
           </ActiveItensContainer>
         </VideoContainer>
@@ -129,7 +131,7 @@ function Learn({ params }: Params) {
                 <Rating />
               </div>
               <div>
-                <Button text="Concluido" buttonSize="full" bg="bg-blue-700 " />
+                <Button text="Concluido" buttonSize="full" bg="bg-blue-700 " onClick={()=> router.push("/course/learn/cursodejava/variaveis2")} />
               </div>
               <div>
                 <ProgressBar percentage={60} />

@@ -5,7 +5,7 @@ import { AiOutlineUnlock, AiOutlineUser } from "react-icons/ai";
 import { BsGithub, BsGoogle } from "react-icons/bs";
 import Button from "@/components/Button";
 import { z } from "zod";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Input } from "@/components/Input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,10 +14,18 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Logo2 from "@/components/Logo2";
+import { useSearchParams } from "next/navigation";
 
 type VarientType = "LOGIN" | "REGISTER";
 
 function Auth() {
+  const params= useSearchParams();
+  useEffect(()=> {
+    if(params.get('type') === 'signup'){
+      setVariante('REGISTER')
+    }
+    
+  },[params])
   const [variant, setVariante] = useState<VarientType>("LOGIN");
   const router = useRouter();
   const schema = z

@@ -1,12 +1,16 @@
+'use client'
 import AcordeonItem from "@/components/Acordeon/AcordeonContainer";
-import AcordeonBasicItem from "@/components/Acordeon/components/AcordeonBasicItem";
+import AcordeonLinkItem from "@/components/Acordeon/components/AcordeonLinkItem";
 import Button from "@/components/Button";
 import Description from "@/components/Description";
 import ProgressBar from "@/components/ProgressBar";
 import SectionContainer from "@/components/Section/SectionContainer";
 import { acordeaoData } from "@/fakeData/acordeaoData";
 
+import { useRouter } from "next/navigation";
+
 function CourseDetails() {
+  const router = useRouter()
   return (
     <SectionContainer className="min-h-[600px] mb-20">
       <div className="grid lg:grid-cols-2 gap-10 grid-cols-1">
@@ -34,6 +38,7 @@ function CourseDetails() {
               text="Continuar onde parei"
               rounded="rounded"
               bg="bg-blue-700"
+              onClick={()=> router.push('/course/learn/cursodejava/variaveis')}
             />
           </div>
         </div>
@@ -43,9 +48,9 @@ function CourseDetails() {
               <AcordeonItem key={item.id} title={item.title}>
                 {item.lessons.map((item) => {
                   return (
-                    <AcordeonBasicItem
+                    <AcordeonLinkItem
                       key={item.id}
-                      itemId={item.id}
+                      itemUrl="/course/learn/cursodejava/variaveis"
                       itemTitle={item.title}
                     />
                   );
