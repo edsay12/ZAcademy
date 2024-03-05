@@ -16,6 +16,7 @@ export type InstructorBasicDetails = {
   id: number;
   name: string;
   role: string;
+  roleType:string
   image: string;
   description: string;
   classification: number;

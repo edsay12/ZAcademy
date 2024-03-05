@@ -19,13 +19,14 @@ import { useSearchParams } from "next/navigation";
 type VarientType = "LOGIN" | "REGISTER";
 
 function Auth() {
-  const params= useSearchParams();
-  useEffect(()=> {
-    if(params.get('type') === 'signup'){
-      setVariante('REGISTER')
+  const [isLoading,setIsLoading] = useState(false)
+  const params = useSearchParams();
+  useEffect(() => {
+    if (params.get("type") === "signup") {
+      setVariante("REGISTER");
     }
-    
-  },[params])
+  }, [params]);
+
   const [variant, setVariante] = useState<VarientType>("LOGIN");
   const router = useRouter();
   const schema = z
@@ -79,6 +80,7 @@ function Auth() {
 
   const handleFormSubmit = async (dados: formProps) => {
     if (variant === "REGISTER") {
+      setIsLoading(true)
       const response = await fetch("api/users", {
         method: "POST",
         body: JSON.stringify(dados),
@@ -86,18 +88,19 @@ function Auth() {
           "contente-type": "json",
         },
       });
-
+      setIsLoading(false)
       if (!response.ok) {
-        alert(response);
-        console.log(response.body);
+        console.log(response.body); // mensagem de erro para o usuário
       } else {
         setVariante("LOGIN");
       }
     } else if (variant === "LOGIN") {
+      setIsLoading(true)
       const res = await signIn("credentials", {
         ...dados,
         redirect: false,
       });
+      setIsLoading(false)
 
       if (res?.error) {
         console.log("erro ao fazer login,tente novamente mais tarde ");
@@ -106,6 +109,15 @@ function Auth() {
       }
     }
   };
+
+  const loginWithGoogle = async () => {
+    try {
+      await signIn("google", { callbackUrl: "http://localhost:3000/" });
+    } catch (error) {
+      alert(error);
+    }
+  };
+
   return (
     <>
       <section className="w-screen h-screen flex  flex-col items-center justify-center ">
@@ -179,24 +191,28 @@ function Auth() {
             <>
               <Divider />
               <Button
-                text="Cadastro com o Github"
+                disabled={isLoading}
+                text="Cadastro com o google"
                 type="submit"
-                bg="bg-black"
-                ico={<BsGithub />}
+                bg="bg-red-500"
+                ico={<BsGoogle />}
                 buttonSize="full"
                 rounded="rounded"
+                onClick={loginWithGoogle}
               />
             </>
           ) : (
             <>
               <Divider />
               <Button
-                text="Entrar com o Github"
+                disabled={isLoading}
+                text="Entrar com o google"
                 type="submit"
-                bg="bg-black"
-                ico={<BsGithub />}
+                bg="bg-red-500"
+                ico={<BsGoogle />}
                 buttonSize="full"
                 rounded="rounded"
+                onClick={loginWithGoogle}
               />
             </>
           )}

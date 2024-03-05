@@ -4,18 +4,9 @@ import { FaStar } from "react-icons/fa";
 import Description from "./Description";
 import { PiStudentBold } from "react-icons/pi";
 import { FaCirclePlay } from "react-icons/fa6";
+import { InstructorBasicDetails } from "@/app/@types";
 
-type InstructorDetails = {
-  id: number;
-  name: string;
-  role: string;
-  image: string;
-  description: string;
-  classification: number;
-  assessmentsNumber: number;
-  studentsNumber: number;
-  courcesNumber: number;
-};
+
 
 function InstructorDetailsCard({
   id,
@@ -26,8 +17,9 @@ function InstructorDetailsCard({
   image,
   name,
   role,
+  roleType,
   studentsNumber,
-}: InstructorDetails) {
+}: InstructorBasicDetails) {
   const instructorMoreDetails = [
     {
       icon: <FaStar />,
@@ -56,7 +48,7 @@ function InstructorDetailsCard({
         >
           {name}
         </a>
-        <p className=" text-black ">{role}</p>
+        <p className=" text-black ">{roleType}</p>
       </div>
 
       <div className=" flex gap-5 mt-2">

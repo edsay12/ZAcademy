@@ -20,9 +20,13 @@ import { coursesData } from "@/fakeData/CourseCardData";
 import Link from "next/link";
 import { categories } from "@/fakeData/categories";
 
+import { useSession } from "next-auth/react";
+
 function Home() {
   const [itens, setItens] = useState(coursesData);
   const [filter, setFilterItens] = useState(coursesData);
+  const { data, status } = useSession();
+  console.log(data?.user?.name);
 
   return (
     <>
@@ -32,7 +36,7 @@ function Home() {
           secondText="Melhores Cursos"
           firstTextColor={"text-black"}
         />
-
+  
         <CardContainer>
           {coursesData.map((item) => {
             return (
@@ -192,7 +196,7 @@ function Home() {
                 oportunidades? Então, você está no lugar certo! Na nossa equipe,
                 valorizamos a criatividade, a inovação e o comprometimento.
                 Aqui, cada membro desempenha um papel fundamental na construção
-                de uma plataforma de ensino que transforma vidas. 
+                de uma plataforma de ensino que transforma vidas.
               </p>
             </div>
             <div className="mt-10">
