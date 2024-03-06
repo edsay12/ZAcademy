@@ -91,10 +91,9 @@ function Auth() {
       });
       setIsLoading(false);
       if (!response.ok) {
-        toast.error(response.status.toString())
-        console.log(response.body); // mensagem de erro para o usuário
+        toast.error('Ocorreu algum erro no cadastro')
       } else {
-        toast.error(response.status.toString())
+        toast.error('sucesso')
         setVariante("LOGIN");
       }
     } else if (variant === "LOGIN") {
@@ -107,10 +106,9 @@ function Auth() {
 
       if (res?.error) {
         console.log(res.error.toString())
-       
-        toast.error('erro ao fazer login '+ 'status: ' + res.status.toString())
-        console.log("erro ao fazer login,tente novamente mais tarde ");
+        toast.error('login ou senha incorretos')
       } else {
+        toast.error('Sucesso')
         router.push("/");
       }
     }
@@ -120,7 +118,7 @@ function Auth() {
     try {
       await signIn("google", { callbackUrl: "http://localhost:3000/" });
     } catch (error) {
-      alert(error);
+      toast.error('erro ao acessar conta')
     }
   };
 

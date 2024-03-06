@@ -18,10 +18,13 @@ type PropTypes = LayoutProps;
 export default function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="pt-BR">
-      <AuthProvider>
-        <Toaster />
-        <body className={inter.className}>{children}</body>
-      </AuthProvider>
+      <body className={inter.className}>
+        <AuthProvider>
+          <Toaster />
+
+          {children}
+        </AuthProvider>
+      </body>
     </html>
   );
 }

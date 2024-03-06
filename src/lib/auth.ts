@@ -54,4 +54,19 @@ export const nextOptions: NextAuthOptions = {
   pages: {
     signIn: "/auth", // Definindo a Pagina de Login.
   },
+  callbacks: {
+    jwt({ user, account, token }) {
+      console.log("Usuiario ", token)
+      if(user){
+        token.role  = user.role
+      }
+      return token;
+    },
+    session({ session, token }) {
+
+      
+      session.user.role = token.role
+      return session;
+    },
+  },
 };

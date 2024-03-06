@@ -53,3 +53,9 @@ export type Categories =
 
 export type CourseLevels = "Iniciante" | "Intermediário" | "Avançado"
 
+
+
+export enum Role {
+  STUDENT = "STUDENT",
+  INSTRUCTOR = "INSTRUCTOR"
+}
