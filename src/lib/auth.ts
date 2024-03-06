@@ -56,7 +56,6 @@ export const nextOptions: NextAuthOptions = {
   },
   callbacks: {
     jwt({ user, account, token }) {
-      console.log("Usuiario ", token)
       if(user){
         token.role  = user.role
       }
