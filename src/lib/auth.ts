@@ -33,19 +33,23 @@ export const nextOptions: NextAuthOptions = {
         if (!user || !user.hashedPassword) {
           throw new Error("usuario ou senha incorretos");
         }
-        const machPassword = compare(credentials.password, user.hashedPassword);
+        const machPassword = await compare(
+          credentials.password,
+          user.hashedPassword
+        );
 
         if (!machPassword) {
           throw new Error("Login ou senha incorretos");
+        } else {
+          return user;
         }
-        return user;
       },
     }),
   ],
   session: {
     strategy: "jwt",
   },
-  debug:true,
+  debug: true,
   secret: process.env.SESSION_SECRET,
   pages: {
     signIn: "/auth", // Definindo a Pagina de Login.

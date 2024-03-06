@@ -22,6 +22,7 @@ import {
 import { BsArrowLeftShort } from "react-icons/bs";
 import { BiUserCircle } from "react-icons/bi";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 import Logo from "../Logo";
 import { LinkType } from "@/app/@types";
@@ -29,6 +30,8 @@ import LinkList from "../Link/LinkList";
 import { Input } from "../Input";
 import Button from "../Button";
 import Link from "next/link";
+import UserDropDown from "../userDropdown";
+import UserDropdown from "../userDropdown";
 
 function HomeNavbar() {
   const links: LinkType[] = [
@@ -42,6 +45,7 @@ function HomeNavbar() {
     },
   ];
   const [isNavOppen, setIsNavOppen] = useState<boolean>(false);
+  const session = useSession();
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
@@ -51,7 +55,7 @@ function HomeNavbar() {
 
   const handdleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    
+
     const inputValue = inputRef.current?.value;
     if (inputValue != "") {
       router.push(`/course/search?src=${inputValue}&page=1`);
@@ -95,7 +99,10 @@ function HomeNavbar() {
                 />
               </div>
               <div className="group">
-                <form onSubmit={(event) => handdleSubmit(event)} className="flex gap-2  ">
+                <form
+                  onSubmit={(event) => handdleSubmit(event)}
+                  className="flex gap-2  "
+                >
                   <Input
                     placeholder="Procure por cursos"
                     type="Text"
@@ -103,8 +110,6 @@ function HomeNavbar() {
                     autoComplete="off"
                     ref={inputRef}
                   />
-
-                  
                 </form>
               </div>
               <div className="flex gap-10 items-center ">
@@ -119,15 +124,30 @@ function HomeNavbar() {
                   </div>
                 </div>
 
-                <div className="w-14 bg-transparent">
-                  
-                  <Link href={'/auth?type=signup'} className="text-white">Cadastrar</Link>
-                </div>
-
-                <div className="w-32 w-50">
-                  <Link href={'/auth'} className="text-white p-4 font-bold pl-7 pr-7 rounded-full bg-yellow-700 ">Entrar</Link>
-                  
-                </div>
+                {session.data?.user ? (
+                  <>
+                    <div className="w-14 bg-transparent">
+                      <UserDropdown/>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    {" "}
+                    <div className="w-14 bg-transparent">
+                      <Link href={"/auth?type=signup"} className="text-white">
+                        Cadastrar
+                      </Link>
+                    </div>
+                    <div className="w-32 w-50">
+                      <Link
+                        href={"/auth"}
+                        className="text-white p-4 font-bold pl-7 pr-7 rounded-full bg-yellow-700 "
+                      >
+                        Entrar
+                      </Link>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </>

@@ -5,6 +5,7 @@ import { ReactNode } from "react";
 import { LayoutProps } from "../../.next/types/app/layout";
 import { SessionProvider } from "next-auth/react";
 import AuthProvider from "../../providers/AuthProvider";
+import { Toaster } from "react-hot-toast";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -18,6 +19,7 @@ export default function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="pt-BR">
       <AuthProvider>
+        <Toaster />
         <body className={inter.className}>{children}</body>
       </AuthProvider>
     </html>

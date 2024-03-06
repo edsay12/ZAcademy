@@ -15,11 +15,12 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Logo2 from "@/components/Logo2";
 import { useSearchParams } from "next/navigation";
+import toast from 'react-hot-toast';
 
 type VarientType = "LOGIN" | "REGISTER";
 
 function Auth() {
-  const [isLoading,setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const params = useSearchParams();
   useEffect(() => {
     if (params.get("type") === "signup") {
@@ -80,7 +81,7 @@ function Auth() {
 
   const handleFormSubmit = async (dados: formProps) => {
     if (variant === "REGISTER") {
-      setIsLoading(true)
+      setIsLoading(true);
       const response = await fetch("api/users", {
         method: "POST",
         body: JSON.stringify(dados),
@@ -88,21 +89,26 @@ function Auth() {
           "contente-type": "json",
         },
       });
-      setIsLoading(false)
+      setIsLoading(false);
       if (!response.ok) {
+        toast.error(response.status.toString())
         console.log(response.body); // mensagem de erro para o usuário
       } else {
+        toast.error(response.status.toString())
         setVariante("LOGIN");
       }
     } else if (variant === "LOGIN") {
-      setIsLoading(true)
+      setIsLoading(true);
       const res = await signIn("credentials", {
         ...dados,
         redirect: false,
       });
-      setIsLoading(false)
+      setIsLoading(false);
 
       if (res?.error) {
+        console.log(res.error.toString())
+       
+        toast.error('erro ao fazer login '+ 'status: ' + res.status.toString())
         console.log("erro ao fazer login,tente novamente mais tarde ");
       } else {
         router.push("/");
@@ -133,6 +139,7 @@ function Auth() {
           </p>
           <form
             action=""
+            method="POST"
             className="mt-10 flex flex-col gap-3 "
             onSubmit={handleSubmit(handleFormSubmit)}
           >
@@ -176,6 +183,7 @@ function Auth() {
             )}
 
             <Button
+              disabled={isLoading}
               type="submit"
               buttonSize="full"
               rounded="rounded"
