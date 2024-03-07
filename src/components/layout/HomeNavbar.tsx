@@ -70,20 +70,10 @@ function HomeNavbar() {
         className={`flex items-center relative z-[1000000] top-0 left-0 right-0 pb-2 w-full bg-blue-700  shadow-md `}
       >
         <div
-          className={`appcontainer  mx-auto h-24 relative  bg-blue-700    text-gray-400 flex justify-between items-center transition-all duration-300  `}
+          className={`appcontainer flex   mx-auto h-24 relative  bg-blue-700 justify-between gap-20   text-gray-400  items-center transition-all duration-300  `}
         >
           <>
-            <div
-              className="text-2xl cursor-pointer flex lg:hidden"
-              onClick={toggleMenu}
-            >
-              {isNavOppen ? (
-                <AiOutlineClose></AiOutlineClose>
-              ) : (
-                <AiOutlineMenu></AiOutlineMenu>
-              )}
-            </div>
-            <div className="lg:w-36 w-24 z-10">
+            <div className="lg:w-36 w-24 z-10 ">
               <Logo />
             </div>
 
@@ -114,10 +104,10 @@ function HomeNavbar() {
               </div>
             </div>
           </>
-          <div className=" ml-10 flex gap-10">
+          <div className="flex">
             <div className="flex gap-10 items-center ">
               <div>
-                <div className="relative">
+                <div className="relative ">
                   <Link href={"/cart"} className="text-2xl text-white">
                     <AiOutlineShoppingCart />
                   </Link>
@@ -126,31 +116,36 @@ function HomeNavbar() {
                   </div>
                 </div>
               </div>
+              {session.data?.user ? (
+                <>
+                  <div className="w-14 bg-transparent">
+                    <UserDropdown />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="w-32 w-50">
+                    <Link
+                      href={"/auth"}
+                      className="text-white p-4 font-bold pl-5 pr-5 rounded-full bg-yellow-700  text-xs"
+                    >
+                      Entrar
+                    </Link>
+                  </div>
+                </>
+              )}
             </div>
-            {session.data?.user ? (
-              <>
-                <div className="w-14 bg-transparent">
-                  <UserDropdown />
-                </div>
-              </>
-            ) : (
-              <>
-                {" "}
-                <div className="w-14 bg-transparent">
-                  <Link href={"/auth?type=signup"} className="text-white">
-                    Cadastrar
-                  </Link>
-                </div>
-                <div className="w-32 w-50">
-                  <Link
-                    href={"/auth"}
-                    className="text-white p-4 font-bold pl-7 pr-7 rounded-full bg-yellow-700 "
-                  >
-                    Entrar
-                  </Link>
-                </div>
-              </>
-            )}
+
+            <div
+              className="text-2xl cursor-pointer flex lg:hidden "
+              onClick={toggleMenu}
+            >
+              {isNavOppen ? (
+                <AiOutlineClose></AiOutlineClose>
+              ) : (
+                <AiOutlineMenu></AiOutlineMenu>
+              )}
+            </div>
           </div>
         </div>
       </nav>
