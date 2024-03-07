@@ -73,9 +73,6 @@ function HomeNavbar() {
           className={`appcontainer  mx-auto h-24 relative  bg-blue-700    text-gray-400 flex justify-between items-center transition-all duration-300  `}
         >
           <>
-            <div className="w-36 z-10">
-              <Logo />
-            </div>
             <div
               className="text-2xl cursor-pointer flex lg:hidden"
               onClick={toggleMenu}
@@ -85,6 +82,9 @@ function HomeNavbar() {
               ) : (
                 <AiOutlineMenu></AiOutlineMenu>
               )}
+            </div>
+            <div className="lg:w-36 w-24 z-10">
+              <Logo />
             </div>
 
             <div
@@ -101,7 +101,7 @@ function HomeNavbar() {
               <div className="group">
                 <form
                   onSubmit={(event) => handdleSubmit(event)}
-                  className="flex gap-2  "
+                  className=" gap-2 flex lg:flex "
                 >
                   <Input
                     placeholder="Procure por cursos"
@@ -112,45 +112,46 @@ function HomeNavbar() {
                   />
                 </form>
               </div>
-              <div className="flex gap-10 items-center ">
-                <div>
-                  <div className="relative">
-                    <Link href={"/cart"} className="text-2xl text-white">
-                      <AiOutlineShoppingCart />
-                    </Link>
-                    <div className=" absolute w-4 h-4 bg-red-500 rounded-full flex items-center justify-center text-[10px] text-white -top-1 -right-2">
-                      2
-                    </div>
-                  </div>
-                </div>
-
-                {session.data?.user ? (
-                  <>
-                    <div className="w-14 bg-transparent">
-                      <UserDropdown/>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    {" "}
-                    <div className="w-14 bg-transparent">
-                      <Link href={"/auth?type=signup"} className="text-white">
-                        Cadastrar
-                      </Link>
-                    </div>
-                    <div className="w-32 w-50">
-                      <Link
-                        href={"/auth"}
-                        className="text-white p-4 font-bold pl-7 pr-7 rounded-full bg-yellow-700 "
-                      >
-                        Entrar
-                      </Link>
-                    </div>
-                  </>
-                )}
-              </div>
             </div>
           </>
+          <div className=" ml-10 flex gap-10">
+            <div className="flex gap-10 items-center ">
+              <div>
+                <div className="relative">
+                  <Link href={"/cart"} className="text-2xl text-white">
+                    <AiOutlineShoppingCart />
+                  </Link>
+                  <div className=" absolute w-4 h-4 bg-red-500 rounded-full flex items-center justify-center text-[10px] text-white -top-1 -right-2">
+                    2
+                  </div>
+                </div>
+              </div>
+            </div>
+            {session.data?.user ? (
+              <>
+                <div className="w-14 bg-transparent">
+                  <UserDropdown />
+                </div>
+              </>
+            ) : (
+              <>
+                {" "}
+                <div className="w-14 bg-transparent">
+                  <Link href={"/auth?type=signup"} className="text-white">
+                    Cadastrar
+                  </Link>
+                </div>
+                <div className="w-32 w-50">
+                  <Link
+                    href={"/auth"}
+                    className="text-white p-4 font-bold pl-7 pr-7 rounded-full bg-yellow-700 "
+                  >
+                    Entrar
+                  </Link>
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </nav>
     </>
