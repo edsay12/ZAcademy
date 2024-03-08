@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
-import FormateDateDifference from "../../../utils/FormateDateDifference";
+import FormateDateDifference from "../../utils/FormateDateDifference";
 import CommentReplyInput from "./CommentReplyInput";
 
 // type Responses = {

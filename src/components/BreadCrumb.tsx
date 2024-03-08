@@ -20,7 +20,7 @@ function BreadCrumb({ pathName, removedFirstQuantity = 0 }: PropTypes) {
   });
 
   const finalItens = itens.slice(removedFirstQuantity);
-  console.log("itens", itens);
+ 
   return (
     <>
       <div className="text-black flex items-center gap-4  text-sm

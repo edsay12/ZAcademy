@@ -13,7 +13,7 @@ function getRelativeTimeFormat(
 }
 
  function DataFormater(difference: number) {
-    console.log("here")
+  
   if (difference < 60) {
     return getRelativeTimeFormat(Math.round(difference), "seconds");
   } else if (difference < 60 * 60) {

@@ -8,7 +8,7 @@ function UserDropdown() {
   const [isOppen, setIsOppen] = useState(false);
   const session = useSession();
   const user = session.data?.user;
-  console.log("image", session.data?.user.role);
+  
 
   const handdleToggle = () => {
     setIsOppen((state) => !state);

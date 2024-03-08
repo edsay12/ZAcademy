@@ -105,7 +105,7 @@ function Auth() {
       setIsLoading(false);
 
       if (res?.error) {
-        console.log(res.error.toString())
+        
         toast.error('login ou senha incorretos')
       } else {
         toast.error('Sucesso')

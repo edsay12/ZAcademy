@@ -1,5 +1,5 @@
 import Image from "next/image";
-import FormateDateDifference from "../../../utils/FormateDateDifference";
+import FormateDateDifference from "../../utils/FormateDateDifference";
 import { useState } from "react";
 import ReplyItem from "./ReplyItem";
 import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";

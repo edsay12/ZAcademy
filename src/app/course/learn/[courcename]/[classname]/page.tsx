@@ -39,8 +39,7 @@ function Learn({ params }: Params) {
   const path = usePathname();
   const router = useRouter();
 
-  console.log("seache", seach);
-  console.log(params.cursonome);
+  
 
   return (
     <>

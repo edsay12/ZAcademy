@@ -14,8 +14,8 @@ import CategoriesButtons from "@/components/CategoriesButtons";
 import TestimonialCard from "@/components/TestimonialCard";
 import Image from "next/image";
 import Button from "@/components/Button";
-import DataFormater from "../../../utils/FormateDateDifference";
-import FormateDateDifference from "../../../utils/FormateDateDifference";
+import DataFormater from "../../utils/FormateDateDifference";
+import FormateDateDifference from "../../utils/FormateDateDifference";
 import { coursesData } from "@/fakeData/CourseCardData";
 import Link from "next/link";
 import { categories } from "@/fakeData/categories";
@@ -26,8 +26,7 @@ function Home() {
   const [itens, setItens] = useState(coursesData);
   const [filter, setFilterItens] = useState(coursesData);
   const { data, status } = useSession();
-  console.log(data?.user?.name);
-
+  
   return (
     <>
       <SectionContainer>

@@ -24,7 +24,7 @@ function Description({ children, title  }: proptypes) {
   const toogleDescription = () => {
     setIsOpen((state) => !state);
   };
-  console.log(title);
+ 
   return (
     <>
       <div className="w-full pt-0">

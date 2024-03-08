@@ -12,7 +12,7 @@ type PropTypes = {
 function ActiveItem({ videoCoverImageUrl, videoTitle, VideoUrl }: PropTypes) {
   const path = usePathname();
   const isActive = VideoUrl === path;
-  console.log(isActive);
+
   useEffect(() => {}, []);
 
   return (

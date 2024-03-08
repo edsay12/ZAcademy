@@ -17,7 +17,7 @@ function CategoriesButtons({
   setFilterItens,
 }: PropTypes) {
   const [category, setCategory] = useState("TUDO");
-  console.log(category)
+  
 
   useEffect(() => {
     if (category === "TUDO") {
@@ -37,7 +37,7 @@ function CategoriesButtons({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, itens, limit]);
 
-  console.log(filter);
+  
 
   return (
     <div className="flex gap-5 mt-20 mb-20 text-xs lg:text-lg md:text-sm    w-full flex-wrap">
