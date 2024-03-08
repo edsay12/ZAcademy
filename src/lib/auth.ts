@@ -52,7 +52,8 @@ export const nextOptions: NextAuthOptions = {
   debug: true,
   secret: process.env.SESSION_SECRET,
   pages: {
-    signIn: "/auth", // Definindo a Pagina de Login.
+    signIn: "/auth",
+    signOut:"/" // Definindo a Pagina de Login.
   },
   callbacks: {
     jwt({ user, account, token }) {

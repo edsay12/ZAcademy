@@ -8,10 +8,17 @@ export default withAuth(
     if (req.nextUrl.pathname === "/auth" && req.nextauth.token) {
       return NextResponse.rewrite(new URL("/", req.url));
     }
-    if(req.nextUrl.pathname === "/dashboard" && req.nextauth.token?.role != "INSTRUCTOR"){
+    if (
+      req.nextUrl.pathname === "/dashboard" &&
+      req.nextauth.token?.role != "INSTRUCTOR"
+    ) {
       return NextResponse.rewrite(new URL("/unauthorized", req.url));
-
     }
+  },
+  {
+    callbacks: {
+      authorized: ({ token }) => true,
+    },
   }
 );
 
