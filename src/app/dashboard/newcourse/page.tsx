@@ -1,4 +1,5 @@
 import { DashboardPage, DashboardPageHeader, DashboardPageHeaderTitle, DashboardPageMain } from "@/components/Dashboard/DashboardPage";
+import DashboardCard from "@/components/DaskboardElements/DashboardCard";
 
 function NewCourse() {
   return (
@@ -7,7 +8,17 @@ function NewCourse() {
         <DashboardPageHeaderTitle>Novo Curso</DashboardPageHeaderTitle>
       </DashboardPageHeader>
 
-      <DashboardPageMain>Novo Curso</DashboardPageMain>
+      <DashboardPageMain>
+
+        <DashboardCard title="Curso">
+
+          <div className="mt-2">
+
+            qweqwsw
+          </div>
+
+        </DashboardCard>
+      </DashboardPageMain>
     </DashboardPage>
   );
 }
