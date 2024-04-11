@@ -9,6 +9,7 @@ function UserDropdown() {
   const session = useSession();
   const user = session.data?.user;
   
+  console.log(user?.role)
 
   const handdleToggle = () => {
     setIsOppen((state) => !state);
@@ -40,19 +41,19 @@ function UserDropdown() {
             isOppen ? "" : "hidden"
           }`}
         >
-          <div className="mt-5  divide-y divide-gray-100 rounded-lg shadow w-44  dark:divide-gray-600 bg-gray-700">
-            <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
+          <div className="mt-5  divide-y  rounded-lg shadow w-44  divide-gray-600 bg-gray-700">
+            <div className="px-4 py-3 text-sm  text-white">
               <div>{user?.name}</div>
               <div className="font-medium truncate">{user?.email}</div>
             </div>
             <ul
-              className="py-2 text-sm text-gray-700 dark:text-gray-200"
+              className="py-2 text-sm text-gray-200"
               aria-labelledby="dropdownUserAvatarButton"
             >
               <li>
                 <Link
                   href="/user"
-                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="block px-4 py-2  hover:bg-gray-600 hover:text-white"
                 >
                   Perfil
                 </Link>
@@ -61,7 +62,7 @@ function UserDropdown() {
               <li>
                 <Link
                   href="/my-courses/all"
-                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="block px-4 py-2 hover:bg-gray-600 hover:text-white"
                 >
                   Meus cursos
                 </Link>
@@ -70,7 +71,7 @@ function UserDropdown() {
                 <li>
                   <Link
                     href="/dashboard"
-                    className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    className="block px-4 py-2  hover:bg-gray-600 hover:text-white"
                   >
                     Daskboard
                   </Link>
@@ -81,7 +82,7 @@ function UserDropdown() {
               <a
                 onClick={() => signOut()}
                 href="#"
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                className="block px-4 py-2 text-sm  hover:bg-gray-600 text-gray-200 hover:text-white"
               >
                 Sign out
               </a>
