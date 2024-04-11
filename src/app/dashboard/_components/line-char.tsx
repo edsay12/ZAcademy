@@ -6,6 +6,7 @@ function LineChar() {
           id: "line-chart",
         
         },
+        colors: ['#FFCC57'],
         xaxis: {
           categories: [
             "Jan",

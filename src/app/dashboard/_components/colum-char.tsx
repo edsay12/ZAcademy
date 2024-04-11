@@ -6,6 +6,7 @@ const ColumnChart = () => {
     chart: {
       id: "column-chart",
     },
+    colors: ['#FFCC57'],
     xaxis: {
       categories: [
         "Jan",
