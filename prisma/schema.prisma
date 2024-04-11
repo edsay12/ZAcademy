@@ -58,7 +58,7 @@ model User {
   hashedPassword String?
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
-  role           Role? @default(STUDENT)
+  role           Role?     @default(STUDENT)
   accounts       Account[]
 
   Course        Course[]
@@ -75,6 +75,7 @@ model Course {
   title             String
   description       String
   image             String
+  video             String
   level             Level
   price             Float
   category          Category
