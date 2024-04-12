@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import {
   DashboardPage,
   DashboardPageHeader,
@@ -7,6 +7,9 @@ import {
 } from "@/components/Dashboard/DashboardPage";
 import DashboardCard from "@/components/DaskboardElements/DashboardCard";
 import DragAndDrop from "./components/dragAndDrop";
+import Input from "./components/input";
+
+
 
 function NewCourse() {
   return (
@@ -18,8 +21,10 @@ function NewCourse() {
       <DashboardPageMain>
         <div className="grid grid-cols-2 gap-6">
           <DashboardCard title="Adicionar">
-            
-            <DragAndDrop />
+            <form action="">
+              <DragAndDrop />
+              <Input type="text" labelTitle="Titulo" />
+            </form>
           </DashboardCard>
           <DashboardCard title="Grade curricular">
             <div className="mt-2">qweqwsw</div>
