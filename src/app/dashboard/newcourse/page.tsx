@@ -1,5 +1,12 @@
-import { DashboardPage, DashboardPageHeader, DashboardPageHeaderTitle, DashboardPageMain } from "@/components/Dashboard/DashboardPage";
+'use client'
+import {
+  DashboardPage,
+  DashboardPageHeader,
+  DashboardPageHeaderTitle,
+  DashboardPageMain,
+} from "@/components/Dashboard/DashboardPage";
 import DashboardCard from "@/components/DaskboardElements/DashboardCard";
+import DragInDrop from "./components/dragInDrop";
 
 function NewCourse() {
   return (
@@ -9,15 +16,14 @@ function NewCourse() {
       </DashboardPageHeader>
 
       <DashboardPageMain>
-
-        <DashboardCard title="Curso">
-
-          <div className="mt-2">
-
-            qweqwsw
-          </div>
-
-        </DashboardCard>
+        <div className="grid grid-cols-2 gap-6">
+          <DashboardCard title="Adicionar">
+            <DragInDrop />
+          </DashboardCard>
+          <DashboardCard title="Grade curricular">
+            <div className="mt-2">qweqwsw</div>
+          </DashboardCard>
+        </div>
       </DashboardPageMain>
     </DashboardPage>
   );
