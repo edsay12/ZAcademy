@@ -33,16 +33,18 @@ function DragInDrop() {
   }
   return (
     <div>
+      <p className="text-black mb-2 font-bold">Video de apresentação</p>
       <div
         {...getRootProps()}
         className="relative border border-black border-dashed rounded flex items-center  flex-col gap-1 p-6 cursor-pointer "
       >
         <div className="absolute top-0 left-0 bg-black opacity-0 hover:opacity-20 w-full h-full z-0"></div>
+        
         <input {...getInputProps()} />
         <span className="text-9xl">
           <IoMdCloudUpload />
         </span>
-        <p>Arraste e solte ou escolha um video para fazer upload</p>
+        <p>Arraste e solte ou <span className="text-blue-500">escolha um video</span> para fazer upload</p>
 
         {acceptedFiles.map((file) => {
           return <p>{file.name}</p>;

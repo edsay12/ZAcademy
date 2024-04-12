@@ -6,7 +6,7 @@ import {
   DashboardPageMain,
 } from "@/components/Dashboard/DashboardPage";
 import DashboardCard from "@/components/DaskboardElements/DashboardCard";
-import DragInDrop from "./components/dragInDrop";
+import DragAndDrop from "./components/dragAndDrop";
 
 function NewCourse() {
   return (
@@ -18,7 +18,8 @@ function NewCourse() {
       <DashboardPageMain>
         <div className="grid grid-cols-2 gap-6">
           <DashboardCard title="Adicionar">
-            <DragInDrop />
+            
+            <DragAndDrop />
           </DashboardCard>
           <DashboardCard title="Grade curricular">
             <div className="mt-2">qweqwsw</div>
