@@ -69,7 +69,7 @@ function NewCourse() {
               Comece a montar seu curso criando Modulos, aulas e atividades
               práticas (testes, exercícios de programação e tarefas).
             </p>
-            <form className="w-full mt-5 ">
+            <form className="flex flex-col gap-4 w-full mt-5 ">
               {modules.map((module,index) => (
                 <div className=" w-full flex-grow gap-5  border-dashed border-2 p-5  " key={index}>
                   <div className="flex items-center">
