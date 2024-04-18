@@ -8,7 +8,7 @@ type DashboardCardType = {
 
 function DashboardCard({ title='Curso',children }: DashboardCardType) {
   return (
-    <div className=" border shadow-lg">
+    <div className=" border shadow-lg h-full">
       <h5 className="p-4 font-semibold">{title}</h5>
       <div className="w-full h-[1px] bg-gray-400 "></div>
       <div className="p-4">{children}</div>

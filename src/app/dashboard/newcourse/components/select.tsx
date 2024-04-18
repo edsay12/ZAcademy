@@ -14,7 +14,7 @@ function Select({
   ...rest
 }: SelectTypeProps) {
   return (
-    <div className="flex flex-col gap-2 mt-5">
+    <div className="flex flex-col gap-2 ">
       <label htmlFor="" className="text-black font-bold">
         {labelTitle}
       </label>

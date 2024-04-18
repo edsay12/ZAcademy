@@ -7,7 +7,7 @@ type inputTypeProps = {
 
 function Input({ labelTitle, className, ...rest }: inputTypeProps) {
   return (
-    <div className="flex flex-col gap-2 mt-5">
+    <div className="flex flex-col gap-2  w-full">
       {labelTitle && (
         <label htmlFor="" className="text-black font-bold">
           {labelTitle}
@@ -17,7 +17,7 @@ function Input({ labelTitle, className, ...rest }: inputTypeProps) {
         type="text"
         {...rest}
         className={cn(
-          "p-2 border-2 text-gray-500 outline-gray-500 border-gray-300",
+          "p-2 border-2 text-gray-500 outline-gray-500 ",
           className
         )}
       />

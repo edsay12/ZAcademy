@@ -14,8 +14,21 @@ import { level } from "@/fakeData/level";
 import InputFile from "./components/InputFile";
 import TextArea from "./components/InputFile";
 import Button from "@/components/Button";
+import { PiPlus } from "react-icons/pi";
+import AcordeonInput from "@/components/Acordeon/AcordeonInput";
+import { useState } from "react";
 
 function NewCourse() {
+  const [modules, setModules] = useState([[]]);
+
+  function handdleClickNewClass(index:number) {
+
+    modules[index].push(1)
+    setModules((modules)=> [...modules])
+  }
+  function handdleClickNewModule() {
+    setModules((module) => [...module, []]);
+  }
   return (
     <DashboardPage>
       <DashboardPageHeader>
@@ -25,7 +38,7 @@ function NewCourse() {
       <DashboardPageMain>
         <div className="grid grid-cols-2 gap-6">
           <DashboardCard title="Adicionar">
-            <form action="">
+            <form action="" className="space-y-5">
               <DragAndDrop />
               <Input type="text" labelTitle="Titulo" />
               <Select labelTitle="Categoria">
@@ -56,14 +69,51 @@ function NewCourse() {
               Comece a montar seu curso criando Modulos, aulas e atividades
               práticas (testes, exercícios de programação e tarefas).
             </p>
-            <form className="w-full">
-              <div className="flex w-full gap-5 items-center">
-                <p className="mt-5">Nome do modulo: </p>
-                <Input title="Nome do modulo" className="w-full"></Input>
-              </div>
-            </form>
+            <form className="w-full mt-5 ">
+              {modules.map((module,index) => (
+                <div className=" w-full flex-grow gap-5  border-dashed border-2 p-5  " key={index}>
+                  <div className="flex items-center">
+                    <p className="w-full max-w-[150px] font-bold">
+                      Nome do modulo:{" "}
+                    </p>
+                    <Input
+                      title="Nome do modulo"
+                      placeholder="Adicione o titulo do novo modulo"
+                    />
+                  </div>
+                  {/* aulas */}
+                  {module.map((aula, index) => (
+                    <div className="mt-5" key={index}>
+                      <AcordeonInput title="Aula1">
+                        <TextArea labelTitle="Descrição" />
+                        <Input type="file" labelTitle="Video da aula" />
+                      </AcordeonInput>
+                    </div>
+                  ))}
 
-            <Button text="Enviar" rounded="rounded" />
+                  <button
+                    type="button"
+                    className="flex items-center gap-4 mt-10 text-xs font-bold"
+                    onClick={()=> handdleClickNewClass(index)}
+                    
+                  >
+                    <PiPlus />
+                    Adicionar nova aula
+                  </button>
+                </div>
+              ))}
+
+              <button
+                type="button"
+                className="flex items-center gap-4 mt-5 text-xs font-bold ml-2"
+                onClick={handdleClickNewModule}
+              >
+                <PiPlus />
+                Adicionar novo modulo
+              </button>
+
+              <Button text="Enviar" rounded="rounded" />
+            </form>
           </DashboardCard>
         </div>
       </DashboardPageMain>
