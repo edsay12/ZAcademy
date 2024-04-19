@@ -17,16 +17,43 @@ import Button from "@/components/Button";
 import { PiPlus } from "react-icons/pi";
 import AcordeonInput from "@/components/Acordeon/AcordeonInput";
 import { FormEvent, FormHTMLAttributes, useState } from "react";
-import { useForm } from "react-hook-form"
+import { useFieldArray, useForm } from "react-hook-form";
 
-
-
+type FormValues = {
+  modules: {
+    title: string;
+    cource: {
+      title: string;
+      description: string;
+      video: File | null;
+    }[];
+  }[];
+};
 
 function NewCourse() {
   const [modules, setModules] = useState([[]]);
-  const {handleSubmit,register} = useForm();
+  const { handleSubmit, register,control } = useForm<FormValues>({
+    defaultValues: {
 
+      modules: [
+        {
+          title: "asda",
+          cource: [
+            {
+              title: "",
+              description: "",
+              video: null,
+            },
+          ],
+        }
+      ],
+    },
+  });
 
+  const {fields,append} = useFieldArray({
+    name:"modules",
+    control
+  })
 
   function handdleClickNewClass(index: number) {
     modules[index].push(1);
@@ -36,8 +63,8 @@ function NewCourse() {
     setModules((module) => [...module, []]);
   }
 
-  function handdleSubmit(data:any) {
-    console.log(data)
+  function handdleSubmit(data: any) {
+    console.log(data);
   }
 
   return (
@@ -49,9 +76,9 @@ function NewCourse() {
       <DashboardPageMain>
         <div className="grid grid-cols-2 gap-6">
           <DashboardCard title="Adicionar">
-            <form action="" className="space-y-5" >
+            <form action="" className="space-y-5">
               <DragAndDrop />
-              <Input type="text"  labelTitle="Titulo" name="title" />
+              <Input type="text" labelTitle="Titulo" name="title" />
               <Select labelTitle="Categoria">
                 {categories.map((category) => (
                   <Option key={category} value={category}>
@@ -84,9 +111,8 @@ function NewCourse() {
               method="post"
               className="flex flex-col gap-4 w-full mt-5"
               onSubmit={handleSubmit(handdleSubmit)}
-              
             >
-              {modules.map((module, index) => (
+              {fields.map((module, index) => (
                 <div
                   className=" w-full flex-grow gap-5  border-dashed border-2 p-5  "
                   key={index}
@@ -99,18 +125,18 @@ function NewCourse() {
                       title="Nome do modulo"
                       placeholder="Adicione o titulo do novo modulo"
                       defaultValue="test"
-                      {...register(`modulo${index}`)}
+                      {...register(`modules.${index}.title` as const)}
                     />
                   </div>
                   {/* aulas */}
-                  {module.map((aula, index) => (
+                  {/* {module.map((aula, index) => (
                     <div className="mt-5" key={index}>
                       <AcordeonInput title="Aula1">
                         <TextArea labelTitle="Descrição" />
-                        <Input type="file" labelTitle="Video da aula" />
+                        <Input type="file" labelTitle="Video da aula" {...register(`modules`)}/>
                       </AcordeonInput>
                     </div>
-                  ))}
+                  ))} */}
 
                   <button
                     type="button"
@@ -126,7 +152,7 @@ function NewCourse() {
               <button
                 type="button"
                 className="flex items-center gap-4 mt-5 text-xs font-bold ml-2"
-                onClick={handdleClickNewModule}
+                onClick={()=> append({title:'aasd',cource:[]})}
               >
                 <PiPlus />
                 Adicionar novo modulo
