@@ -16,19 +16,30 @@ import TextArea from "./components/InputFile";
 import Button from "@/components/Button";
 import { PiPlus } from "react-icons/pi";
 import AcordeonInput from "@/components/Acordeon/AcordeonInput";
-import { useState } from "react";
+import { FormEvent, FormHTMLAttributes, useState } from "react";
+import { useForm } from "react-hook-form"
+
+
+
 
 function NewCourse() {
   const [modules, setModules] = useState([[]]);
+  const {handleSubmit,register} = useForm();
 
-  function handdleClickNewClass(index:number) {
 
-    modules[index].push(1)
-    setModules((modules)=> [...modules])
+
+  function handdleClickNewClass(index: number) {
+    modules[index].push(1);
+    setModules((modules) => [...modules]);
   }
   function handdleClickNewModule() {
     setModules((module) => [...module, []]);
   }
+
+  function handdleSubmit(data:any) {
+    console.log(data)
+  }
+
   return (
     <DashboardPage>
       <DashboardPageHeader>
@@ -38,9 +49,9 @@ function NewCourse() {
       <DashboardPageMain>
         <div className="grid grid-cols-2 gap-6">
           <DashboardCard title="Adicionar">
-            <form action="" className="space-y-5">
+            <form action="" className="space-y-5" >
               <DragAndDrop />
-              <Input type="text" labelTitle="Titulo" />
+              <Input type="text"  labelTitle="Titulo" name="title" />
               <Select labelTitle="Categoria">
                 {categories.map((category) => (
                   <Option key={category} value={category}>
@@ -59,7 +70,7 @@ function NewCourse() {
 
                 <Input type="text" labelTitle="Titulo" />
               </div>
-              <Input type="file" labelTitle="Imagem de capa" />
+              <Input type="file" name="imagem" labelTitle="Imagem de capa" />
               <TextArea labelTitle="Descrição" />
               <Button text="Enviar" rounded="rounded" />
             </form>
@@ -69,9 +80,17 @@ function NewCourse() {
               Comece a montar seu curso criando Modulos, aulas e atividades
               práticas (testes, exercícios de programação e tarefas).
             </p>
-            <form className="flex flex-col gap-4 w-full mt-5 ">
-              {modules.map((module,index) => (
-                <div className=" w-full flex-grow gap-5  border-dashed border-2 p-5  " key={index}>
+            <form
+              method="post"
+              className="flex flex-col gap-4 w-full mt-5"
+              onSubmit={handleSubmit(handdleSubmit)}
+              
+            >
+              {modules.map((module, index) => (
+                <div
+                  className=" w-full flex-grow gap-5  border-dashed border-2 p-5  "
+                  key={index}
+                >
                   <div className="flex items-center">
                     <p className="w-full max-w-[150px] font-bold">
                       Nome do modulo:{" "}
@@ -79,6 +98,8 @@ function NewCourse() {
                     <Input
                       title="Nome do modulo"
                       placeholder="Adicione o titulo do novo modulo"
+                      defaultValue="test"
+                      {...register(`modulo${index}`)}
                     />
                   </div>
                   {/* aulas */}
@@ -94,8 +115,7 @@ function NewCourse() {
                   <button
                     type="button"
                     className="flex items-center gap-4 mt-10 text-xs font-bold"
-                    onClick={()=> handdleClickNewClass(index)}
-                    
+                    onClick={() => handdleClickNewClass(index)}
                   >
                     <PiPlus />
                     Adicionar nova aula
