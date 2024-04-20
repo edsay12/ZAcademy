@@ -3,17 +3,20 @@ import { InputHTMLAttributes, forwardRef } from "react";
 
 type inputTypeProps = {
   labelTitle?: string;
+  errorMessage?: string;
 } & InputHTMLAttributes<HTMLInputElement>;
 
 // eslint-disable-next-line react/display-name
 const Input = forwardRef<HTMLInputElement, inputTypeProps>(
-  ({
-    labelTitle,
-    className,
+  (
+    {
+      labelTitle,
+      className,
 
-
-    ...rest
-  },ref) => {
+      ...rest
+    },
+    ref
+  ) => {
     return (
       <div className="flex flex-col gap-2  w-full">
         {labelTitle && (
@@ -30,6 +33,7 @@ const Input = forwardRef<HTMLInputElement, inputTypeProps>(
             className
           )}
         />
+        {/* {errorMessage && <span role="alert">{errorMessage}</span>} */}
       </div>
     );
   }

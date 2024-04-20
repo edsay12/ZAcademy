@@ -18,13 +18,14 @@ import { PiPlus } from "react-icons/pi";
 import AcordeonInput from "@/components/Acordeon/AcordeonInput";
 import { FormEvent, FormHTMLAttributes, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
+import { error } from "console";
 
 type FormValues = {
   modules: {
-    id?:string
+    id?: string;
     title: string;
     cource: {
-      id?:string,
+      id?: string;
       title: string;
       description: string;
       video: File | null;
@@ -33,16 +34,20 @@ type FormValues = {
 };
 
 function NewCourse() {
-  const { handleSubmit, register, control } = useForm<FormValues>({
+  const {
+    handleSubmit,
+    register,
+    control,
+    formState: { errors },
+  } = useForm<FormValues>({
     defaultValues: {
       modules: [
         {
           title: "asda",
-          id:"",
+          id: "",
           cource: [
-            
             {
-              id:"",
+              id: "",
               title: "",
               description: "",
               video: null,
@@ -56,7 +61,6 @@ function NewCourse() {
   const {
     fields: modules,
     append: moduleArray,
-    update,
     replace,
   } = useFieldArray({
     name: "modules",
@@ -65,23 +69,22 @@ function NewCourse() {
 
   function handdleClickNewClass(index: number) {
     const array = modules.map((module, itemIndex) => {
-      
-      if(itemIndex == index){
+      if (itemIndex == index) {
         return {
           ...module,
-          cource:[
+          cource: [
             ...module.cource,
             {
-              id:"",
+              id: "",
               title: "",
               description: "",
               video: null,
-            }
-          ]
-        }
+            },
+          ],
+        };
       }
-      
-      return module
+
+      return module;
     });
     replace(array);
   }
@@ -94,6 +97,7 @@ function NewCourse() {
 
   function handdleSubmit(data: any) {
     console.log(data);
+    console.log(errors);
   }
 
   return (
@@ -154,7 +158,13 @@ function NewCourse() {
                       title="Nome do modulo"
                       placeholder="Adicione o titulo do novo modulo"
                       defaultValue="test"
-                      {...register(`modules.${moduleIndex}.title` as const)}
+                      errorMessage={
+                        errors.modules && errors.modules[moduleIndex]?.message
+                      }
+                      {...register(`modules.${moduleIndex}.title` as const, {
+                        required: true,
+                        minLength: 10,
+                      })}
                     />
                   </div>
                   {/* aulas */}
@@ -163,20 +173,25 @@ function NewCourse() {
                       <AcordeonInput
                         title="Aula1"
                         {...register(
-                          `modules.${moduleIndex}.cource.${courceIndex}.title`
+                          `modules.${moduleIndex}.cource.${courceIndex}.title`,
+                          { required: true, minLength: 10 }
                         )}
                       >
                         <TextArea
                           labelTitle="Descrição"
                           {...register(
-                            `modules.${moduleIndex}.cource.${courceIndex}.description`
+                            `modules.${moduleIndex}.cource.${courceIndex}.description`,
+                            { required: true, minLength: 10 }
                           )}
                         />
                         <Input
                           type="file"
                           labelTitle="Video da aula"
+                          accept="video/*"
                           {...register(
-                            `modules.${moduleIndex}.cource.${courceIndex}.video`
+                            `modules.${moduleIndex}.cource.${courceIndex}.video`,
+
+                            { required: true }
                           )}
                         />
                       </AcordeonInput>
