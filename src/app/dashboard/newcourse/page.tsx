@@ -21,8 +21,10 @@ import { useFieldArray, useForm } from "react-hook-form";
 
 type FormValues = {
   modules: {
+    id?:string
     title: string;
     cource: {
+      id?:string,
       title: string;
       description: string;
       video: File | null;
@@ -31,36 +33,63 @@ type FormValues = {
 };
 
 function NewCourse() {
-  const [modules, setModules] = useState([[]]);
-  const { handleSubmit, register,control } = useForm<FormValues>({
+  const { handleSubmit, register, control } = useForm<FormValues>({
     defaultValues: {
-
       modules: [
         {
           title: "asda",
+          id:"",
           cource: [
+            
             {
+              id:"",
               title: "",
               description: "",
               video: null,
             },
           ],
-        }
+        },
       ],
     },
   });
 
-  const {fields,append} = useFieldArray({
-    name:"modules",
-    control
-  })
+  const {
+    fields: modules,
+    append: moduleArray,
+    update,
+    replace,
+  } = useFieldArray({
+    name: "modules",
+    control,
+  });
 
   function handdleClickNewClass(index: number) {
-    modules[index].push(1);
-    setModules((modules) => [...modules]);
+    const array = modules.map((module, itemIndex) => {
+      
+      if(itemIndex == index){
+        return {
+          ...module,
+          cource:[
+            ...module.cource,
+            {
+              id:"",
+              title: "",
+              description: "",
+              video: null,
+            }
+          ]
+        }
+      }
+      
+      return module
+    });
+    replace(array);
   }
   function handdleClickNewModule() {
-    setModules((module) => [...module, []]);
+    moduleArray({
+      title: "",
+      cource: [{ description: "", title: "", video: null }],
+    });
   }
 
   function handdleSubmit(data: any) {
@@ -112,10 +141,10 @@ function NewCourse() {
               className="flex flex-col gap-4 w-full mt-5"
               onSubmit={handleSubmit(handdleSubmit)}
             >
-              {fields.map((module, index) => (
+              {modules.map((module, moduleIndex) => (
                 <div
                   className=" w-full flex-grow gap-5  border-dashed border-2 p-5  "
-                  key={index}
+                  key={moduleIndex}
                 >
                   <div className="flex items-center">
                     <p className="w-full max-w-[150px] font-bold">
@@ -125,23 +154,39 @@ function NewCourse() {
                       title="Nome do modulo"
                       placeholder="Adicione o titulo do novo modulo"
                       defaultValue="test"
-                      {...register(`modules.${index}.title` as const)}
+                      {...register(`modules.${moduleIndex}.title` as const)}
                     />
                   </div>
                   {/* aulas */}
-                  {/* {module.map((aula, index) => (
-                    <div className="mt-5" key={index}>
-                      <AcordeonInput title="Aula1">
-                        <TextArea labelTitle="Descrição" />
-                        <Input type="file" labelTitle="Video da aula" {...register(`modules`)}/>
+                  {module.cource.map((aula, courceIndex) => (
+                    <div className="mt-5" key={courceIndex}>
+                      <AcordeonInput
+                        title="Aula1"
+                        {...register(
+                          `modules.${moduleIndex}.cource.${courceIndex}.title`
+                        )}
+                      >
+                        <TextArea
+                          labelTitle="Descrição"
+                          {...register(
+                            `modules.${moduleIndex}.cource.${courceIndex}.description`
+                          )}
+                        />
+                        <Input
+                          type="file"
+                          labelTitle="Video da aula"
+                          {...register(
+                            `modules.${moduleIndex}.cource.${courceIndex}.video`
+                          )}
+                        />
                       </AcordeonInput>
                     </div>
-                  ))} */}
+                  ))}
 
                   <button
                     type="button"
                     className="flex items-center gap-4 mt-10 text-xs font-bold"
-                    onClick={() => handdleClickNewClass(index)}
+                    onClick={() => handdleClickNewClass(moduleIndex)}
                   >
                     <PiPlus />
                     Adicionar nova aula
@@ -152,7 +197,7 @@ function NewCourse() {
               <button
                 type="button"
                 className="flex items-center gap-4 mt-5 text-xs font-bold ml-2"
-                onClick={()=> append({title:'aasd',cource:[]})}
+                onClick={() => handdleClickNewModule()}
               >
                 <PiPlus />
                 Adicionar novo modulo
