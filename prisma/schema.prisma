@@ -60,6 +60,7 @@ model User {
   updatedAt      DateTime  @updatedAt
   role           Role?     @default(STUDENT)
   accounts       Account[]
+  bio            String?
 
   Course        Course[]
   comment       Comment[]

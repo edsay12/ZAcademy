@@ -1,14 +1,14 @@
 "use client";
 import { AcordeaoData } from "@/app/@types";
 import Input from "@/app/dashboard/newcourse/components/input";
-import { forwardRef, useState } from "react";
+import { HTMLAttributes, InputHTMLAttributes, forwardRef, useState } from "react";
 import { FaRegCirclePlay } from "react-icons/fa6";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 
 type PropTypes = {
   children: React.ReactNode;
   title: string;
-};
+} & InputHTMLAttributes<HTMLInputElement>
 // eslint-disable-next-line react/display-name
 const AcordeonInput = forwardRef<HTMLInputElement, PropTypes>(
   ({ children, title,...rest },ref) => {
