@@ -171,6 +171,7 @@ function NewCourse() {
                   {module.cource.map((aula, courceIndex) => (
                     <div className="mt-5" key={courceIndex}>
                       <AcordeonInput
+                        placeholder="Titulo da aula"
                         title="Aula1"
                         {...register(
                           `modules.${moduleIndex}.cource.${courceIndex}.title`,

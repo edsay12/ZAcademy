@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils/cn";
 import { InputHTMLAttributes } from "react";
 
 type SelectTypeProps = {
-  labelTitle: string;
+  labelTitle?: string;
 } & InputHTMLAttributes<HTMLSelectElement>;
 type OptionTypeProps = {} & InputHTMLAttributes<HTMLOptionElement>;
 
@@ -14,7 +14,7 @@ function Select({
   ...rest
 }: SelectTypeProps) {
   return (
-    <div className="flex flex-col gap-2 ">
+    <div className="flex flex-col gap-2 w-full ">
       <label htmlFor="" className="text-black font-bold">
         {labelTitle}
       </label>
