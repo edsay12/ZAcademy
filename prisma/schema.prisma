@@ -76,7 +76,6 @@ model Course {
   title             String
   description       String
   image             String
-  video             String
   level             Level
   price             Float
   category          Category
