@@ -10,8 +10,6 @@ import { GoEye } from "react-icons/go";
 import { IoCartOutline } from "react-icons/io5";
 import { CiBag1 } from "react-icons/ci";
 import { FiUsers } from "react-icons/fi";
-
-import { useState } from "react";
 import LineChar from "./_components/line-char";
 import ColumnChart from "./_components/colum-char";
 function Dashboard() {
