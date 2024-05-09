@@ -22,7 +22,7 @@ export async function POST(
     studentsNumber,
   } = data as Course;
 
-  const isUserExists = await db.course.findUnique({
+  const isCourseExists = await db.course.findUnique({
     where: {
       id: courseId,
     },
@@ -34,7 +34,7 @@ export async function POST(
     return NextResponse.json({ error: "Dados Invalidos" }, { status: 400 });
   }
 
-  if (!isUserExists) {
+  if (!isCourseExists) {
     return NextResponse.json({ data: "couser id not found" }, { status: 400 });
   }
 
