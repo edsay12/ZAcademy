@@ -4,16 +4,16 @@ import { NextResponse, NextRequest } from "next/server";
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { courseId: string } }
+  { params }: { params: { moduleId: string } }
 ) {
-  const { courseId } = params;
+  const { moduleId } = params;
   const data = await req.json();
 
   const { title } = data as Module;
 
-  const isCourseExists = await db.course.findUnique({
+  const isModuleExists = await db.module.findUnique({
     where: {
-      id: courseId,
+      id: moduleId,
     },
   });
 
@@ -22,26 +22,17 @@ export async function POST(
     return NextResponse.json({ error: "Dados Invalidos" }, { status: 400 });
   }
 
-  if (!isCourseExists) {
-    return NextResponse.json({ data: "couser id not found" }, { status: 400 });
+  if (!isModuleExists) {
+    return NextResponse.json({ data: "module id not found" }, { status: 400 });
   }
 
   try {
-    const couse = await db.course.update({
+    const couse = await db.module.update({
       where: {
-        id: courseId,
+        id: moduleId,
       },
       data: {
         title: title,
-        category: category,
-        image: image,
-        description: description,
-        level: level,
-        presentationVideo: presentationVideo,
-        price: price,
-        starNumber: starNumber,
-        assessmentsNumber: assessmentsNumber,
-        studentsNumber: studentsNumber,
       },
     });
 
