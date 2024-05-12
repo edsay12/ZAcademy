@@ -17,6 +17,7 @@ export async function POST(
     presentationVideo,
     level,
     price,
+    video,
     image,
   } = data as Course;
 
@@ -45,6 +46,7 @@ export async function POST(
     const couse = await db.course.create({
       data: {
         title: title,
+        video:video,
         userId: userId,
         category: category,
         image: image,

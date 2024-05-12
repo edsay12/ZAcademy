@@ -47,7 +47,7 @@ function DragInDrop() {
         <p>Arraste e solte ou <span className="text-blue-500">escolha um video</span> para fazer upload</p>
 
         {acceptedFiles.map((file) => {
-          return <p>{file.name}</p>;
+          return <p key={file.name}>{file.name}</p>;
         })}
       </div>
       {file.preview && (
