@@ -4,24 +4,24 @@ import { NextResponse, NextRequest } from "next/server";
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { courseId: string } }
+  { params }: { params: { classeId: string } }
 ) {
-  const { courseId } = params;
+  const { classeId } = params;
 
-  const isCourseExists = await db.course.findUnique({
+  const isClasseExists = await db.class.findUnique({
     where: {
-      id: courseId,
+      id: classeId,
     },
   });
 
-  if (!isCourseExists) {
-    return NextResponse.json({ data: "couser id not found" }, { status: 400 });
+  if (!isClasseExists) {
+    return NextResponse.json({ data: "class id not found" }, { status: 400 });
   }
 
   try {
-    const couse = await db.course.delete({
+    const classe = await db.class.delete({
       where: {
-        id: courseId,
+        id: classeId,
       },
     });
 
