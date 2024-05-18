@@ -59,10 +59,10 @@ export async function POST(
   await writeFileSync(path, buffer);
 
   try {
-    const classeData: Class = {
+    const classeData: Partial<Class> = {
+      id: "",
       title: titulo as string,
       starNumber: 0,
-
       moduleId: params.moduleId,
       assessmentsNumber: 0,
       duration: 0,

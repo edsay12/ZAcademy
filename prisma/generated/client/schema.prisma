@@ -1,0 +1,167 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(uuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model User {
+  id             String          @id @default(uuid())
+  name           String?
+  email          String?         @unique
+  emailVerified  DateTime?
+  image          String?
+  hashedPassword String?
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  role           Role?           @default(STUDENT)
+  bio            String?
+  accounts       Account[]
+  ClassProgress  ClassProgress[]
+  comment        Comment[]
+  Course         Course[]
+  Reply          Reply[]
+  Shopping       Shopping[]
+  Stared         Stared[]
+}
+
+model Course {
+  id                String     @id @default(uuid())
+  userId            String
+  title             String
+  description       String
+  image             String
+  level             Level
+  price             Float
+  category          Category
+  presentationVideo String
+  starNumber        Int
+  assessmentsNumber Int
+  studentsNumber    Int
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  user              User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Module            Module[]
+  Shopping          Shopping[]
+  Stared            Stared[]
+}
+
+model Module {
+  id        String   @id @default(uuid())
+  courseId  String
+  title     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Class     Class[]
+  cource    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+}
+
+model Class {
+  id                String          @id @default(uuid())
+  moduleId          String
+  title             String
+  description       String
+  video             String
+  starNumber        Int
+  assessmentsNumber Int
+  duration          Int
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  module            Module          @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  ClassProgress     ClassProgress[]
+  comment           Comment[]
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  userId    String
+  classId   String
+  comment   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  class     Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Reply     Reply[]
+}
+
+model Reply {
+  id        String   @id @default(uuid())
+  userId    String
+  CommentId String
+  reply     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  comment   Comment  @relation(fields: [CommentId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Shopping {
+  id        String   @id @default(uuid())
+  courseId  String
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Stared {
+  id        String   @id @default(uuid())
+  courseId  String
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model ClassProgress {
+  id        String   @id @default(uuid())
+  classId   String
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  course    Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum Level {
+  iniciante
+  intermediario
+  avancado
+}
+
+enum Category {
+  negocios
+  designer
+  desenvolvimento
+  gerenciamento
+  tecnologia
+  fotografia
+}
+
+enum Role {
+  STUDENT
+  INSTRUCTOR
+}
