@@ -7,9 +7,9 @@ export async function POST(
   { params }: { params: { courseId: string } }
 ) {
   const { courseId } = params;
-  const data = await req.json();
+  const data = await req.formData();
 
-  const { title } = data as Module;
+  const title = data.get("titulo") as string;
 
   const isCourseExists = await db.course.findUnique({
     where: {
@@ -17,11 +17,12 @@ export async function POST(
     },
   });
 
-  if (Object.keys(data).length === 0) {
-    console.log(data);
-    return NextResponse.json({ error: "Dados Invalidos" }, { status: 400 });
+  if (!title) {
+    return NextResponse.json(
+      { data: "titulo deve ser adicionado" },
+      { status: 400 }
+    );
   }
-
   if (!isCourseExists) {
     return NextResponse.json({ data: "couser id not found" }, { status: 400 });
   }

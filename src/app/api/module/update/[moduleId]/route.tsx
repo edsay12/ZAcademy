@@ -7,9 +7,9 @@ export async function POST(
   { params }: { params: { moduleId: string } }
 ) {
   const { moduleId } = params;
-  const data = await req.json();
+  const data = await req.formData();
 
-  const { title } = data as Module;
+  const title  = data.get('titulo') as string
 
   const isModuleExists = await db.module.findUnique({
     where: {
@@ -17,10 +17,9 @@ export async function POST(
     },
   });
 
-  if (Object.keys(data).length === 0) {
-    console.log(data);
-    return NextResponse.json({ error: "Dados Invalidos" }, { status: 400 });
-  }
+if(!title){
+  return NextResponse.json({data:"titulo deve ser adicionado"},{status: 400})
+}
 
   if (!isModuleExists) {
     return NextResponse.json({ data: "module id not found" }, { status: 400 });
