@@ -60,7 +60,7 @@ export async function POST(
 
   try {
     const classeData: Partial<Class> = {
-      id: "",
+     
       title: titulo as string,
       starNumber: 0,
       moduleId: params.moduleId,
@@ -76,6 +76,7 @@ export async function POST(
 
     return NextResponse.json({ data: data }, { status: 200 });
   } catch (error) {
+    console.log(error)
     return NextResponse.json({ error: "algo deu errado" }, { status: 500 });
   }
 }

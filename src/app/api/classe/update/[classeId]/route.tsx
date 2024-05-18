@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
-import { Course } from "@prisma/client";
+import { Class, Course } from "@prisma/client";
+import { writeFileSync } from "fs";
 import { NextResponse, NextRequest } from "next/server";
 
 export async function POST(
@@ -7,53 +8,64 @@ export async function POST(
   { params }: { params: { classeId: string } }
 ) {
   const { classeId } = params;
-  const data = await req.json();
+  const data = await req.formData();
 
-  const {
-    title,
-    description,
-    category,
-    presentationVideo,
-    level,
-    price,
-    image,
-    starNumber,
-    assessmentsNumber,
-    studentsNumber,
-  } = data as Course;
+  const titulo = data.get('titulo') as string
+  const descricao = data.get('descricao') as string
+  const file: File | null = data.get("video") as unknown as File;
+  const tiposVideoPermitidos = ["video/mp4", "video/webm", "video/ogg"];
 
-  const isCourseExists = await db.course.findUnique({
+  if (!file || !tiposVideoPermitidos.includes(file.type)) {
+    return NextResponse.json(
+      { erro: "Arquivo vazio ou no formato incorreto" },
+      { status: 404 }
+    );
+  }
+  if (!titulo) {
+    return NextResponse.json(
+      { error: "titulo deve ser adicionado" },
+      { status: 404 }
+    );
+  }
+  if (!descricao) {
+    return NextResponse.json(
+      { error: "descrição deve ser adiocionada" },
+      { status: 404 }
+    );
+  }
+  const isClasseExists = await db.class.findUnique({
     where: {
-      id: courseId,
+      id: classeId,
     },
   });
 
-
-  if (Object.keys(data).length === 0) {
-    console.log(data)
-    return NextResponse.json({ error: "Dados Invalidos" }, { status: 400 });
+  if (!file || !tiposVideoPermitidos.includes(file.type)) {
+    return NextResponse.json(
+      { erro: "Arquivo vazio ou no formato incorreto" },
+      { status: 404 }
+    );
   }
 
-  if (!isCourseExists) {
+  if (!isClasseExists) {
     return NextResponse.json({ data: "couser id not found" }, { status: 400 });
   }
 
+  const bytes = await file.arrayBuffer();
+  const buffer = Buffer.from(bytes);
+
+  const path = `./upload/classes/${file.name}`;
+
+  await writeFileSync(path, buffer);
+
   try {
-    const couse = await db.course.update({
+    const couse = await db.class.update({
       where: {
-        id: courseId,
+        id: classeId,
       },
       data: {
-        title: title,
-        category: category,
-        image: image,
-        description: description,
-        level: level,
-        presentationVideo: presentationVideo,
-        price: price,
-        starNumber: starNumber,
-        assessmentsNumber: assessmentsNumber,
-        studentsNumber: studentsNumber,
+        title: titulo,
+        video: path,
+        description: descricao,
       },
     });
 
