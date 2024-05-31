@@ -21,11 +21,19 @@ import Link from "next/link";
 import { categories } from "@/fakeData/categories";
 
 import { useSession } from "next-auth/react";
+import { useQuery } from "react-query";
+import getCourses from "@/services/courses";
 
 function Home() {
   const [itens, setItens] = useState(coursesData);
   const [filter, setFilterItens] = useState(coursesData);
   const { data, status } = useSession();
+
+  const apiData = useQuery(['courses'], getCourses)
+
+  if(!apiData.isLoading){
+    console.log(apiData.data)
+  }
   
   return (
     <>

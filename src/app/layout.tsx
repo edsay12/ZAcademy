@@ -6,7 +6,11 @@ import { LayoutProps } from "../../.next/types/app/layout";
 import { SessionProvider } from "next-auth/react";
 import AuthProvider from "../../providers/AuthProvider";
 import { Toaster } from "react-hot-toast";
+import { QueryClient } from "react-query";
+import QueryClientProvider from "../../providers/QueryClientProvider";
 const inter = Inter({ subsets: ["latin"] });
+
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,11 +23,17 @@ export default function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="pt-BR">
       <body className={inter.className}>
-        <AuthProvider>
-          <Toaster />
 
-          {children}
-        </AuthProvider>
+        <QueryClientProvider>
+          <AuthProvider>
+            <Toaster />
+
+            {children}
+          </AuthProvider>
+
+        </QueryClientProvider>
+        
+     
       </body>
     </html>
   );
