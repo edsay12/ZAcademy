@@ -9,7 +9,7 @@ import SectionHelperText from "@/components/Section/SectionHelperText";
 import SectionTitle from "@/components/Section/SectionTitle";
 import CertificationElementCard from "@/components/CertificationElementCard";
 import { PiCertificateDuotone } from "react-icons/pi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CategoriesButtons from "@/components/CategoriesButtons";
 import TestimonialCard from "@/components/TestimonialCard";
 import Image from "next/image";
@@ -22,19 +22,25 @@ import { categories } from "@/fakeData/categories";
 
 import { useSession } from "next-auth/react";
 import { useQuery } from "react-query";
-import getCourses from "@/services/courses";
+
+import { courseService } from "@/services/courses";
+import { Course } from "../api/courses/all/route";
 
 function Home() {
-  const [itens, setItens] = useState(coursesData);
-  const [filter, setFilterItens] = useState(coursesData);
-  const { data, status } = useSession();
+  const { data: couseApiData, isLoading } = useQuery<Course[]>({
+    queryKey: ["courses"],
+    queryFn: courseService.getAllCourses,
+  });
+  const [itens, setItens] = useState<Course | any>([]);
+  const [filter, setFilterItens] = useState<Course | any>([]);
 
-  const apiData = useQuery(['courses'], getCourses)
+  useEffect(() => {
+    if (!isLoading) {
+      setItens(couseApiData);
+      setFilterItens(couseApiData);
+    }
+  }, [couseApiData]);
 
-  if(!apiData.isLoading){
-    console.log(apiData.data)
-  }
-  
   return (
     <>
       <SectionContainer>
@@ -43,29 +49,35 @@ function Home() {
           secondText="Melhores Cursos"
           firstTextColor={"text-black"}
         />
-  
-        <CardContainer>
-          {coursesData.map((item) => {
-            return (
-              <Card key={item.courseId}>
-                <CardTop
-                  courseId={item.courseId}
-                  courseImageUrl={item.courseImageUrl}
-                  instructorName={item.instructorName}
-                  userImageUrl={item.userImageUrl}
-                />
-                <CardBotton
-                  courseId={item.courseId}
-                  courseLevel={item.courseLevel}
-                  coursePrice={item.coursePrice}
-                  courseStarNumber={item.courseStarNumber}
-                  courseTitle={item.courseTitle}
-                  courseTotalTime={item.courseTotalTime}
-                />
-              </Card>
-            );
-          })}
-        </CardContainer>
+        {isLoading ? (
+          <>loading</>
+        ) : (
+          <>
+            <CardContainer>
+              {couseApiData?.slice(0, 4)?.map((item: Course) => {
+                return (
+                  <Card key={item.id}>
+                    <CardTop
+                      courseId={item.id}
+                      courseImageUrl={item.image}
+                      instructorName={item.user.name!}
+                      userImageUrl={item.user.image!}
+                    />
+                    <CardBotton
+                      courseId={item.id}
+                      courseLevel={item.level}
+                      coursePrice={item.price}
+                      textColor="text-black"
+                      courseStarNumber={item.starNumber}
+                      courseTitle={item.title}
+                      courseTotalTime={10}
+                    />
+                  </Card>
+                );
+              })}
+            </CardContainer>
+          </>
+        )}
       </SectionContainer>
 
       <SectionContainer>
@@ -108,41 +120,46 @@ function Home() {
           firstTextColor={"text-white"}
         />
 
-        <CategoriesButtons
-          categories={categories}
-          itens={itens}
-          filter={filter}
-          setFilterItens={setFilterItens}
-          limit={4}
-        />
+        {isLoading ? (
+          <>loading</>
+        ) : (
+          <>
+            <CategoriesButtons
+              categories={categories}
+              itens={itens}
+              filter={filter}
+              setFilterItens={setFilterItens}
+              limit={4}
+            />
+            <CardContainer>
+              {filter.map((item: Course) => {
+                return (
+                  <Card key={item.id}>
+                    <CardTop
+                      courseId={item.id}
+                      courseImageUrl={item.image}
+                      instructorName={item.user.name ?? ""}
+                      userImageUrl={item.user.image ?? ""}
+                    />
+                    <CardBotton
+                      courseId={item.id}
+                      courseLevel={item.level}
+                      coursePrice={item.price}
+                      textColor="text-white"
+                      courseStarNumber={item.starNumber}
+                      courseTitle={item.title}
+                      courseTotalTime={19}
+                    />
+                  </Card>
+                );
+              })}
 
-        <CardContainer>
-          {filter.map((item) => {
-            return (
-              <Card key={item.courseId}>
-                <CardTop
-                  courseId={item.courseId}
-                  courseImageUrl={item.courseImageUrl}
-                  instructorName={item.instructorName}
-                  userImageUrl={item.userImageUrl}
-                />
-                <CardBotton
-                  courseId={item.courseId}
-                  courseLevel={item.courseLevel}
-                  coursePrice={item.coursePrice}
-                  textColor="text-white"
-                  courseStarNumber={item.courseStarNumber}
-                  courseTitle={item.courseTitle}
-                  courseTotalTime={item.courseTotalTime}
-                />
-              </Card>
-            );
-          })}
-
-          {filter.length === 0 && (
-            <h1 className="text-white">Nada encontrado</h1>
-          )}
-        </CardContainer>
+              {filter.length === 0 && (
+                <h1 className="text-white">Nada encontrado</h1>
+              )}
+            </CardContainer>
+          </>
+        )}
 
         <Link
           href={"/course/search"}

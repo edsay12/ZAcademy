@@ -17,7 +17,8 @@ export async function POST(
   const imagem = data.get("imagem") as unknown as File;
   const level = data.get("nivel") as Level;
   const price = Number(data.get("preco"));
-  const category = data.get("categoria") as Category;
+  const category =  data.get("categoria") as Category;
+  
 
   const tiposVideoPermitidos = ["video/mp4", "video/webm", "video/ogg"];
   const tiposImagensPermitidas = [
@@ -95,13 +96,13 @@ export async function POST(
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
 
-  const path = `./upload/classes/${file.name}`;
+  const path = `./public/upload/classes/${file.name}`;
 
   await writeFileSync(path, buffer);
 
-  const imagebytes = await file.arrayBuffer();
+  const imagebytes = await imagem.arrayBuffer();
   const bufferImage = Buffer.from(imagebytes);
-  const imagePath = `./upload/images/${imagem.name}`;
+  const imagePath = `./public/upload/images/${imagem.name}`;
   await writeFileSync(imagePath, bufferImage);
 
   try {
@@ -109,12 +110,12 @@ export async function POST(
       data: {
         userId: params.userId,
         description: descricao,
-        image: imagePath,
+        image: imagePath.replace("./public",""),
         starNumber: 0,
         title: titulo,
-        presentationVideo: path,
+        presentationVideo: path.replace("./public",""),
         level: level,
-        category: category,
+        category:  category,
         price: price,
         assessmentsNumber: 0,
         studentsNumber: 0,

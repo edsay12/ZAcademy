@@ -1,13 +1,25 @@
 import { Axios } from "@/utils/Axios";
 
-export default async function getCourses() {
-  try {
-    const response = await Axios.get(
-      "/api/courses/list/1c544dcf-976c-4c16-a386-f3f9695f8355"
-    );
 
-    return response.data;
-  } catch (error) {
-    return error;
+class CourseService {
+
+  async getAllCourses() {
+   try {
+     const response = await Axios.get(
+       "/api/courses/all"
+     );
+
+     
+  
+     return response.data.data ;
+   } catch (error) {
+     return error;
+   }
   }
+
 }
+
+
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export const courseService = new CourseService()

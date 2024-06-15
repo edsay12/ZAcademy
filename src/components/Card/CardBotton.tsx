@@ -10,11 +10,11 @@ import Button from "../Button";
 import { CourseLevels } from "@/app/@types";
 
 type PropTypes = {
-  courseId:number;
+  courseId:string;
   courseTitle: string;
-  courseLevel: CourseLevels;
-  courseTotalTime: string;
-  courseStarNumber: 1 | 2 | 3 | 4 | 5;
+  courseLevel: string;
+  courseTotalTime: number;
+  courseStarNumber:number;
   coursePrice: number;
   textColor?: string;
 };

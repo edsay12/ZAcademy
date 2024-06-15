@@ -1,12 +1,13 @@
 import { CardData } from "@/app/@types";
+import { Course } from "@/app/api/courses/all/route";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 type PropTypes = {
   categories: Array<string>;
-  itens: CardData[];
-  filter: CardData[];
+  itens: Course[];
+  filter: Course[];
   limit: number;
-  setFilterItens: Dispatch<SetStateAction<CardData[]>>;
+  setFilterItens: Dispatch<SetStateAction<Course[]>>;
 };
 
 function CategoriesButtons({
@@ -48,7 +49,7 @@ function CategoriesButtons({
             onClick={() => setCategory(item)}
             className={` ${item === category && 'border-b-2 border-b-white' }`}
           >
-            {item}
+            {item.toLocaleUpperCase()}
           </button>
         );
       })}

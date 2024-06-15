@@ -153,12 +153,12 @@ enum Level {
 }
 
 enum Category {
-  negocios
-  designer
-  desenvolvimento
-  gerenciamento
-  tecnologia
-  fotografia
+  NEGOCIOS
+  DESIGNER
+  DESENVOLVIMENTO
+  GERENCIAMENTO
+  TECNOLOGIA
+  FOTOGRAFIA
 }
 
 enum Role {

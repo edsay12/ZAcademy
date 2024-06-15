@@ -3,7 +3,7 @@ import Link from "next/link";
 import { AiOutlineHeart } from "react-icons/ai";
 
 type PropTypes = {
-  courseId:number;
+  courseId:string;
   courseImageUrl: string;
   userImageUrl: string;
   instructorName: string;
@@ -18,7 +18,7 @@ function CardTop({ courseImageUrl, userImageUrl, instructorName,courseId }: Prop
           alt="Course image"
           width={100}
           height={50}
-          className="w-full  rounded-t-3xl object-cover"
+          className="w-full max-h-[200px] rounded-t-3xl object-cover"
         />
       </Link>
 
