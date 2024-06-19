@@ -9,7 +9,7 @@ import SectionHelperText from "@/components/Section/SectionHelperText";
 import SectionTitle from "@/components/Section/SectionTitle";
 import CertificationElementCard from "@/components/CertificationElementCard";
 import { PiCertificateDuotone } from "react-icons/pi";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import CategoriesButtons from "@/components/CategoriesButtons";
 import TestimonialCard from "@/components/TestimonialCard";
 import Image from "next/image";
@@ -25,9 +25,10 @@ import { useQuery } from "react-query";
 
 import { courseService } from "@/services/courses";
 import { Course } from "../api/courses/all/route";
+import Loading from "@/components/Loading";
 
 function Home() {
-  const { data: couseApiData, isLoading } = useQuery<Course[]>({
+  const { data: couseApiData = [], isLoading } = useQuery<Course[]>({
     queryKey: ["courses"],
     queryFn: courseService.getAllCourses,
   });
@@ -39,7 +40,7 @@ function Home() {
       setItens(couseApiData);
       setFilterItens(couseApiData);
     }
-  }, [couseApiData]);
+  }, [couseApiData, isLoading]);
 
   return (
     <>
@@ -49,13 +50,18 @@ function Home() {
           secondText="Melhores Cursos"
           firstTextColor={"text-black"}
         />
-        {isLoading ? (
-          <>loading</>
+        {isLoading  ? (
+          <>
+          
+          <Loading isLoading />
+          </>
         ) : (
           <>
             <CardContainer>
-              {couseApiData?.slice(0, 4)?.map((item: Course) => {
+              {couseApiData.length > 0 && couseApiData.slice(0,4).map((item: Course) => {
                 return (
+                  <Suspense key={item.id}  fallback={<Loading isLoading/>}>
+
                   <Card key={item.id}>
                     <CardTop
                       courseId={item.id}
@@ -73,6 +79,7 @@ function Home() {
                       courseTotalTime={10}
                     />
                   </Card>
+                  </Suspense>
                 );
               })}
             </CardContainer>
@@ -121,7 +128,7 @@ function Home() {
         />
 
         {isLoading ? (
-          <>loading</>
+          <Loading isLoading />
         ) : (
           <>
             <CategoriesButtons
@@ -132,7 +139,7 @@ function Home() {
               limit={4}
             />
             <CardContainer>
-              {filter.map((item: Course) => {
+              {filter.length > 0 && filter.map((item: Course) => {
                 return (
                   <Card key={item.id}>
                     <CardTop
@@ -158,15 +165,14 @@ function Home() {
                 <h1 className="text-white">Nada encontrado</h1>
               )}
             </CardContainer>
+            <Link
+              href={"/course/search"}
+              className="mt-11 underline hover:opacity-50 text-blue-500 text-end block mx-auto"
+            >
+              Ver Tudo
+            </Link>
           </>
         )}
-
-        <Link
-          href={"/course/search"}
-          className="mt-11 underline hover:opacity-50 text-blue-500 text-end block mx-auto"
-        >
-          Ver Tudo
-        </Link>
       </SectionContainer>
 
       <SectionContainer>

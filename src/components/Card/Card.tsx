@@ -1,5 +1,6 @@
-import { Children } from "react";
+import { Children, Suspense } from "react";
 import CardTop from "./CardTop";
+import Loading from "../Loading";
 
 type PropTypes = {
   children: React.ReactNode;

@@ -22,14 +22,14 @@ function CategoriesButtons({
 
   useEffect(() => {
     if (category === "TUDO") {
-      if (limit > 0) {
+      if (limit > 0 && itens.length > 0) {
         setFilterItens(itens.slice(0, limit));
       } else {
         setFilterItens(itens);
       }
     } else {
-      let filteredItens = itens.filter((item) => item.category === category);
-      if (limit > 0) {
+      let filteredItens = itens.length > 0 ?  itens.filter((item) => item.category === category) : [];
+      if (limit > 0 && filteredItens.length > 0) {
         setFilterItens(filteredItens.slice(0, limit));
       } else {
         setFilterItens(filteredItens);
