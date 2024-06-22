@@ -21,7 +21,7 @@ import {
 } from "react";
 import { BsArrowLeftShort } from "react-icons/bs";
 import { BiUserCircle } from "react-icons/bi";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 import Logo from "../Logo";
@@ -45,9 +45,17 @@ function HomeNavbar() {
     },
   ];
   const [isNavOppen, setIsNavOppen] = useState<boolean>(false);
+  const [src, setSrc] = useState("")
   const session = useSession();
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  const params = useSearchParams();
+ 
+
+
+  useEffect(()=>{
+    setSrc(params.get("src")!) 
+  },[params])
 
   const toggleMenu = () => {
     setIsNavOppen((current) => !current);
@@ -99,6 +107,8 @@ function HomeNavbar() {
                     ico={<AiOutlineSearch />}
                     autoComplete="off"
                     ref={inputRef}
+                    onChange={(e)=> setSrc(e.target.value)}
+                    value={src!}
                   />
                 </form>
               </div>
