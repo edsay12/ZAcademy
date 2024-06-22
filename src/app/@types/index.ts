@@ -44,14 +44,14 @@ export type CardData = {
 
 export type Categories =
 |"TUDO"
-|"NEGÓCIOS"
-|"DESIGNER"
-|"DESENVOLVIMENTO"
-|"GERENCIAMENTO"
-|"TECNOLOGIA"
-|"FOTOGRAFIA"
+|"negocios"
+|"designer"
+|"desenvolvimento"
+|"gerenciamento"
+|"tecnologia"
+|"fotografia"
 
-export type CourseLevels = "Iniciante" | "Intermediário" | "Avançado"
+export type CourseLevels = "iniciante" | "intermediario" | "avancado"
 
 
 

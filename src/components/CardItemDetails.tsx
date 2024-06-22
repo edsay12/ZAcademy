@@ -5,13 +5,13 @@ import { FaClock, FaStar } from "react-icons/fa";
 import { FaPerson } from "react-icons/fa6";
 
 type PropTypes = {
-  courseId: number;
+  courseId: string;
   courseTitle: string;
   courseImageUrl: string;
   instructorName: string;
-  courseLevel: CourseLevels;
+  courseLevel: string;
   courseTotalTime: string;
-  courseStarNumber: 1 | 2 | 3 | 4 | 5;
+  courseStarNumber: number
   coursePrice: number;
 };
 

@@ -10,6 +10,9 @@ import { ChangeEvent, useEffect, useReducer, useState } from "react";
 import { CardData, Categories, CourseLevels } from "@/app/@types";
 import DefaultListError from "@/components/DefaultListError";
 import { useRouter} from "next/navigation";
+import { useQuery } from "react-query";
+import { Course } from "@/app/api/courses/all/route";
+import { courseService } from "@/services/courses";
 
 type FilterCategories = {
   title: string;
@@ -37,17 +40,17 @@ const filterLevelAcordeonData:FilterCategoryData = {
     {
       id: 2,
       label: "Intermediario",
-      value: "Intermediário",
+      value: "intermediario",
     },
     {
       id: 3,
       label: "Básico",
-      value: "Iniciante",
+      value: "iniciante",
     },
     {
       id: 4,
       label: "Avançado",
-      value: "Avançado",
+      value: "avancado",
     },
   ],
 };
@@ -62,61 +65,62 @@ const filterCategoryAcordeonData: FilterCategories = {
     },
     {
       id: 2,
-      value: "NEGÓCIOS",
-      label: "Negocios",
+      value: "negocios",
+      label: "Negócios",
     },
     {
       id: 3,
-      value: "DESIGNER",
+      value: "designer",
       label: "Design",
     },
     {
       id: 4,
-      value: "DESENVOLVIMENTO",
+      value: "desenvolvimento",
       label: "Desenvolvimento",
     },
     {
       id: 5,
-      value: "GERENCIAMENTO",
+      value: "gerenciamento",
       label: "Gerenciamento",
     },
     {
       id: 6,
-      value: "FOTOGRAFIA",
+      value: "fotografia",
       label: "Fotografia",
     },
     {
       id: 6,
-      value: "TECNOLOGIA",
+      value: "tecnologia",
       label: "Tecnologia",
     },
   ],
 };
 
 function categoryFilter(
-  defaultData: CardData[],
-  data: CardData[],
+  defaultData: Course[],
+  data: Course[],
   type: Categories
 ) {
   if (type === "TUDO") {
     return defaultData;
   } else {
+    
     return data.filter((item) => item.category === type);
   }
 }
 
-function levelFilter(defaultData: CardData[], data: CardData[], type: Levels) {
+function levelFilter(defaultData: Course[], data: Course[], type: Levels) {
   if (type === "TUDO") {
     return defaultData;
   } else {
-    return data.filter((item) => item.courseLevel === type);
+    return data.filter((item) => item.level === type);
   }
 }
 
-function sortItens(defaultData: CardData[], data: CardData[], type: string) {
+function sortItens(defaultData: Course[], data: Course[], type: string) {
   if (type === "estrelas") {
     return data.sort((a, b) => {
-      if (a.courseStarNumber > b.courseStarNumber) {
+      if (a.starNumber > b.starNumber) {
         return -1;
       } else {
         return 1;
@@ -128,8 +132,12 @@ function sortItens(defaultData: CardData[], data: CardData[], type: string) {
 }
 
 function Search() {
+  const { data: itens = [], isLoading } = useQuery<Course[]>({
+    queryKey: ["courses"],
+    queryFn: courseService.getAllCourses,
+  });
   const params = useSearchParams();
-  const itens = coursesData; // set itens on component
+
   const [category, setCategory] = useState<Categories>("TUDO");
   const [level, setLevel] = useState<Levels>("TUDO");
   const [sort, setSort] = useState("mais relevantes");
@@ -138,8 +146,8 @@ function Search() {
 
   let itensData = [];
   // search
-  const filterSearchItem: CardData[] = itens.filter((item) =>
-    item.courseTitle
+  const filterSearchItem: Course[] = itens.filter((item) =>
+    item.title
       .toLowerCase()
       .includes(params.get("src")?.toLocaleLowerCase() ?? "")
   );
@@ -158,7 +166,7 @@ function Search() {
   const currentPages = Number(params.get("page") ?? "1"); // current page
   const start = (currentPages - 1) * itensPerPage;
   const final = start + itensPerPage;
-  let paginationItens = [];
+  let paginationItens:Course[] = [];
 
   function applyFilter() {
     let categoryFilterData = categoryFilter(
@@ -277,15 +285,15 @@ function Search() {
               {paginationItens.map((item) => {
                 return (
                   <CartItemDetails
-                    key={item.courseId}
-                    courseId={item.courseId}
-                    courseImageUrl={item.courseImageUrl}
-                    courseLevel={item.courseLevel}
-                    courseStarNumber={item.courseStarNumber}
-                    courseTitle={item.courseTitle}
-                    courseTotalTime={item.courseTotalTime}
-                    instructorName={item.instructorName}
-                    coursePrice={item.coursePrice}
+                    key={item.id}
+                    courseId={item.id}
+                    courseImageUrl={item.image}
+                    courseLevel={item.level}
+                    courseStarNumber={item.starNumber}
+                    courseTitle={item.title}
+                    courseTotalTime={item.title}
+                    instructorName={item.user.name!}
+                    coursePrice={item.price}
                   />
                 );
               })}
