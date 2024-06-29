@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import SectionContainer from "@/components/Section/SectionContainer";
 import Description from "@/components/Description";
 import Link from "next/link";
@@ -14,53 +14,99 @@ import { acordeaoData } from "@/fakeData/acordeaoData";
 import InstructorDetailsCard from "@/components/InstructorDetailsCard";
 import { fakeInstructors } from "@/fakeData/FakeInstructors";
 import AcordeonBasicItem from "@/components/Acordeon/components/AcordeonBasicItem";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Course as CourseType } from "../../../../prisma/generated/client";
+import { useQuery } from "react-query";
+import { courseService } from "@/services/courses";
+import { useEffect, useState } from "react";
 
-function Course() {
+type PropType = {
+  params: {
+    id: string;
+  };
+};
+
+function PulseLoadingCourse() {
+  return (
+    <div className="flex items-center xl:justify-between justify-center  xl:flex-nowrap flex-wrap-reverse w-full gap-20 ">
+      <div className="animate-pulse flex flex-grow  gap-8 flex-col">
+        <div className="h-28 bg-slate-700 rounded "></div>
+        <div className="h-12 bg-slate-700 rounded "></div>
+        <div className="h-5 bg-slate-700 rounded "></div>
+        <div className="h-5 bg-slate-700 rounded "></div>
+      </div>
+
+      <div className=" xl:w-[500px] w-[900px]  rounded-lg overflow-hidden animate-pulse">
+        <div className=" bg-slate-700 rounded col-span-2  p-40 block"></div>
+      </div>
+    </div>
+  );
+}
+
+function Course({ params }: PropType) {
   const instructor = fakeInstructors[0];
-  const router = useRouter()
+  const [courseData, setCourseData] = useState<CourseType>();
+  const { data: couseApiData = [], isLoading } = useQuery<CourseType[]>({
+    queryKey: ["courses"],
+    queryFn: () => courseService.getCourseById({ id: params.id }),
+  });
+
+  useEffect(() => {
+    if (!isLoading) {
+      setCourseData(couseApiData[0]);
+    }
+  }, [isLoading, couseApiData]);
+
+  const router = useRouter();
   return (
     <>
       <SectionContainer className="bg-blue-700 mt-0 pt-14 pb-14 ">
-        <div className="flex items-center xl:justify-between justify-center  xl:flex-nowrap flex-wrap-reverse ">
-          <div className="flex flex-col gap-5">
-            <h1 className="xl:text-[42px] xl:mt-0 text-3xl mt-5 font-bold max-w-[900px] leading-snug">
-              API REST em Node.JS aplicando testes (TDD) desde o princípio
-            </h1>
-            <p className="xl:text-xl text-base max-w-[800px] leading-5">
-              Utilize o TDD para desenvolver um gerenciador financeiro com a
-              segurança dos testes automatizados sempre a seu lado
-            </p>
-            <div className="flex gap-2 xl:text-base text-sm ">
-              <div className="flex items-center gap-2 text-yellow-400">
-                <span>5.0</span>
-                <span className="flex">
-                  <AiFillStar />
-                  <AiFillStar />
-                  <AiFillStar />
-                  <AiFillStar />
-                  <AiFillStar />
-                </span>
+        {isLoading ? (
+          <PulseLoadingCourse />
+        ) : (
+          <div className="flex items-center xl:justify-between justify-center  xl:flex-nowrap flex-wrap-reverse ">
+            <div className="flex flex-col gap-5">
+              <h1 className="xl:text-[42px] xl:mt-0 text-3xl mt-5 font-bold max-w-[900px] leading-snug">
+                {courseData && courseData.title}
+              </h1>
+              <p className="xl:text-xl text-base max-w-[800px] leading-5">
+                {courseData && courseData.subtitle}
+              </p>
+              <div className="flex gap-2 xl:text-base text-sm ">
+                <div className="flex items-center gap-2 text-yellow-400">
+                  <span>{courseData && courseData.starNumber}</span>
+                  <span className="flex">
+                    <AiFillStar />
+                    <AiFillStar />
+                    <AiFillStar />
+                    <AiFillStar />
+                    <AiFillStar />
+                  </span>
+                </div>
+                <a href="#" className="text-blue-800 underline">
+                  (1.702 classificações)
+                </a>
+                <span>{courseData && courseData.studentsNumber} alunos</span>
               </div>
-              <a href="#" className="text-blue-800 underline">
-                (1.702 classificações)
-              </a>
-              <span>2.000 alunos</span>
+              <div>
+                <span>Criado por:</span>
+                <Link href={"/user/1231"} className="text-blue-800 underline">
+                  {" "}
+                  Tomas Andre{" "}
+                </Link>
+              </div>
             </div>
-            <div>
-              <span>Criado por:</span>
-              <Link href={"/user/1231"} className="text-blue-800 underline">
-                {" "}
-                Tomas Andre{" "}
-              </Link>
-            </div>
-          </div>
 
-          <div className="xl:max-w-[500px] max-w-[900px] rounded-lg overflow-hidden">
-            <video src="/videoDeExemplo.mp4" controls></video>
+            <div className="xl:max-w-[500px] max-w-[900px] rounded-lg overflow-hidden">
+              <video
+                src={courseData && courseData.presentationVideo}
+                controls
+              ></video>
+            </div>
           </div>
-        </div>
+        )}
       </SectionContainer>
+
       <SectionContainer className="mb-20 relative">
         <div className="grid  grid-cols-2 lg:grid-cols-4  mx-auto gap-5 relative">
           {/* leftside */}
@@ -103,23 +149,21 @@ function Course() {
               {acordeaoData.map((item) => {
                 return (
                   <AcordeonItem key={item.id} title={item.title}>
-
-                    {item.lessons.map((item)=>{
+                    {item.lessons.map((item) => {
                       return (
-
-                        <AcordeonBasicItem key={item.id} itemId={item.id} itemTitle={item.title} />
-
-                      )
+                        <AcordeonBasicItem
+                          key={item.id}
+                          itemId={item.id}
+                          itemTitle={item.title}
+                        />
+                      );
                     })}
-
-
-
                   </AcordeonItem>
                 );
               })}
             </div>
 
-            <div  className="p-5">
+            <div className="p-5">
               <div>
                 <h3 className="font-bold text-black text-lg mb-5">Instrutor</h3>
               </div>
@@ -136,11 +180,15 @@ function Course() {
                 })}
               </h3>
               <div className="">
-                <Button text="Comprar agora" className="bg-blue-700" onClick={()=> router.push('/my-courses/all')}></Button>
+                <Button
+                  text="Comprar agora"
+                  className="bg-blue-700"
+                  onClick={() => router.push("/my-courses/all")}
+                ></Button>
                 <Button
                   text="Adicionar ao carrinho"
                   className="bg-yellow-700 mb-0"
-                  onClick={()=> router.push('/cart')}
+                  onClick={() => router.push("/cart")}
                 ></Button>
               </div>
             </div>
