@@ -1,4 +1,4 @@
-import { Role } from "@prisma/client";
+import { Role } from "../../prisma/generated/client";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
@@ -9,7 +9,7 @@ function UserDropdown() {
   const session = useSession();
   const user = session.data?.user;
   
-  console.log(user?.role)
+  console.log(user)
 
   const handdleToggle = () => {
     setIsOppen((state) => !state);

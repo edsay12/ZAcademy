@@ -38,5 +38,5 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest) {
-  return NextResponse.json({ error: "rota ainda não implementada" }, { status: 500 });
+  return await db.account.findMany()
 }
