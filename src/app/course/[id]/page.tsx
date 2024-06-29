@@ -46,7 +46,12 @@ function PulseLoadingCourse() {
 function Course({ params }: PropType) {
   const instructor = fakeInstructors[0];
   const [courseData, setCourseData] = useState<CourseType>();
-  const { data: couseApiData = [], isLoading } = useQuery<CourseType[]>({
+  const router = useRouter();
+  const {
+    data: couseApiData = [],
+    isLoading,
+    error,
+  } = useQuery<CourseType[]>({
     queryKey: ["courses"],
     queryFn: () => courseService.getCourseById({ id: params.id }),
   });
@@ -54,11 +59,13 @@ function Course({ params }: PropType) {
   useEffect(() => {
     if (!isLoading) {
       setCourseData(couseApiData[0]);
-      console.log("datadoaasda", couseApiData);
+      if (typeof couseApiData[0] === "undefined") {
+        router.push("/404");
+      }
     }
-  }, [isLoading, couseApiData]);
+    console.log(typeof couseApiData[0] === "undefined");
+  }, [isLoading, couseApiData, router]);
 
-  const router = useRouter();
   return (
     <>
       <SectionContainer className="bg-blue-700 mt-0 pt-14 pb-14 ">
