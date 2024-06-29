@@ -55,6 +55,7 @@ model Course {
   level             Level
   price             Float
   category          Category
+  subtitle          String
   presentationVideo String
   starNumber        Int
   assessmentsNumber Int
@@ -86,7 +87,7 @@ model Class {
   starNumber        Int
   assessmentsNumber Int
   duration          Int
-  createdAt         DateTime?        @default(now())
+  createdAt         DateTime?       @default(now())
   updatedAt         DateTime?       @updatedAt
   module            Module          @relation(fields: [moduleId], references: [id], onDelete: Cascade)
   ClassProgress     ClassProgress[]
@@ -153,12 +154,12 @@ enum Level {
 }
 
 enum Category {
-  NEGOCIOS
-  DESIGNER
-  DESENVOLVIMENTO
-  GERENCIAMENTO
-  TECNOLOGIA
-  FOTOGRAFIA
+  negocios
+  designer
+  desenvolvimento
+  gerenciamento
+  tecnologia
+  fotografia
 }
 
 enum Role {

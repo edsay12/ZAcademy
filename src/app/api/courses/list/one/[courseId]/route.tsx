@@ -1,28 +1,28 @@
 import { db } from "@/lib/db";
-import { Course } from "../../../../../../prisma/generated/client";
+import { Course } from "../../../../../../../prisma/generated/client";
 
 import { NextRequest, NextResponse } from "next/server";
 
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { userId: string } }
+  { params }: { params: { courseId: string } }
 ) {
-  const { userId } = params;
+  const { courseId } = params;
 
-  const isUserExists = await db.user.findUnique({
+  const isCourseExists = await db.course.findUnique({
     where: {
-      id: userId,
+      id: courseId,
     },
   });
 
-  if (!isUserExists) {
-    return NextResponse.json({ data: "user id not found" }, { status: 400 });
+  if (!isCourseExists) {
+    return NextResponse.json({ data: "Course id not found" }, { status: 400 });
   }
   try {
     const couses = await db.course.findMany({
       where: {
-        userId: userId,
+        id: courseId,
       },
     });
     return NextResponse.json({ data: couses }, { status: 200 });
@@ -30,4 +30,3 @@ export async function GET(
     return NextResponse.json({ data: error }, { status: 500 });
   }
 }
-

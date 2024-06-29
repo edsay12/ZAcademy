@@ -4115,6 +4115,7 @@ export namespace Prisma {
     level: $Enums.Level | null
     price: number | null
     category: $Enums.Category | null
+    subtitle: string | null
     presentationVideo: string | null
     starNumber: number | null
     assessmentsNumber: number | null
@@ -4132,6 +4133,7 @@ export namespace Prisma {
     level: $Enums.Level | null
     price: number | null
     category: $Enums.Category | null
+    subtitle: string | null
     presentationVideo: string | null
     starNumber: number | null
     assessmentsNumber: number | null
@@ -4149,6 +4151,7 @@ export namespace Prisma {
     level: number
     price: number
     category: number
+    subtitle: number
     presentationVideo: number
     starNumber: number
     assessmentsNumber: number
@@ -4182,6 +4185,7 @@ export namespace Prisma {
     level?: true
     price?: true
     category?: true
+    subtitle?: true
     presentationVideo?: true
     starNumber?: true
     assessmentsNumber?: true
@@ -4199,6 +4203,7 @@ export namespace Prisma {
     level?: true
     price?: true
     category?: true
+    subtitle?: true
     presentationVideo?: true
     starNumber?: true
     assessmentsNumber?: true
@@ -4216,6 +4221,7 @@ export namespace Prisma {
     level?: true
     price?: true
     category?: true
+    subtitle?: true
     presentationVideo?: true
     starNumber?: true
     assessmentsNumber?: true
@@ -4320,6 +4326,7 @@ export namespace Prisma {
     level: $Enums.Level
     price: number
     category: $Enums.Category
+    subtitle: string
     presentationVideo: string
     starNumber: number
     assessmentsNumber: number
@@ -4356,6 +4363,7 @@ export namespace Prisma {
     level?: boolean
     price?: boolean
     category?: boolean
+    subtitle?: boolean
     presentationVideo?: boolean
     starNumber?: boolean
     assessmentsNumber?: boolean
@@ -4378,6 +4386,7 @@ export namespace Prisma {
     level?: boolean
     price?: boolean
     category?: boolean
+    subtitle?: boolean
     presentationVideo?: boolean
     starNumber?: boolean
     assessmentsNumber?: boolean
@@ -4412,6 +4421,7 @@ export namespace Prisma {
       level: $Enums.Level
       price: number
       category: $Enums.Category
+      subtitle: string
       presentationVideo: string
       starNumber: number
       assessmentsNumber: number
@@ -4827,6 +4837,7 @@ export namespace Prisma {
     readonly level: FieldRef<"Course", 'Level'>
     readonly price: FieldRef<"Course", 'Float'>
     readonly category: FieldRef<"Course", 'Category'>
+    readonly subtitle: FieldRef<"Course", 'String'>
     readonly presentationVideo: FieldRef<"Course", 'String'>
     readonly starNumber: FieldRef<"Course", 'Int'>
     readonly assessmentsNumber: FieldRef<"Course", 'Int'>
@@ -6381,8 +6392,8 @@ export namespace Prisma {
     starNumber: number
     assessmentsNumber: number
     duration: number
-    createdAt: Date
-    updatedAt: Date
+    createdAt: Date | null
+    updatedAt: Date | null
     _count: ClassCountAggregateOutputType | null
     _avg: ClassAvgAggregateOutputType | null
     _sum: ClassSumAggregateOutputType | null
@@ -6458,8 +6469,8 @@ export namespace Prisma {
       starNumber: number
       assessmentsNumber: number
       duration: number
-      createdAt: Date
-      updatedAt: Date
+      createdAt: Date | null
+      updatedAt: Date | null
     }, ExtArgs["result"]["class"]>
     composites: {}
   }
@@ -11960,6 +11971,7 @@ export namespace Prisma {
     level: 'level',
     price: 'price',
     category: 'category',
+    subtitle: 'subtitle',
     presentationVideo: 'presentationVideo',
     starNumber: 'starNumber',
     assessmentsNumber: 'assessmentsNumber',
@@ -12388,6 +12400,7 @@ export namespace Prisma {
     level?: EnumLevelFilter<"Course"> | $Enums.Level
     price?: FloatFilter<"Course"> | number
     category?: EnumCategoryFilter<"Course"> | $Enums.Category
+    subtitle?: StringFilter<"Course"> | string
     presentationVideo?: StringFilter<"Course"> | string
     starNumber?: IntFilter<"Course"> | number
     assessmentsNumber?: IntFilter<"Course"> | number
@@ -12409,6 +12422,7 @@ export namespace Prisma {
     level?: SortOrder
     price?: SortOrder
     category?: SortOrder
+    subtitle?: SortOrder
     presentationVideo?: SortOrder
     starNumber?: SortOrder
     assessmentsNumber?: SortOrder
@@ -12433,6 +12447,7 @@ export namespace Prisma {
     level?: EnumLevelFilter<"Course"> | $Enums.Level
     price?: FloatFilter<"Course"> | number
     category?: EnumCategoryFilter<"Course"> | $Enums.Category
+    subtitle?: StringFilter<"Course"> | string
     presentationVideo?: StringFilter<"Course"> | string
     starNumber?: IntFilter<"Course"> | number
     assessmentsNumber?: IntFilter<"Course"> | number
@@ -12454,6 +12469,7 @@ export namespace Prisma {
     level?: SortOrder
     price?: SortOrder
     category?: SortOrder
+    subtitle?: SortOrder
     presentationVideo?: SortOrder
     starNumber?: SortOrder
     assessmentsNumber?: SortOrder
@@ -12479,6 +12495,7 @@ export namespace Prisma {
     level?: EnumLevelWithAggregatesFilter<"Course"> | $Enums.Level
     price?: FloatWithAggregatesFilter<"Course"> | number
     category?: EnumCategoryWithAggregatesFilter<"Course"> | $Enums.Category
+    subtitle?: StringWithAggregatesFilter<"Course"> | string
     presentationVideo?: StringWithAggregatesFilter<"Course"> | string
     starNumber?: IntWithAggregatesFilter<"Course"> | number
     assessmentsNumber?: IntWithAggregatesFilter<"Course"> | number
@@ -12557,8 +12574,8 @@ export namespace Prisma {
     starNumber?: IntFilter<"Class"> | number
     assessmentsNumber?: IntFilter<"Class"> | number
     duration?: IntFilter<"Class"> | number
-    createdAt?: DateTimeFilter<"Class"> | Date | string
-    updatedAt?: DateTimeFilter<"Class"> | Date | string
+    createdAt?: DateTimeNullableFilter<"Class"> | Date | string | null
+    updatedAt?: DateTimeNullableFilter<"Class"> | Date | string | null
     module?: XOR<ModuleRelationFilter, ModuleWhereInput>
     ClassProgress?: ClassProgressListRelationFilter
     comment?: CommentListRelationFilter
@@ -12573,8 +12590,8 @@ export namespace Prisma {
     starNumber?: SortOrder
     assessmentsNumber?: SortOrder
     duration?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
+    createdAt?: SortOrderInput | SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     module?: ModuleOrderByWithRelationInput
     ClassProgress?: ClassProgressOrderByRelationAggregateInput
     comment?: CommentOrderByRelationAggregateInput
@@ -12592,8 +12609,8 @@ export namespace Prisma {
     starNumber?: IntFilter<"Class"> | number
     assessmentsNumber?: IntFilter<"Class"> | number
     duration?: IntFilter<"Class"> | number
-    createdAt?: DateTimeFilter<"Class"> | Date | string
-    updatedAt?: DateTimeFilter<"Class"> | Date | string
+    createdAt?: DateTimeNullableFilter<"Class"> | Date | string | null
+    updatedAt?: DateTimeNullableFilter<"Class"> | Date | string | null
     module?: XOR<ModuleRelationFilter, ModuleWhereInput>
     ClassProgress?: ClassProgressListRelationFilter
     comment?: CommentListRelationFilter
@@ -12608,8 +12625,8 @@ export namespace Prisma {
     starNumber?: SortOrder
     assessmentsNumber?: SortOrder
     duration?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
+    createdAt?: SortOrderInput | SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     _count?: ClassCountOrderByAggregateInput
     _avg?: ClassAvgOrderByAggregateInput
     _max?: ClassMaxOrderByAggregateInput
@@ -12629,8 +12646,8 @@ export namespace Prisma {
     starNumber?: IntWithAggregatesFilter<"Class"> | number
     assessmentsNumber?: IntWithAggregatesFilter<"Class"> | number
     duration?: IntWithAggregatesFilter<"Class"> | number
-    createdAt?: DateTimeWithAggregatesFilter<"Class"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Class"> | Date | string
+    createdAt?: DateTimeNullableWithAggregatesFilter<"Class"> | Date | string | null
+    updatedAt?: DateTimeNullableWithAggregatesFilter<"Class"> | Date | string | null
   }
 
   export type CommentWhereInput = {
@@ -13167,6 +13184,7 @@ export namespace Prisma {
     level: $Enums.Level
     price: number
     category: $Enums.Category
+    subtitle: string
     presentationVideo: string
     starNumber: number
     assessmentsNumber: number
@@ -13188,6 +13206,7 @@ export namespace Prisma {
     level: $Enums.Level
     price: number
     category: $Enums.Category
+    subtitle: string
     presentationVideo: string
     starNumber: number
     assessmentsNumber: number
@@ -13207,6 +13226,7 @@ export namespace Prisma {
     level?: EnumLevelFieldUpdateOperationsInput | $Enums.Level
     price?: FloatFieldUpdateOperationsInput | number
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    subtitle?: StringFieldUpdateOperationsInput | string
     presentationVideo?: StringFieldUpdateOperationsInput | string
     starNumber?: IntFieldUpdateOperationsInput | number
     assessmentsNumber?: IntFieldUpdateOperationsInput | number
@@ -13228,6 +13248,7 @@ export namespace Prisma {
     level?: EnumLevelFieldUpdateOperationsInput | $Enums.Level
     price?: FloatFieldUpdateOperationsInput | number
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    subtitle?: StringFieldUpdateOperationsInput | string
     presentationVideo?: StringFieldUpdateOperationsInput | string
     starNumber?: IntFieldUpdateOperationsInput | number
     assessmentsNumber?: IntFieldUpdateOperationsInput | number
@@ -13248,6 +13269,7 @@ export namespace Prisma {
     level: $Enums.Level
     price: number
     category: $Enums.Category
+    subtitle: string
     presentationVideo: string
     starNumber: number
     assessmentsNumber: number
@@ -13264,6 +13286,7 @@ export namespace Prisma {
     level?: EnumLevelFieldUpdateOperationsInput | $Enums.Level
     price?: FloatFieldUpdateOperationsInput | number
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    subtitle?: StringFieldUpdateOperationsInput | string
     presentationVideo?: StringFieldUpdateOperationsInput | string
     starNumber?: IntFieldUpdateOperationsInput | number
     assessmentsNumber?: IntFieldUpdateOperationsInput | number
@@ -13281,6 +13304,7 @@ export namespace Prisma {
     level?: EnumLevelFieldUpdateOperationsInput | $Enums.Level
     price?: FloatFieldUpdateOperationsInput | number
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    subtitle?: StringFieldUpdateOperationsInput | string
     presentationVideo?: StringFieldUpdateOperationsInput | string
     starNumber?: IntFieldUpdateOperationsInput | number
     assessmentsNumber?: IntFieldUpdateOperationsInput | number
@@ -13356,8 +13380,8 @@ export namespace Prisma {
     starNumber: number
     assessmentsNumber: number
     duration: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
     module: ModuleCreateNestedOneWithoutClassInput
     ClassProgress?: ClassProgressCreateNestedManyWithoutCourseInput
     comment?: CommentCreateNestedManyWithoutClassInput
@@ -13372,8 +13396,8 @@ export namespace Prisma {
     starNumber: number
     assessmentsNumber: number
     duration: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
     ClassProgress?: ClassProgressUncheckedCreateNestedManyWithoutCourseInput
     comment?: CommentUncheckedCreateNestedManyWithoutClassInput
   }
@@ -13386,8 +13410,8 @@ export namespace Prisma {
     starNumber?: IntFieldUpdateOperationsInput | number
     assessmentsNumber?: IntFieldUpdateOperationsInput | number
     duration?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     module?: ModuleUpdateOneRequiredWithoutClassNestedInput
     ClassProgress?: ClassProgressUpdateManyWithoutCourseNestedInput
     comment?: CommentUpdateManyWithoutClassNestedInput
@@ -13402,8 +13426,8 @@ export namespace Prisma {
     starNumber?: IntFieldUpdateOperationsInput | number
     assessmentsNumber?: IntFieldUpdateOperationsInput | number
     duration?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ClassProgress?: ClassProgressUncheckedUpdateManyWithoutCourseNestedInput
     comment?: CommentUncheckedUpdateManyWithoutClassNestedInput
   }
@@ -13417,8 +13441,8 @@ export namespace Prisma {
     starNumber: number
     assessmentsNumber: number
     duration: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
   }
 
   export type ClassUpdateManyMutationInput = {
@@ -13429,8 +13453,8 @@ export namespace Prisma {
     starNumber?: IntFieldUpdateOperationsInput | number
     assessmentsNumber?: IntFieldUpdateOperationsInput | number
     duration?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ClassUncheckedUpdateManyInput = {
@@ -13442,8 +13466,8 @@ export namespace Prisma {
     starNumber?: IntFieldUpdateOperationsInput | number
     assessmentsNumber?: IntFieldUpdateOperationsInput | number
     duration?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type CommentCreateInput = {
@@ -14126,6 +14150,7 @@ export namespace Prisma {
     level?: SortOrder
     price?: SortOrder
     category?: SortOrder
+    subtitle?: SortOrder
     presentationVideo?: SortOrder
     starNumber?: SortOrder
     assessmentsNumber?: SortOrder
@@ -14150,6 +14175,7 @@ export namespace Prisma {
     level?: SortOrder
     price?: SortOrder
     category?: SortOrder
+    subtitle?: SortOrder
     presentationVideo?: SortOrder
     starNumber?: SortOrder
     assessmentsNumber?: SortOrder
@@ -14167,6 +14193,7 @@ export namespace Prisma {
     level?: SortOrder
     price?: SortOrder
     category?: SortOrder
+    subtitle?: SortOrder
     presentationVideo?: SortOrder
     starNumber?: SortOrder
     assessmentsNumber?: SortOrder
@@ -15746,6 +15773,7 @@ export namespace Prisma {
     level: $Enums.Level
     price: number
     category: $Enums.Category
+    subtitle: string
     presentationVideo: string
     starNumber: number
     assessmentsNumber: number
@@ -15765,6 +15793,7 @@ export namespace Prisma {
     level: $Enums.Level
     price: number
     category: $Enums.Category
+    subtitle: string
     presentationVideo: string
     starNumber: number
     assessmentsNumber: number
@@ -15977,6 +16006,7 @@ export namespace Prisma {
     level?: EnumLevelFilter<"Course"> | $Enums.Level
     price?: FloatFilter<"Course"> | number
     category?: EnumCategoryFilter<"Course"> | $Enums.Category
+    subtitle?: StringFilter<"Course"> | string
     presentationVideo?: StringFilter<"Course"> | string
     starNumber?: IntFilter<"Course"> | number
     assessmentsNumber?: IntFilter<"Course"> | number
@@ -16300,8 +16330,8 @@ export namespace Prisma {
     starNumber: number
     assessmentsNumber: number
     duration: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
     ClassProgress?: ClassProgressCreateNestedManyWithoutCourseInput
     comment?: CommentCreateNestedManyWithoutClassInput
   }
@@ -16314,8 +16344,8 @@ export namespace Prisma {
     starNumber: number
     assessmentsNumber: number
     duration: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
     ClassProgress?: ClassProgressUncheckedCreateNestedManyWithoutCourseInput
     comment?: CommentUncheckedCreateNestedManyWithoutClassInput
   }
@@ -16338,6 +16368,7 @@ export namespace Prisma {
     level: $Enums.Level
     price: number
     category: $Enums.Category
+    subtitle: string
     presentationVideo: string
     starNumber: number
     assessmentsNumber: number
@@ -16358,6 +16389,7 @@ export namespace Prisma {
     level: $Enums.Level
     price: number
     category: $Enums.Category
+    subtitle: string
     presentationVideo: string
     starNumber: number
     assessmentsNumber: number
@@ -16401,8 +16433,8 @@ export namespace Prisma {
     starNumber?: IntFilter<"Class"> | number
     assessmentsNumber?: IntFilter<"Class"> | number
     duration?: IntFilter<"Class"> | number
-    createdAt?: DateTimeFilter<"Class"> | Date | string
-    updatedAt?: DateTimeFilter<"Class"> | Date | string
+    createdAt?: DateTimeNullableFilter<"Class"> | Date | string | null
+    updatedAt?: DateTimeNullableFilter<"Class"> | Date | string | null
   }
 
   export type CourseUpsertWithoutModuleInput = {
@@ -16424,6 +16456,7 @@ export namespace Prisma {
     level?: EnumLevelFieldUpdateOperationsInput | $Enums.Level
     price?: FloatFieldUpdateOperationsInput | number
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    subtitle?: StringFieldUpdateOperationsInput | string
     presentationVideo?: StringFieldUpdateOperationsInput | string
     starNumber?: IntFieldUpdateOperationsInput | number
     assessmentsNumber?: IntFieldUpdateOperationsInput | number
@@ -16444,6 +16477,7 @@ export namespace Prisma {
     level?: EnumLevelFieldUpdateOperationsInput | $Enums.Level
     price?: FloatFieldUpdateOperationsInput | number
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    subtitle?: StringFieldUpdateOperationsInput | string
     presentationVideo?: StringFieldUpdateOperationsInput | string
     starNumber?: IntFieldUpdateOperationsInput | number
     assessmentsNumber?: IntFieldUpdateOperationsInput | number
@@ -16594,8 +16628,8 @@ export namespace Prisma {
     starNumber: number
     assessmentsNumber: number
     duration: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
     module: ModuleCreateNestedOneWithoutClassInput
     ClassProgress?: ClassProgressCreateNestedManyWithoutCourseInput
   }
@@ -16609,8 +16643,8 @@ export namespace Prisma {
     starNumber: number
     assessmentsNumber: number
     duration: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
     ClassProgress?: ClassProgressUncheckedCreateNestedManyWithoutCourseInput
   }
 
@@ -16707,8 +16741,8 @@ export namespace Prisma {
     starNumber?: IntFieldUpdateOperationsInput | number
     assessmentsNumber?: IntFieldUpdateOperationsInput | number
     duration?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     module?: ModuleUpdateOneRequiredWithoutClassNestedInput
     ClassProgress?: ClassProgressUpdateManyWithoutCourseNestedInput
   }
@@ -16722,8 +16756,8 @@ export namespace Prisma {
     starNumber?: IntFieldUpdateOperationsInput | number
     assessmentsNumber?: IntFieldUpdateOperationsInput | number
     duration?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ClassProgress?: ClassProgressUncheckedUpdateManyWithoutCourseNestedInput
   }
 
@@ -16944,6 +16978,7 @@ export namespace Prisma {
     level: $Enums.Level
     price: number
     category: $Enums.Category
+    subtitle: string
     presentationVideo: string
     starNumber: number
     assessmentsNumber: number
@@ -16964,6 +16999,7 @@ export namespace Prisma {
     level: $Enums.Level
     price: number
     category: $Enums.Category
+    subtitle: string
     presentationVideo: string
     starNumber: number
     assessmentsNumber: number
@@ -17041,6 +17077,7 @@ export namespace Prisma {
     level?: EnumLevelFieldUpdateOperationsInput | $Enums.Level
     price?: FloatFieldUpdateOperationsInput | number
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    subtitle?: StringFieldUpdateOperationsInput | string
     presentationVideo?: StringFieldUpdateOperationsInput | string
     starNumber?: IntFieldUpdateOperationsInput | number
     assessmentsNumber?: IntFieldUpdateOperationsInput | number
@@ -17061,6 +17098,7 @@ export namespace Prisma {
     level?: EnumLevelFieldUpdateOperationsInput | $Enums.Level
     price?: FloatFieldUpdateOperationsInput | number
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    subtitle?: StringFieldUpdateOperationsInput | string
     presentationVideo?: StringFieldUpdateOperationsInput | string
     starNumber?: IntFieldUpdateOperationsInput | number
     assessmentsNumber?: IntFieldUpdateOperationsInput | number
@@ -17128,6 +17166,7 @@ export namespace Prisma {
     level: $Enums.Level
     price: number
     category: $Enums.Category
+    subtitle: string
     presentationVideo: string
     starNumber: number
     assessmentsNumber: number
@@ -17148,6 +17187,7 @@ export namespace Prisma {
     level: $Enums.Level
     price: number
     category: $Enums.Category
+    subtitle: string
     presentationVideo: string
     starNumber: number
     assessmentsNumber: number
@@ -17225,6 +17265,7 @@ export namespace Prisma {
     level?: EnumLevelFieldUpdateOperationsInput | $Enums.Level
     price?: FloatFieldUpdateOperationsInput | number
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    subtitle?: StringFieldUpdateOperationsInput | string
     presentationVideo?: StringFieldUpdateOperationsInput | string
     starNumber?: IntFieldUpdateOperationsInput | number
     assessmentsNumber?: IntFieldUpdateOperationsInput | number
@@ -17245,6 +17286,7 @@ export namespace Prisma {
     level?: EnumLevelFieldUpdateOperationsInput | $Enums.Level
     price?: FloatFieldUpdateOperationsInput | number
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    subtitle?: StringFieldUpdateOperationsInput | string
     presentationVideo?: StringFieldUpdateOperationsInput | string
     starNumber?: IntFieldUpdateOperationsInput | number
     assessmentsNumber?: IntFieldUpdateOperationsInput | number
@@ -17312,8 +17354,8 @@ export namespace Prisma {
     starNumber: number
     assessmentsNumber: number
     duration: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
     module: ModuleCreateNestedOneWithoutClassInput
     comment?: CommentCreateNestedManyWithoutClassInput
   }
@@ -17327,8 +17369,8 @@ export namespace Prisma {
     starNumber: number
     assessmentsNumber: number
     duration: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
     comment?: CommentUncheckedCreateNestedManyWithoutClassInput
   }
 
@@ -17399,8 +17441,8 @@ export namespace Prisma {
     starNumber?: IntFieldUpdateOperationsInput | number
     assessmentsNumber?: IntFieldUpdateOperationsInput | number
     duration?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     module?: ModuleUpdateOneRequiredWithoutClassNestedInput
     comment?: CommentUpdateManyWithoutClassNestedInput
   }
@@ -17414,8 +17456,8 @@ export namespace Prisma {
     starNumber?: IntFieldUpdateOperationsInput | number
     assessmentsNumber?: IntFieldUpdateOperationsInput | number
     duration?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     comment?: CommentUncheckedUpdateManyWithoutClassNestedInput
   }
 
@@ -17505,6 +17547,7 @@ export namespace Prisma {
     level: $Enums.Level
     price: number
     category: $Enums.Category
+    subtitle: string
     presentationVideo: string
     starNumber: number
     assessmentsNumber: number
@@ -17632,6 +17675,7 @@ export namespace Prisma {
     level?: EnumLevelFieldUpdateOperationsInput | $Enums.Level
     price?: FloatFieldUpdateOperationsInput | number
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    subtitle?: StringFieldUpdateOperationsInput | string
     presentationVideo?: StringFieldUpdateOperationsInput | string
     starNumber?: IntFieldUpdateOperationsInput | number
     assessmentsNumber?: IntFieldUpdateOperationsInput | number
@@ -17651,6 +17695,7 @@ export namespace Prisma {
     level?: EnumLevelFieldUpdateOperationsInput | $Enums.Level
     price?: FloatFieldUpdateOperationsInput | number
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    subtitle?: StringFieldUpdateOperationsInput | string
     presentationVideo?: StringFieldUpdateOperationsInput | string
     starNumber?: IntFieldUpdateOperationsInput | number
     assessmentsNumber?: IntFieldUpdateOperationsInput | number
@@ -17670,6 +17715,7 @@ export namespace Prisma {
     level?: EnumLevelFieldUpdateOperationsInput | $Enums.Level
     price?: FloatFieldUpdateOperationsInput | number
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    subtitle?: StringFieldUpdateOperationsInput | string
     presentationVideo?: StringFieldUpdateOperationsInput | string
     starNumber?: IntFieldUpdateOperationsInput | number
     assessmentsNumber?: IntFieldUpdateOperationsInput | number
@@ -17838,8 +17884,8 @@ export namespace Prisma {
     starNumber: number
     assessmentsNumber: number
     duration: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
   }
 
   export type ClassUpdateWithoutModuleInput = {
@@ -17850,8 +17896,8 @@ export namespace Prisma {
     starNumber?: IntFieldUpdateOperationsInput | number
     assessmentsNumber?: IntFieldUpdateOperationsInput | number
     duration?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ClassProgress?: ClassProgressUpdateManyWithoutCourseNestedInput
     comment?: CommentUpdateManyWithoutClassNestedInput
   }
@@ -17864,8 +17910,8 @@ export namespace Prisma {
     starNumber?: IntFieldUpdateOperationsInput | number
     assessmentsNumber?: IntFieldUpdateOperationsInput | number
     duration?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ClassProgress?: ClassProgressUncheckedUpdateManyWithoutCourseNestedInput
     comment?: CommentUncheckedUpdateManyWithoutClassNestedInput
   }
@@ -17878,8 +17924,8 @@ export namespace Prisma {
     starNumber?: IntFieldUpdateOperationsInput | number
     assessmentsNumber?: IntFieldUpdateOperationsInput | number
     duration?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ClassProgressCreateManyCourseInput = {

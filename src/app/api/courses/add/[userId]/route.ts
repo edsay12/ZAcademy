@@ -1,7 +1,6 @@
-import { CourseLevels } from "@/app/@types";
+
 import { db } from "@/lib/db";
-import { Class } from "@prisma/client";
-import { error } from "console";
+
 import { writeFile, writeFileSync } from "fs";
 import { NextRequest, NextResponse } from "next/server";
 import { Category, Level } from "../../../../../../prisma/generated/client";
@@ -14,11 +13,11 @@ export async function POST(
   const file: File | null = data.get("video") as unknown as File;
   const titulo = data.get("titulo") as string;
   const descricao = data.get("descricao") as string;
+  const subtitle = data.get("subtitle") as string;
   const imagem = data.get("imagem") as unknown as File;
   const level = data.get("nivel") as Level;
   const price = Number(data.get("preco"));
-  const category =  data.get("categoria") as Category;
-  
+  const category = data.get("categoria") as Category;
 
   const tiposVideoPermitidos = ["video/mp4", "video/webm", "video/ogg"];
   const tiposImagensPermitidas = [
@@ -45,8 +44,6 @@ export async function POST(
     return NextResponse.json({ error: "algo deu errado" }, { status: 500 });
   }
   // básic validations
-
-  
 
   if (!titulo) {
     return NextResponse.json(
@@ -110,12 +107,13 @@ export async function POST(
       data: {
         userId: params.userId,
         description: descricao,
-        image: imagePath.replace("./public",""),
+        image: imagePath.replace("./public", ""),
         starNumber: 0,
+        subtitle:subtitle,
         title: titulo,
-        presentationVideo: path.replace("./public",""),
+        presentationVideo: path.replace("./public", ""),
         level: level,
-        category:  category,
+        category: category,
         price: price,
         assessmentsNumber: 0,
         studentsNumber: 0,
