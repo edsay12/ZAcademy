@@ -2,7 +2,7 @@ import { InstructorBasicDetails } from "@/app/@types";
 
 export const fakeInstructors: InstructorBasicDetails[] = [
   {
-    id: 1,
+    id: "asdas",
     name: "Alice Johnson",
     roleType: "Math Instructor",
     image: "/cardUser.jpeg",
@@ -15,7 +15,7 @@ export const fakeInstructors: InstructorBasicDetails[] = [
     courcesNumber: 5,
   },
   {
-    id: 2,
+    id: "asda",
     name: "Bob Smith",
     role:"instructor",
     roleType: "History Professor",

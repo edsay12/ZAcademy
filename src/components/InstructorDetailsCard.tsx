@@ -6,19 +6,17 @@ import { PiStudentBold } from "react-icons/pi";
 import { FaCirclePlay } from "react-icons/fa6";
 import { InstructorBasicDetails } from "@/app/@types";
 
-
-
 function InstructorDetailsCard({
   id,
-  assessmentsNumber,
-  classification,
-  courcesNumber,
-  description,
-  image,
-  name,
-  role,
-  roleType,
-  studentsNumber,
+  assessmentsNumber = 0,
+  classification = 0,
+  courcesNumber = 0,
+  description = "/cardUser.jpeg",
+  image = "",
+  name = "",
+  role = "",
+  roleType = "",
+  studentsNumber = 0,
 }: InstructorBasicDetails) {
   const instructorMoreDetails = [
     {
@@ -61,7 +59,10 @@ function InstructorDetailsCard({
         />
         <ul>
           {instructorMoreDetails.map((details) => (
-            <li className="flex items-center gap-3 text-xs md:text-sm" key={details.text}>
+            <li
+              className="flex items-center gap-3 text-xs md:text-sm"
+              key={details.text}
+            >
               <span>{details.icon}</span>
               <span>{details.text}</span>
             </li>

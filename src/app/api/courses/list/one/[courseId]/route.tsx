@@ -3,7 +3,6 @@ import { Course } from "../../../../../../../prisma/generated/client";
 
 import { NextRequest, NextResponse } from "next/server";
 
-
 export async function GET(
   req: NextRequest,
   { params }: { params: { courseId: string } }
@@ -23,6 +22,29 @@ export async function GET(
     const couses = await db.course.findMany({
       where: {
         id: courseId,
+      },
+
+      include: {
+        
+        user: {
+          select: {
+            id: true,
+            name: true,
+            image: true,
+            _count: {
+              select: {
+                Course: true,
+              },
+            },
+
+            bio: true,
+          },
+        },
+        Module: {
+          include: {
+            Class: true,
+          },
+        },
       },
     });
     return NextResponse.json({ data: couses }, { status: 200 });

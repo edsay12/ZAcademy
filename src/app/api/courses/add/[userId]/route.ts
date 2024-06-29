@@ -93,7 +93,7 @@ export async function POST(
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
 
-  const path = `./public/upload/classes/${file.name}`;
+  const path = `./public/upload/courses/${file.name}`;
 
   await writeFileSync(path, buffer);
 

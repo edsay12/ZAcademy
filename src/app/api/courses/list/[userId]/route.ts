@@ -3,7 +3,6 @@ import { Course } from "../../../../../../prisma/generated/client";
 
 import { NextRequest, NextResponse } from "next/server";
 
-
 export async function GET(
   req: NextRequest,
   { params }: { params: { userId: string } }
@@ -24,10 +23,25 @@ export async function GET(
       where: {
         userId: userId,
       },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            image: true,
+            _count: {
+              select: {
+                Course: true,
+              },
+            },
+
+            bio: true,
+          },
+        },
+      },
     });
     return NextResponse.json({ data: couses }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ data: error }, { status: 500 });
   }
 }
-

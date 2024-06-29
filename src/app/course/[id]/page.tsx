@@ -15,7 +15,7 @@ import InstructorDetailsCard from "@/components/InstructorDetailsCard";
 import { fakeInstructors } from "@/fakeData/FakeInstructors";
 import AcordeonBasicItem from "@/components/Acordeon/components/AcordeonBasicItem";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Course as CourseType } from "../../../../prisma/generated/client";
+import { Course as CourseType } from "@/app/api/courses/all/route";
 import { useQuery } from "react-query";
 import { courseService } from "@/services/courses";
 import { useEffect, useState } from "react";
@@ -54,6 +54,7 @@ function Course({ params }: PropType) {
   useEffect(() => {
     if (!isLoading) {
       setCourseData(couseApiData[0]);
+      console.log("datadoaasda", couseApiData);
     }
   }, [isLoading, couseApiData]);
 
@@ -92,7 +93,7 @@ function Course({ params }: PropType) {
                 <span>Criado por:</span>
                 <Link href={"/user/1231"} className="text-blue-800 underline">
                   {" "}
-                  Tomas Andre{" "}
+                  {courseData && courseData.user.name}
                 </Link>
               </div>
             </div>
@@ -112,44 +113,22 @@ function Course({ params }: PropType) {
           {/* leftside */}
           <div className="col-span-3 lg:max-w-[900px] w-full mt-28 lg:mt-0 ">
             <div className="p-5">
-              <Description title="Visão geral do curso">
-                Seja bem vindo(a) ao curso API Rest em NodeJS aplicando testes
-                (TDD) desde o início. Nesse curso vamos, inicialmente, aprender
-                a montar o nosso ambiente de desenvolvimento, configurar o
-                VSCode, e trabalhar com o lint para garantir a padronização dos
-                nossos códigos. Em seguida, apresentarei o básico do Jest para
-                criarmos os nossos testes... a partir daí vamos criar um teste e
-                desenvolver a nossa aplicação até o teste passar. E assim será
-                ao longo do curso, um teste de cada vez, uma funcionalidade de
-                cada vez, evoluindo sempre com segurança, pois configuraremos
-                nossos testes de tal forma que toda a API será testada sempre
-                que você salvar algum arquivo. Caso algo deixe de funcionar, com
-                um simples Ctrl+Z será possível retornar à normalidade de antes.
-                Durante o curso, iremos criar a API de um gerenciador financeiro
-                onde, no lado dos testes, apresentarei diversos recursos do Jest
-                para fazer assertivas e estruturar nossos testes. Já no lado do
-                desenvolvimento, trabalharemos com várias bibliotecas famosas
-                como o Express para criar o nosso servidor, o Passport e JWT
-                para autenticação, Knex e Postgres para migração e consultas ao
-                banco de dados, além de outras. Importante ressaltar que os
-                testes não serão a nível unitário, faremos todas as verificações
-                diretamente nos serviços. O que fará o teste mais real, pois o
-                fluxo passará desde a chamada da URL, passando pelo roteamento,
-                regras de negócio e banco de dados. Porém trará dificuldades
-                extras como a necessidade de possuir o ambiente sempre
-                atualizado e a necessidade de gerenciar a massa de dados
-                necessários para os testes, isso também será abordado no curso.
-                Abraços e nos vemos na próxima aula, até lá!
-              </Description>
+              {isLoading ? (
+                <div className="w-full h-[200px] animate-pulse bg-slate-400 rounded text-black"></div>
+              ) : (
+                <Description title="Visão geral do curso">
+                  {courseData ? courseData.description.toString() : ""}
+                </Description>
+              )}
             </div>
             <div className="p-5">
               <div>
                 <h3 className="font-bold text-black text-lg mb-5">Conteudo</h3>
               </div>
-              {acordeaoData.map((item) => {
+              {courseData?.Module.map((item) => {
                 return (
                   <AcordeonItem key={item.id} title={item.title}>
-                    {item.lessons.map((item) => {
+                    {item.Class.map((item) => {
                       return (
                         <AcordeonBasicItem
                           key={item.id}
@@ -167,14 +146,28 @@ function Course({ params }: PropType) {
               <div>
                 <h3 className="font-bold text-black text-lg mb-5">Instrutor</h3>
               </div>
-              <InstructorDetailsCard {...instructor} />
+              <InstructorDetailsCard
+                image={courseData?.user.image || "/cardUser.jpeg"}
+                classification={5}
+                courcesNumber={courseData?.user._count.Course || 0}
+                description={
+                  courseData?.user.bio ||
+                  "Apaixonado por desvendar os mistérios dos números e equações. Ela acredita que a matemática não é apenas uma disciplina acadêmica, mas também uma ferramenta poderosa para resolver problemas do mundo real. Com um sorriso caloroso, ela guia seus alunos através de conceitos complexos, tornando-os acessíveis e interessantes. Nos fins de semana, você pode encontrá-la explorando trilhas de montanha ou resolvendo quebra-cabeças matemáticos desafiadores. entusiasta da matemática, apaixonada por desvendar os mistérios dos números e equações. Ela acredita que a matemática não é apenas uma disciplina acadêmica, mas também uma ferramenta poderosa para resolver problemas do mundo real. Com um sorriso caloroso, ela guia seus alunos através de conceitos complexos, tornando-os acessíveis e interessantes. Nos fins de semana, você pode encontrá-la explorando trilhas de montanha ou resolvendo quebra-cabeças matemáticos desafiadores."
+                }
+                id={courseData?.user.id || ""}
+                name={courseData?.user.name || ""}
+                studentsNumber={10}
+                role="Instructor"
+                roleType="Tech Teacher"
+                assessmentsNumber={0}
+              />
             </div>
           </div>
           {/* righttside */}
           <div className=" flex flex-col gap-5 ">
             <div className="w-full border border-gray-300 rounded-md p-4 pb-5 shadow-xl lg:static absolute bg-white -top-[120px]  ">
               <h3 className="font-bold text-3xl text-black">
-                {(23.5).toLocaleString("pt-BR", {
+                {(courseData ? courseData?.price : 0).toLocaleString("pt-BR", {
                   style: "currency",
                   currency: "BRL",
                 })}
@@ -199,7 +192,7 @@ function Course({ params }: PropType) {
                   <span>
                     <FaSignal />
                   </span>
-                  Iniciante
+                  {courseData ? courseData.level : ""}
                 </li>
                 <li className="text-black flex gap-2 items-center">
                   <span>

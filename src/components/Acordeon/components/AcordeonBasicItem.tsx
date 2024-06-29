@@ -1,7 +1,7 @@
 import { FaRegCirclePlay } from "react-icons/fa6";
 
 type PropTypes = {
-    itemId:number
+    itemId:string
     itemTitle:string
 }
 

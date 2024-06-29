@@ -36,7 +36,7 @@ model User {
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
   role           Role?           @default(STUDENT)
-  bio            String?
+  bio            String?   @default("Estou sempre em busca de aprender e crescer, vamos nos conectar!")
   accounts       Account[]
   ClassProgress  ClassProgress[]
   comment        Comment[]

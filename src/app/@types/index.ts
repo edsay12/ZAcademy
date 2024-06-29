@@ -13,7 +13,7 @@ export type AcordeaoData = {
 };
 
 export type InstructorBasicDetails = {
-  id: number;
+  id: string;
   name: string;
   role: string;
   roleType:string
