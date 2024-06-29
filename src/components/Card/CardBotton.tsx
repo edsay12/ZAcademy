@@ -30,7 +30,7 @@ function CardBotton({
 }: PropTypes) {
   return (
     <div className={`p-6 text-black shadow-2xl ${textColor}`}>
-      <h3 className=" font-bold text-xl opacity-75 h-[40px]">{courseTitle}</h3>
+      <h3 className=" font-bold text-xl opacity-75 h-[40px] overflow-hidden truncate w-full">{courseTitle}</h3>
       <div className="flex mt-4 opacity-50 gap-4">
         <div className="flex gap-1 text-xs items-center">
           <span className="text-base">
