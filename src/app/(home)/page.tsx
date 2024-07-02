@@ -144,6 +144,7 @@ function Home() {
                   return (
                     <Card key={item.id}>
                       <CardTop
+                        url="/course/asdas"
                         courseId={item.id}
                         courseImageUrl={item.image}
                         instructorName={item.user.name ?? ""}

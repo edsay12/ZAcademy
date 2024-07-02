@@ -44,7 +44,6 @@ function PulseLoadingCourse() {
 }
 
 function Course({ params }: PropType) {
-  const instructor = fakeInstructors[0];
   const [courseData, setCourseData] = useState<CourseType>();
   const router = useRouter();
   const {
