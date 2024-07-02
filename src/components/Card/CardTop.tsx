@@ -7,12 +7,13 @@ type PropTypes = {
   courseImageUrl: string;
   userImageUrl: string;
   instructorName: string;
+  url:string
 };
 
-function CardTop({ courseImageUrl, userImageUrl, instructorName,courseId }: PropTypes) {
+function CardTop({ courseImageUrl, userImageUrl, instructorName,courseId,url="" }: PropTypes) {
   return (
     <div className="relative w-full">
-      <Link href={`/course/${courseId}`}>
+      <Link href={url}>
         <Image
           src={courseImageUrl}
           alt="Course image"

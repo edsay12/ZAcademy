@@ -50,38 +50,38 @@ function Home() {
           secondText="Melhores Cursos"
           firstTextColor={"text-black"}
         />
-        {isLoading  ? (
+        {isLoading ? (
           <>
-          
-          <Loading isLoading />
+            <Loading isLoading />
           </>
         ) : (
           <>
             <CardContainer>
-              {couseApiData.length > 0 && couseApiData.slice(0,4).map((item: Course) => {
-                return (
-                  <Suspense key={item.id}  fallback={<Loading isLoading/>}>
-
-                  <Card key={item.id}>
-                    <CardTop
-                      courseId={item.id}
-                      courseImageUrl={item.image}
-                      instructorName={item.user.name!}
-                      userImageUrl={item.user.image!}
-                    />
-                    <CardBotton
-                      courseId={item.id}
-                      courseLevel={item.level}
-                      coursePrice={item.price}
-                      textColor="text-black"
-                      courseStarNumber={item.starNumber}
-                      courseTitle={item.title}
-                      courseTotalTime={10}
-                    />
-                  </Card>
-                  </Suspense>
-                );
-              })}
+              {couseApiData.length > 0 &&
+                couseApiData.slice(0, 4).map((item: Course) => {
+                  return (
+                    <Suspense key={item.id} fallback={<Loading isLoading />}>
+                      <Card key={item.id}>
+                        <CardTop
+                          url="/course/asdas"
+                          courseId={item.id}
+                          courseImageUrl={item.image}
+                          instructorName={item.user.name!}
+                          userImageUrl={item.user.image!}
+                        />
+                        <CardBotton
+                          courseId={item.id}
+                          courseLevel={item.level}
+                          coursePrice={item.price}
+                          textColor="text-black"
+                          courseStarNumber={item.starNumber}
+                          courseTitle={item.title}
+                          courseTotalTime={10}
+                        />
+                      </Card>
+                    </Suspense>
+                  );
+                })}
             </CardContainer>
           </>
         )}
@@ -139,27 +139,28 @@ function Home() {
               limit={4}
             />
             <CardContainer>
-              {filter.length > 0 && filter.map((item: Course) => {
-                return (
-                  <Card key={item.id}>
-                    <CardTop
-                      courseId={item.id}
-                      courseImageUrl={item.image}
-                      instructorName={item.user.name ?? ""}
-                      userImageUrl={item.user.image ?? ""}
-                    />
-                    <CardBotton
-                      courseId={item.id}
-                      courseLevel={item.level}
-                      coursePrice={item.price}
-                      textColor="text-white"
-                      courseStarNumber={item.starNumber}
-                      courseTitle={item.title}
-                      courseTotalTime={19}
-                    />
-                  </Card>
-                );
-              })}
+              {filter.length > 0 &&
+                filter.map((item: Course) => {
+                  return (
+                    <Card key={item.id}>
+                      <CardTop
+                        courseId={item.id}
+                        courseImageUrl={item.image}
+                        instructorName={item.user.name ?? ""}
+                        userImageUrl={item.user.image ?? ""}
+                      />
+                      <CardBotton
+                        courseId={item.id}
+                        courseLevel={item.level}
+                        coursePrice={item.price}
+                        textColor="text-white"
+                        courseStarNumber={item.starNumber}
+                        courseTitle={item.title}
+                        courseTotalTime={19}
+                      />
+                    </Card>
+                  );
+                })}
 
               {filter.length === 0 && (
                 <h1 className="text-white">Nada encontrado</h1>

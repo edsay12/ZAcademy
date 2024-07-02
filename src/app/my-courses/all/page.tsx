@@ -3,7 +3,7 @@ import CardBotton from "@/components/Card/CardBotton";
 import CardContainer from "@/components/Card/CardContainer";
 import CardTop from "@/components/Card/CardTop";
 import SectionContainer from "@/components/Section/SectionContainer";
-const array = [1,2,3]
+const array = [1, 2, 3];
 function All() {
   return (
     <SectionContainer className="min-h-[500px] pb-5">
@@ -12,18 +12,19 @@ function All() {
           return (
             <Card key={item}>
               <CardTop
-                courseId={1}
+                url={`/course/learn/${'sasdas'}`}
+                courseId={"sf"}
                 courseImageUrl="/cardBg.webp"
                 instructorName="Jhon lenon"
                 userImageUrl="/cardUser.jpeg"
               />
               <CardBotton
-                courseId={1}
+                courseId={"asda"}
                 courseLevel="Avançado"
-                coursePrice={23.50}
+                coursePrice={23.5}
                 courseStarNumber={5}
                 courseTitle="Conceitos de desnvolvimento de software"
-                courseTotalTime="13h 20m"
+                courseTotalTime={0}
               />
             </Card>
           );
