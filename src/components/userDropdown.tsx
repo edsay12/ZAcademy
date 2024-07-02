@@ -21,7 +21,7 @@ function UserDropdown() {
         <button
           id="dropdownUserAvatarButton"
           data-dropdown-toggle="dropdownAvatar"
-          className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 "
+          className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300  "
           type="button"
           onClick={handdleToggle}
         >

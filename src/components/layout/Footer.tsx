@@ -2,14 +2,14 @@ import Logo from "../Logo";
 
 function Footer() {
   return (
-    <footer className="px-4 divide-y dark:bg-blue-700 dark:text-gray-100">
+    <footer className="px-4 divide-y ">
       <div className="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
         <div className="lg:w-1/3">
           <Logo  className="w-16"/>
         </div>
         <div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
           <div className="space-y-3">
-            <h3 className="tracki uppercase dark:text-gray-50"> Produtos</h3>
+            <h3 className="tracki uppercase "> Produtos</h3>
             <ul className="space-y-1">
               <li>
                 <a rel="noopener noreferrer" href="#">
@@ -34,7 +34,7 @@ function Footer() {
             </ul>
           </div>
           <div className="space-y-3">
-            <h3 className="tracki uppercase dark:text-gray-50">Companhia</h3>
+            <h3 className="tracki uppercase ">Companhia</h3>
             <ul className="space-y-1">
               <li>
                 <a rel="noopener noreferrer" href="#">
@@ -49,7 +49,7 @@ function Footer() {
             </ul>
           </div>
           <div className="space-y-3">
-            <h3 className="uppercase dark:text-gray-50">Developers</h3>
+            <h3 className="uppercase ">Developers</h3>
             <ul className="space-y-1">
               <li>
                 <a rel="noopener noreferrer" href="#">
@@ -69,7 +69,7 @@ function Footer() {
             </ul>
           </div>
           <div className="space-y-3">
-            <div className="uppercase dark:text-gray-50">Redes Sociais</div>
+            <div className="uppercase ">Redes Sociais</div>
             <div className="flex justify-start space-x-3">
               <a
                 rel="noopener noreferrer"
@@ -119,7 +119,7 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div className="py-6 text-sm text-center dark:text-gray-400">
+      <div className="py-6 text-sm text-center ">
         Todos os direitos reservados Zacademy © 2024 
       </div>
     </footer>

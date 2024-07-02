@@ -27,7 +27,7 @@ function UserDropdown({user}:UserDropdownProps) {
           <button
             id="dropdownUserAvatarButton"
             data-dropdown-toggle="dropdownAvatar"
-            className="flex  text-sm   rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 "
+            className="flex  text-sm   rounded-full md:me-0 focus:ring-4 focus:ring-gray-300"
             type="button"
             onClick={handdleToggle}
           >
@@ -52,20 +52,20 @@ function UserDropdown({user}:UserDropdownProps) {
             isOppen ? "" : "hidden"
           }`}
         >
-          <div className="mt-5  divide-y divide-gray-100 rounded-lg shadow w-44  dark:divide-gray-600 bg-gray-700">
-            <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
+          <div className="mt-5  divide-y divide-gray-100 rounded-lg shadow w-44   bg-gray-700">
+            <div className="px-4 py-3 text-sm text-gray-900 ">
               <div>{user?.name}</div>
               <div className="font-medium truncate">{user?.email}</div>
             </div>
             
             <ul
-              className="py-2 text-sm text-gray-700 dark:text-gray-200"
+              className="py-2 text-sm text-gray-700 "
               aria-labelledby="dropdownUserAvatarButton"
             >
               <li>
                 <Link
                   href="/user"
-                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="block px-4 py-2 hover:bg-gray-100 "
                 >
                   Perfil
                 </Link>
@@ -74,7 +74,7 @@ function UserDropdown({user}:UserDropdownProps) {
               <li>
                 <Link
                   href="/my-courses/all"
-                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="block px-4 py-2 hover:bg-gray-100 "
                 >
                   Meus cursos
                 </Link>
@@ -84,7 +84,7 @@ function UserDropdown({user}:UserDropdownProps) {
               <a
                 onClick={() => signOut()}
                 href="#"
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 "
               >
                 Sign out
               </a>

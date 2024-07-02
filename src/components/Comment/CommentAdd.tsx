@@ -10,13 +10,12 @@ function CommentAdd() {
         <textarea
           id="comment"
           rows={6}
-          className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none  dark:placeholder-gray-400 "
+          className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none   "
           placeholder="Escreva uma pergunta..."
           required
         ></textarea>
       </div>
-      <Button text="Perguntar" bg="bg-blue-700" buttonSize="medium"/>
-      
+      <Button text="Perguntar" bg="bg-blue-700" buttonSize="medium" />
     </form>
   );
 }
