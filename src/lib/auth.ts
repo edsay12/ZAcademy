@@ -53,19 +53,22 @@ export const nextOptions: NextAuthOptions = {
   secret: process.env.SESSION_SECRET,
   pages: {
     signIn: "/auth",
-    signOut:"/" // Definindo a Pagina de Login.
+    signOut: "/", // Definindo a Pagina de Login.
   },
   callbacks: {
     jwt({ user, account, token }) {
-      if(user){
-        token.role  = user.role
+      if (user) {
+        token.role = user.role;
+        if (user?.id) {
+          token.id = user.id;
+        }
       }
       return token;
     },
     session({ session, token }) {
+      session.user.id = token.id
 
-      
-      session.user.role = token.role
+      session.user.role = token.role;
       return session;
     },
   },

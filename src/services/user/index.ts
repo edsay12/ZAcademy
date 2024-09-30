@@ -1,7 +1,7 @@
 import { Axios } from "@/utils/Axios";
 
-class userServices {
-  async getCourseById({ id }: { id: string }) {
+ class UserServices {
+  async getCourseById({ id }: { id: string; }) {
     try {
       const response = await Axios.get(`/api/users/${id}`);
       return response.data.data;
@@ -10,3 +10,5 @@ class userServices {
     }
   }
 }
+
+export const userServices = new UserServices()

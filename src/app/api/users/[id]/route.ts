@@ -1,6 +1,14 @@
 import { db } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 
+export interface User {
+  id: string;
+  bio: string;
+  email: string;
+  name: string;
+  image: string;
+}
+
 export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
@@ -10,11 +18,11 @@ export async function GET(
       id: params.id,
     },
     select: {
-      id:true,
-      bio:true,
-      email:true,
-      image:true,
-      name:true,
+      id: true,
+      bio: true,
+      email: true,
+      image: true,
+      name: true,
     },
   });
 

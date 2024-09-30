@@ -5,9 +5,14 @@ import TextArea from "../dashboard/newcourse/components/InputFile";
 import Image from "next/image";
 import { Option, Select } from "../dashboard/newcourse/components/select";
 import Button from "@/components/Button";
-import { ChangeEvent, ChangeEventHandler, useState } from "react";
+import { ChangeEvent, ChangeEventHandler, useEffect, useState } from "react";
 import { MdModeEditOutline, MdOutlineModeEditOutline } from "react-icons/md";
 import { useForm } from "react-hook-form";
+import { useQuery } from "react-query";
+
+import { userServices } from "@/services/user";
+import { User as userType } from "../api/users/[id]/route";
+import { useSession } from "next-auth/react";
 
 type FormValues = {
   nome: string;
@@ -19,8 +24,14 @@ type FormValues = {
 };
 
 function User() {
+  const session = useSession();
+  const { data: userApiData = [], isLoading } = useQuery<userType>({
+    queryKey: ["user"],
+    queryFn: () => userServices.getCourseById({ id: session.data?.user.id}),
+  });
+
   const [userImage, setUserImage] = useState("/cardUser.jpeg");
-  const { register, handleSubmit } = useForm<FormValues>({
+  const { register, handleSubmit,setValue } = useForm<FormValues>({
     defaultValues: {
       bio: "Não sou vagabundo,não sou delinquente",
       image: "/cardUser.jpeg",
@@ -30,6 +41,15 @@ function User() {
       newPassword: "senha",
     },
   });
+
+
+  useEffect(() => {
+    if (!isLoading) {
+      setUserImage(userApiData.image);
+      
+      
+    }
+  }, [userApiData, isLoading]);
 
   const handdleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -44,12 +64,9 @@ function User() {
     }
   };
 
-  const handleFormSubmit = (data:FormValues)=>{
-    console.log(data)
-
-
-
-  }
+  const handleFormSubmit = (data: FormValues) => {
+    console.log(data);
+  };
 
   return (
     <div>
@@ -70,7 +87,11 @@ function User() {
             <div className="w-full bg-red-white shadow-lg border rounded-lg border-gray-200 p-5">
               <Input labelTitle="Nome" {...register("nome")} />
               <div className="flex items-center gap-5 mt-5">
-                <TextArea labelTitle="Biografia" className="min-w-[300px]" {...register("bio")} />
+                <TextArea
+                  labelTitle="Biografia"
+                  className="min-w-[300px]"
+                  {...register("bio")}
+                />
                 <div className="">
                   <p className="text-black font-bold">Avatar</p>
 
@@ -85,7 +106,7 @@ function User() {
                       type="file"
                       className="sr-only"
                       id="userimage"
-                      {...register("image")} 
+                      {...register("image")}
                       onChange={(e) => handdleChange(e)}
                     />
                     <Image
@@ -131,9 +152,21 @@ function User() {
             </div>
             <div className="w-full bg-red-white shadow-lg border rounded-lg border-gray-200 p-5">
               <div className="flex items-center gap-5 w-full">
-                <Input labelTitle="Senha atual" type="password" {...register("password")}  />
-                <Input labelTitle="Nova Senha"  type="password" {...register("newPassword")} />
-                <Input labelTitle="Confirme sua nova senha" type="password" {...register("confirmPassword")} />
+                <Input
+                  labelTitle="Senha atual"
+                  type="password"
+                  {...register("password")}
+                />
+                <Input
+                  labelTitle="Nova Senha"
+                  type="password"
+                  {...register("newPassword")}
+                />
+                <Input
+                  labelTitle="Confirme sua nova senha"
+                  type="password"
+                  {...register("confirmPassword")}
+                />
               </div>
             </div>
           </div>
