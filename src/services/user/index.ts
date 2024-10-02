@@ -6,6 +6,7 @@ import { Axios } from "@/utils/Axios";
       const response = await Axios.get(`/api/users/${id}`);
       return response.data.data;
     } catch (error) {
+      console.log("erro",error)
       return error;
     }
   }

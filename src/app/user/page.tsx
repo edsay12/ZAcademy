@@ -25,31 +25,36 @@ type FormValues = {
 
 function User() {
   const session = useSession();
-  const { data: userApiData = [], isLoading } = useQuery<userType>({
-    queryKey: ["user"],
-    queryFn: () => userServices.getCourseById({ id: session.data?.user.id}),
-  });
-
-  const [userImage, setUserImage] = useState("/cardUser.jpeg");
-  const { register, handleSubmit,setValue } = useForm<FormValues>({
+  const userId = session.data?.user.id;
+  const [userImage, setUserImage] = useState("");
+  const { register, handleSubmit, setValue } = useForm<FormValues>({
     defaultValues: {
       bio: "Não sou vagabundo,não sou delinquente",
       image: "/cardUser.jpeg",
       nome: "Edvan",
-      password: "sou uma senha de exemplo",
-      confirmPassword: "senha nova",
-      newPassword: "senha",
+      password: "",
+      confirmPassword: "",
+      newPassword: "",
     },
   });
 
+  const { data: userApiData, isLoading } = useQuery<userType>({
+    queryKey: ["user"],
+    queryFn: () =>
+      userServices.getCourseById({
+        id: userId,
+      }),
+    enabled: !!userId,
+  });
 
   useEffect(() => {
     if (!isLoading) {
-      setUserImage(userApiData.image);
-      
-      
+      setUserImage(userApiData?.image!);
+
+      setValue("bio", userApiData?.bio!);
+      setValue("nome", userApiData?.name!);
     }
-  }, [userApiData, isLoading]);
+  }, [isLoading]);
 
   const handdleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
