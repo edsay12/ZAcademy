@@ -42,7 +42,7 @@ function User() {
     queryKey: ["user"],
     queryFn: () =>
       userServices.getCourseById({
-        id: userId,
+        id: userId!,
       }),
     enabled: !!userId,
   });
