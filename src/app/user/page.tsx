@@ -26,12 +26,12 @@ type FormValues = {
 function User() {
   const session = useSession();
   const userId = session.data?.user.id;
-  const [userImage, setUserImage] = useState("");
+  const [userImage, setUserImage] = useState("/usuarioPadrao.jpg");
   const [userImageSave, setUserImageSave] = useState<File>();
   const { register, handleSubmit, setValue } = useForm<FormValues>({
     defaultValues: {
       bio: "Não sou vagabundo,não sou delinquente",
-      image: "/cardUser.jpeg",
+      image: "/usuarioPadrao.jpg",
       nome: "Edvan",
       password: "",
       confirmPassword: "",
@@ -50,7 +50,10 @@ function User() {
 
   useEffect(() => {
     if (!isLoading) {
-      setUserImage(userApiData?.image!);
+      if(userApiData?.image){
+        setUserImage(userApiData?.image!);
+
+      }
 
       setValue("bio", userApiData?.bio!);
       setValue("nome", userApiData?.name!);

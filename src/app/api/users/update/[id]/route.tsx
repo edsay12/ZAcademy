@@ -56,21 +56,27 @@ export async function POST(
   if (!user.hashedPassword) {
     var hashedPassword = await hash(newPassword, 10);
   } else {
-    const machPassword = await compare(password, user.hashedPassword!);
-    // verifica se a senha ta de fato correta
-    if (!machPassword) {
-      return NextResponse.json({ error: "Senha incorreta" }, { status: 404 });
-    } else {
-      // se as senhas forem diferentes retorna
-      if (newPassword != confirmPassword) {
-        return NextResponse.json({ error: "Senhas difentes" }, { status: 404 });
-      }
+    if(password){
 
-      var hashedPassword = await hash(newPassword, 10);
+      const machPassword = await compare(password, user.hashedPassword!);
+      // verifica se a senha ta de fato correta
+      if (!machPassword) {
+        return NextResponse.json({ error: "Senha incorreta" }, { status: 404 });
+      } else {
+        // se as senhas forem diferentes retorna
+        if(!newPassword || !confirmPassword){
+          return NextResponse.json({ error: "Senhas difentes ou nulas" }, { status: 404 });
+        }
+        if (newPassword != confirmPassword) {
+          return NextResponse.json({ error: "Senhas difentes" }, { status: 404 });
+        }
+  
+        var hashedPassword = await hash(newPassword, 10);
+        if (hashedPassword) dataToUpdate.hashedPassword = hashedPassword;
+      }
     }
   }
 
-  if (hashedPassword) dataToUpdate.hashedPassword = hashedPassword;
 
   try {
     const couse = await db.user.update({
