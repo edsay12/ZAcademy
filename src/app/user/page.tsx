@@ -27,6 +27,7 @@ function User() {
   const session = useSession();
   const userId = session.data?.user.id;
   const [userImage, setUserImage] = useState("");
+  const [userImageSave, setUserImageSave] = useState<File>();
   const { register, handleSubmit, setValue } = useForm<FormValues>({
     defaultValues: {
       bio: "Não sou vagabundo,não sou delinquente",
@@ -66,11 +67,28 @@ function User() {
       }
 
       setUserImage(URL.createObjectURL(e.target.files[0]));
+      setUserImageSave(e.target.files[0])
     }
   };
 
   const handleFormSubmit = (data: FormValues) => {
     console.log(data);
+
+    const formData = new FormData();
+    formData.append("nome",data.nome)
+    formData.append("bio",data.bio)
+    formData.append("image",userImageSave!)
+    formData.append("password",data.password)
+    formData.append("newPassword",data.newPassword)
+    formData.append("confirmPassword",data.confirmPassword)
+    
+    
+    userServices.updateUser({id:userId ,data:formData})
+
+
+
+
+
   };
 
   return (
