@@ -3,7 +3,7 @@ import { Axios } from "@/utils/Axios";
 class UserServices {
   async getCourseById({ id }: { id: string }) {
     if (!id) {
-      return console.log("user id vazio");
+      return;
     }
 
     try {
@@ -15,23 +15,15 @@ class UserServices {
     }
   }
   async updateUser({ id, data }: { id: string | undefined; data: FormData }) {
-    
     if (!id) {
-      return console.log("user id vazio");
+      return;
     }
 
-    try {
-      const response = await Axios.post(`/api/users/update/${id}`, 
-        data,
-        {
-          headers: { 'Content-Type': 'multipart/form-data' }
-        }
-      );
-      return response.data;
-    } catch (error) {
-      console.log("eero", error);
-      return error;
-    }
+    const response = await Axios.post(`/api/users/update/${id}`, data, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    
+    return response.data;
   }
 }
 

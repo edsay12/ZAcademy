@@ -7,7 +7,7 @@ import { User } from "../../../../../../prisma/generated/client";
 export async function POST(
   req: NextRequest,
   { params }: { params: { id: string } }
-) {
+): Promise<NextResponse<{ error: string; }> | NextResponse<{ data: unknown; }>> {
   const { id } = params;
   const data = await req.formData();
   const image: File | null = data.get("image") as unknown as File;
@@ -38,14 +38,13 @@ export async function POST(
 
   if (image && image.name) {
 
-    console.log("imagem",image)
     
     const imagebytes = await image.arrayBuffer();
     const bufferImage = Buffer.from(imagebytes);
     imagePath = `./public/upload/images/${image.name}`;
     await writeFileSync(imagePath, bufferImage); // resolver isso depois ;/
     imagePath = `/upload/images/${image.name}`
-    console.log("cheguei na imagem");
+
     dataToUpdate.image = imagePath;
   }
   
@@ -65,7 +64,7 @@ export async function POST(
       } else {
         // se as senhas forem diferentes retorna
         if(!newPassword || !confirmPassword){
-          return NextResponse.json({ error: "Senhas difentes ou nulas" }, { status: 404 });
+          return NextResponse.json({ error: "Digite as senhas corertamente" }, { status: 404 });
         }
         if (newPassword != confirmPassword) {
           return NextResponse.json({ error: "Senhas difentes" }, { status: 404 });

@@ -13,6 +13,7 @@ import { useQuery } from "react-query";
 import { userServices } from "@/services/user";
 import { User as userType } from "../api/users/[id]/route";
 import { useSession } from "next-auth/react";
+import toast from "react-hot-toast";
 
 type FormValues = {
   nome: string;
@@ -50,9 +51,8 @@ function User() {
 
   useEffect(() => {
     if (!isLoading) {
-      if(userApiData?.image){
+      if (userApiData?.image) {
         setUserImage(userApiData?.image!);
-
       }
 
       setValue("bio", userApiData?.bio!);
@@ -62,36 +62,33 @@ function User() {
 
   const handdleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      console.log(e.target.files[0].type);
-
       if (!e.target.files[0].type.startsWith("image")) {
         alert("Escolha uma imagem para continuar");
         return;
       }
 
       setUserImage(URL.createObjectURL(e.target.files[0]));
-      setUserImageSave(e.target.files[0])
+      setUserImageSave(e.target.files[0]);
     }
   };
 
   const handleFormSubmit = (data: FormValues) => {
-    console.log(data);
-
     const formData = new FormData();
-    formData.append("nome",data.nome)
-    formData.append("bio",data.bio)
-    formData.append("image",userImageSave!)
-    formData.append("password",data.password)
-    formData.append("newPassword",data.newPassword)
-    formData.append("confirmPassword",data.confirmPassword)
-    
-    
-    userServices.updateUser({id:userId ,data:formData})
+    formData.append("nome", data.nome);
+    formData.append("bio", data.bio);
+    formData.append("image", userImageSave!);
+    formData.append("password", data.password);
+    formData.append("newPassword", data.newPassword);
+    formData.append("confirmPassword", data.confirmPassword);
 
-
-
-
-
+    userServices
+      .updateUser({ id: userId, data: formData })
+      .then((data) => {
+        toast.success("a atualização ocorreu com sucesso");
+      })
+      .catch((error) => {
+        toast.error(error.response.data.error|| "Ocorreu um erro"); 
+      });
   };
 
   return (
