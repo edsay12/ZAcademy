@@ -34,6 +34,26 @@ function PulseLoadingUserInformations() {
   );
 }
 
+function PulseLoadingFuso() {
+  return (
+    <div className="w-full gap-20 ">
+      <div className=" w-full  rounded-lg overflow-hidden animate-pulse">
+        <div className=" bg-slate-400 rounded col-span-2  p-5 block"></div>
+      </div>
+    </div>
+  );
+}
+
+function PulseLoadingPassword() {
+  return (
+    <div className="w-full gap-20 ">
+      <div className=" w-full  rounded-lg overflow-hidden animate-pulse">
+        <div className=" bg-slate-400 rounded col-span-2  p-5 block"></div>
+      </div>
+    </div>
+  );
+}
+
 function User() {
   const session = useSession();
   const userId = session.data?.user.id;
@@ -171,11 +191,15 @@ function User() {
               </p>
             </div>
             <div className="w-full bg-red-white shadow-lg border rounded-lg border-gray-200 p-5">
-              <div className="flex items-center gap-5 w-full">
-                <Select className="w-full">
-                  <Option>GMT-03:00 Brasilia</Option>
-                </Select>
-              </div>
+              {isLoading || !userId ? (
+                <PulseLoadingFuso />
+              ) : (
+                <div className="flex items-center gap-5 w-full">
+                  <Select className="w-full">
+                    <Option>GMT-03:00 Brasilia</Option>
+                  </Select>
+                </div>
+              )}
             </div>
           </div>
           {/* divider */}
@@ -189,7 +213,7 @@ function User() {
               </p>
             </div>
             <div className="w-full bg-red-white shadow-lg border rounded-lg border-gray-200 p-5">
-              <div className="flex items-center gap-5 w-full">
+              {isLoading || !userId ? <PulseLoadingPassword/> : <div className="flex items-center gap-5 w-full">
                 <Input
                   labelTitle="Senha atual"
                   type="password"
@@ -205,7 +229,8 @@ function User() {
                   type="password"
                   {...register("confirmPassword")}
                 />
-              </div>
+              </div> }
+              
             </div>
           </div>
 
@@ -229,8 +254,6 @@ function User() {
           </div>
         </form>
       </SectionContainer>
-
-      <PulseLoadingUserInformations />
     </div>
   );
 }
