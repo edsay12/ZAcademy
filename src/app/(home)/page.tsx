@@ -63,7 +63,7 @@ function Home() {
                     <Suspense key={item.id} fallback={<Loading isLoading />}>
                       <Card key={item.id}>
                         <CardTop
-                          url="/course/asdas"
+                          url={`/course/${item.id}`}
                           courseId={item.id}
                           courseImageUrl={item.image}
                           instructorName={item.user.name!}

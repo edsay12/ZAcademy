@@ -14,6 +14,7 @@ import { userServices } from "@/services/user";
 import { User as userType } from "../api/users/[id]/route";
 import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
+import Loading from "@/components/Loading";
 
 type FormValues = {
   nome: string;
@@ -29,14 +30,15 @@ function User() {
   const userId = session.data?.user.id;
   const [userImage, setUserImage] = useState("/usuarioPadrao.jpg");
   const [userImageSave, setUserImageSave] = useState<File>();
+  const [isCancel, setIsCancel] = useState(false);
   const { register, handleSubmit, setValue } = useForm<FormValues>({
     defaultValues: {
-      bio: "Não sou vagabundo,não sou delinquente",
+      bio: "Coloque sua bio aqui ",
       image: "/usuarioPadrao.jpg",
-      nome: "Edvan",
-      password: "",
+      nome: "seu nome de usuario",
       confirmPassword: "",
       newPassword: "",
+      password: "",
     },
   });
 
@@ -54,11 +56,14 @@ function User() {
       if (userApiData?.image) {
         setUserImage(userApiData?.image!);
       }
-
-      setValue("bio", userApiData?.bio!);
-      setValue("nome", userApiData?.name!);
+      if (userApiData?.bio) {
+        setValue("bio", userApiData?.bio!);
+      }
+      if (userApiData?.name!) {
+        setValue("nome", userApiData?.name!);
+      }
     }
-  }, [isLoading]);
+  }, [isLoading, isCancel]);
 
   const handdleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -87,7 +92,7 @@ function User() {
         toast.success("a atualização ocorreu com sucesso");
       })
       .catch((error) => {
-        toast.error(error.response.data.error|| "Ocorreu um erro"); 
+        toast.error(error.response.data.error || "Ocorreu um erro");
       });
   };
 
@@ -130,6 +135,7 @@ function User() {
                       className="sr-only"
                       id="userimage"
                       {...register("image")}
+                      defaultValue={"/usuarioPadrao.jpg"}
                       onChange={(e) => handdleChange(e)}
                     />
                     <Image
@@ -202,8 +208,15 @@ function User() {
               text="Cancelar"
               buttonSize="medium"
               className="bg-transparent text-black"
+              onClick={() => setIsCancel((state)=> !state)}
+              type="button"
             />
-            <Button text="Atualizar" buttonSize="medium" type="submit" />
+            <Button
+              text="Atualizar"
+              buttonSize="medium"
+              type="submit"
+              disabled={isLoading}
+            />
           </div>
         </form>
       </SectionContainer>
