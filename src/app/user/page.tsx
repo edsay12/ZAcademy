@@ -5,11 +5,10 @@ import TextArea from "../dashboard/newcourse/components/InputFile";
 import Image from "next/image";
 import { Option, Select } from "../dashboard/newcourse/components/select";
 import Button from "@/components/Button";
-import { ChangeEvent, ChangeEventHandler, useEffect, useState } from "react";
-import { MdModeEditOutline, MdOutlineModeEditOutline } from "react-icons/md";
+import { ChangeEvent, useEffect, useState } from "react";
+import { MdOutlineModeEditOutline } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
-
 import { userServices } from "@/services/user";
 import { User as userType } from "../api/users/[id]/route";
 import { useSession } from "next-auth/react";
@@ -25,22 +24,23 @@ type FormValues = {
   confirmPassword: string;
 };
 
+function PulseLoadingUserInformations() {
+  return (
+    <div className="w-full gap-20 ">
+      <div className=" w-full  rounded-lg overflow-hidden animate-pulse">
+        <div className=" bg-slate-400 rounded col-span-2  p-24 block"></div>
+      </div>
+    </div>
+  );
+}
+
 function User() {
   const session = useSession();
   const userId = session.data?.user.id;
   const [userImage, setUserImage] = useState("/usuarioPadrao.jpg");
   const [userImageSave, setUserImageSave] = useState<File>();
   const [isCancel, setIsCancel] = useState(false);
-  const { register, handleSubmit, setValue } = useForm<FormValues>({
-    defaultValues: {
-      bio: "Coloque sua bio aqui ",
-      image: "/usuarioPadrao.jpg",
-      nome: "seu nome de usuario",
-      confirmPassword: "",
-      newPassword: "",
-      password: "",
-    },
-  });
+  const { register, handleSubmit, reset } = useForm<FormValues>();
 
   const { data: userApiData, isLoading } = useQuery<userType>({
     queryKey: ["user"],
@@ -51,19 +51,21 @@ function User() {
     enabled: !!userId,
   });
 
+  console.log(isLoading);
   useEffect(() => {
     if (!isLoading) {
       if (userApiData?.image) {
         setUserImage(userApiData?.image!);
       }
-      if (userApiData?.bio) {
-        setValue("bio", userApiData?.bio!);
-      }
-      if (userApiData?.name!) {
-        setValue("nome", userApiData?.name!);
-      }
+      reset({
+        nome: userApiData?.name || "seu nome de usuario",
+        bio: userApiData?.bio || "Coloque sua bio aqui",
+        password: "",
+        newPassword: "",
+        confirmPassword: "",
+      });
     }
-  }, [isLoading, isCancel]);
+  }, [isLoading, isCancel, reset]);
 
   const handdleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -112,42 +114,49 @@ function User() {
                 voce é? Qual seu objetivo.
               </p>
             </div>
-            <div className="w-full bg-red-white shadow-lg border rounded-lg border-gray-200 p-5">
-              <Input labelTitle="Nome" {...register("nome")} />
-              <div className="flex items-center gap-5 mt-5">
-                <TextArea
-                  labelTitle="Biografia"
-                  className="min-w-[300px]"
-                  {...register("bio")}
-                />
-                <div className="">
-                  <p className="text-black font-bold">Avatar</p>
 
-                  <label
-                    htmlFor="userimage"
-                    className="cursor-pointer relative"
-                  >
-                    <span className="absolute -right-2 -bottom-2 text-white text-xl p-1 rounded-full border-2 border-white bg-yellow-500">
-                      <MdOutlineModeEditOutline />
-                    </span>
-                    <input
-                      type="file"
-                      className="sr-only"
-                      id="userimage"
-                      {...register("image")}
-                      defaultValue={"/usuarioPadrao.jpg"}
-                      onChange={(e) => handdleChange(e)}
+            <div className="w-full bg-red-white shadow-lg border rounded-lg border-gray-200 p-5">
+              {isLoading || !userId ? (
+                <PulseLoadingUserInformations />
+              ) : (
+                <>
+                  <Input labelTitle="Nome" {...register("nome")} />
+                  <div className="flex items-center gap-5 mt-5">
+                    <TextArea
+                      labelTitle="Biografia"
+                      className="min-w-[300px]"
+                      {...register("bio")}
+                      disabled={isLoading}
                     />
-                    <Image
-                      src={userImage}
-                      alt=""
-                      className="rounded-full w-16 h-16"
-                      width={50}
-                      height={50}
-                    />
-                  </label>
-                </div>
-              </div>
+                    <div className="">
+                      <p className="text-black font-bold">Avatar</p>
+
+                      <label
+                        htmlFor="userimage"
+                        className="cursor-pointer relative"
+                      >
+                        <span className="absolute -right-2 -bottom-2 text-white text-xl p-1 rounded-full border-2 border-white bg-yellow-500">
+                          <MdOutlineModeEditOutline />
+                        </span>
+                        <input
+                          type="file"
+                          className="sr-only"
+                          id="userimage"
+                          {...register("image")}
+                          onChange={(e) => handdleChange(e)}
+                        />
+                        <Image
+                          src={userImage}
+                          alt=""
+                          className="rounded-full w-16 h-16"
+                          width={50}
+                          height={50}
+                        />
+                      </label>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </div>
 
@@ -208,7 +217,7 @@ function User() {
               text="Cancelar"
               buttonSize="medium"
               className="bg-transparent text-black"
-              onClick={() => setIsCancel((state)=> !state)}
+              onClick={() => setIsCancel((state) => !state)}
               type="button"
             />
             <Button
@@ -220,6 +229,8 @@ function User() {
           </div>
         </form>
       </SectionContainer>
+
+      <PulseLoadingUserInformations />
     </div>
   );
 }
