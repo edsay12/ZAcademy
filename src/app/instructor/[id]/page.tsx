@@ -38,17 +38,17 @@ function Instructor({ params }: PropType) {
   const seachParams = useSearchParams();
   const [userCourses,setUserCourses] = useState<Course[]>([])
   
-//   const itensPerPage = 4;
-//   const currentPages = Number(seachParams.get("page") ?? "1"); // current page
-//   const start = (currentPages - 1) * itensPerPage;
-//   const final = start + itensPerPage;
-//   let paginationItens: Course[] = [];
+  const itensPerPage = 4;
+  const currentPages = Number(seachParams.get("page") ?? "1"); // current page
+  const start = (currentPages - 1) * itensPerPage;
+  const final = start + itensPerPage;
+  let paginationItens: Course[] = [];
   
   
 
-//   const numberOfPages = Math.ceil(userApiData?.Course.length || 1 / itensPerPage);
+  const numberOfPages = Math.ceil(couseApiData.length  / itensPerPage);
 
-//   paginationItens = userApiData.Course.slice(start, final);
+  paginationItens = couseApiData.slice(start, final);
 
   return (
     <div>
@@ -91,8 +91,8 @@ function Instructor({ params }: PropType) {
               ) : (
                 <>
                   <div className="grid grid-flow-row gap-8 text-neutral-600 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
-                    {couseApiData.length > 0 &&
-                      couseApiData.slice(0, 4).map((item: Course) => {
+                    {paginationItens.length > 0 &&
+                      paginationItens.slice(0, 4).map((item: Course) => {
                         return (
                           <Suspense
                             key={item.id}
@@ -121,7 +121,7 @@ function Instructor({ params }: PropType) {
                       })}
 
                     <div className="flex justify-center p-12 mx-auto w-full ">
-                      {/* <Pagination numberOfPages={numberOfPages} /> */}
+                      <Pagination numberOfPages={numberOfPages} />
                     </div>
                   </div>
                 </>
