@@ -22,8 +22,18 @@ class UserServices {
     const response = await Axios.post(`/api/users/update/${id}`, data, {
       headers: { "Content-Type": "multipart/form-data" },
     });
-    
+
     return response.data;
+  }
+  async getUser({ id }: { id: string }) {
+    console.log(id)
+    if (!id) {
+      return;
+    }
+
+    const response = await Axios.get(`/api/users/${id}`);
+    
+    return response.data.data;
   }
 }
 

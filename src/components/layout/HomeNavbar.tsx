@@ -30,7 +30,6 @@ import LinkList from "../Link/LinkList";
 import { Input } from "../Input";
 import Button from "../Button";
 import Link from "next/link";
-import UserDropDown from "../userDropdown";
 import UserDropdown from "../userDropdown";
 
 function HomeNavbar() {
@@ -46,7 +45,7 @@ function HomeNavbar() {
   ];
   const [isNavOppen, setIsNavOppen] = useState<boolean>(false);
   const [src, setSrc] = useState("")
-  const session = useSession();
+  let session = useSession();
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const params = useSearchParams();

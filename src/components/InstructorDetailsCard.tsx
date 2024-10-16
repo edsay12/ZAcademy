@@ -5,6 +5,7 @@ import Description from "./Description";
 import { PiStudentBold } from "react-icons/pi";
 import { FaCirclePlay } from "react-icons/fa6";
 import { InstructorBasicDetails } from "@/app/@types";
+import Link from "next/link";
 
 function InstructorDetailsCard({
   id,
@@ -40,23 +41,25 @@ function InstructorDetailsCard({
   return (
     <div className="w-full text-black">
       <div className="space-y-2 text-black">
-        <a
+        <Link
           href={`/instructor/${id}`}
           className="text-bold text-blue-500 underline block "
         >
           {name}
-        </a>
+        </Link>
         <p className=" text-black ">{roleType}</p>
       </div>
 
       <div className=" flex gap-5 mt-2">
-        <Image
-          src={image}
-          alt=""
-          width={100}
-          height={100}
-          className="w-24 h-24 md:w-32 md:h-32 rounded-full"
-        />
+        <Link href={`/instructor/${id}`}>
+          <Image
+            src={image}
+            alt=""
+            width={100}
+            height={100}
+            className="w-24 h-24 md:w-32 md:h-32 rounded-full"
+          />
+        </Link>
         <ul>
           {instructorMoreDetails.map((details) => (
             <li
