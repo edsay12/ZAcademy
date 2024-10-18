@@ -23,9 +23,6 @@ type PropType = {
 };
 
 function Instructor({ params }: PropType) {
-
-    
-
   const { data: couseApiData = [], isLoading } = useQuery<Course[]>({
     queryKey: ["courses"],
     queryFn: courseService.getAllCourses,
@@ -36,19 +33,27 @@ function Instructor({ params }: PropType) {
     queryFn: () => userServices.getUser({ id: params.id }),
   });
   const seachParams = useSearchParams();
-  const [userCourses,setUserCourses] = useState<Course[]>([])
-  
+  const [userCourses, setUserCourses] = useState<Course[]>([]);
+
   const itensPerPage = 4;
   const currentPages = Number(seachParams.get("page") ?? "1"); // current page
   const start = (currentPages - 1) * itensPerPage;
   const final = start + itensPerPage;
   let paginationItens: Course[] = [];
-  
-  
 
-  const numberOfPages = Math.ceil(couseApiData.length  / itensPerPage);
+  const numberOfPages = Math.ceil(couseApiData.length / itensPerPage);
 
   paginationItens = couseApiData.slice(start, final);
+
+  function PulseLoadingUserImage() {
+    return (
+      <div className="w-full gap-20 ">
+        <div className=" w-full  rounded-full overflow-hidden animate-pulse">
+          <div className=" bg-slate-400 rounded col-span-2  p-24 block"></div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -79,7 +84,7 @@ function Instructor({ params }: PropType) {
 
             <div>
               <p className="text-black text-lg font-medium mt-8">
-                Meus cursos (52)
+                Meus cursos ({couseApiData.length})
               </p>
             </div>
 
@@ -119,10 +124,9 @@ function Instructor({ params }: PropType) {
                           </Suspense>
                         );
                       })}
-
-                    <div className="flex justify-center p-12 mx-auto w-full ">
-                      <Pagination numberOfPages={numberOfPages} />
-                    </div>
+                  </div>
+                  <div className="flex justify-center p-12 mx-auto w-full ">
+                    <Pagination numberOfPages={numberOfPages} />
                   </div>
                 </>
               )}
@@ -130,13 +134,17 @@ function Instructor({ params }: PropType) {
           </div>
 
           <div>
-            <Image
-              src={`${userApiData?.image || "/usuarioPadrao.jpg"}`}
-              alt=""
-              width={100}
-              height={100}
-              className="w-24 h-24 md:w-32 md:h-32 rounded-full"
-            />
+            {isLoading ? (
+              <PulseLoadingUserImage />
+            ) : (
+              <Image
+                src={`${userApiData?.image || "/usuarioPadrao.jpg"}`}
+                alt=""
+                width={100}
+                height={100}
+                className="w-32 h-32 md:w-32 md:h-32 rounded-full shadow-2xl"
+              />
+            )}
           </div>
         </div>
       </SectionContainer>
