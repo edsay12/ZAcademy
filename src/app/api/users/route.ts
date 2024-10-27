@@ -36,8 +36,3 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json({ user });
 }
-
-export async function GET(req: NextRequest) {
-  const users= await db.account.findMany()
-  return NextResponse.json({ users });
-}

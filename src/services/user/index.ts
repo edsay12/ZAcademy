@@ -26,14 +26,19 @@ class UserServices {
     return response.data;
   }
   async getUser({ id }: { id: string }) {
-    console.log(id)
+    console.log(id);
     if (!id) {
       return;
     }
 
     const response = await Axios.get(`/api/users/${id}`);
-    
+
     return response.data.data;
+  }
+
+  async getUserStaredVideos({ id }: { id: string }) {
+    if (!id) return;
+    const response = await Axios.get(`/api/users/${id}`);
   }
 }
 

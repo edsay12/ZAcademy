@@ -26,7 +26,8 @@ export async function GET(
       email: true,
       image: true,
       name: true,
-      Course:true
+      Course:true,
+      Stared:true
     },
   });
 

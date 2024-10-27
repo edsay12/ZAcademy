@@ -19,6 +19,16 @@ class CourseService {
       return error;
     }
   }
+
+  async getStaredCourses({ userId }: { userId: string }) {
+    try {
+      const response = await Axios.get(`/api/courses/list/${userId}/stared`);
+
+      return response.data.data;
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
