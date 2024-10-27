@@ -201,7 +201,6 @@ exports.Prisma.ShoppingScalarFieldEnum = {
 };
 
 exports.Prisma.StaredScalarFieldEnum = {
-  id: 'id',
   courseId: 'courseId',
   userId: 'userId',
   createdAt: 'createdAt',

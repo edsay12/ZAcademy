@@ -1,16 +1,52 @@
+"use client"
 import Image from "next/image";
 import Link from "next/link";
-import { AiOutlineHeart } from "react-icons/ai";
-
+import { useEffect, useState } from "react";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { useSession } from "next-auth/react";
+import { staredCourse } from "@/services/stared";
 type PropTypes = {
-  courseId:string;
+  courseId: string;
   courseImageUrl: string;
   userImageUrl: string;
   instructorName: string;
-  url:string
+  url: string;
+  stareds: { userId: string }[];
 };
 
-function CardTop({ courseImageUrl, userImageUrl, instructorName,courseId,url="" }: PropTypes) {
+function CardTop({
+  courseImageUrl,
+  userImageUrl,
+  instructorName,
+  courseId,
+  url = "",
+  stareds,
+}: PropTypes) {
+  const session = useSession();
+  const sessionUserId = session.data?.user.id;
+  const [isStared, setIsStared] = useState(false);
+  function handdleStared(){
+    staredCourse.stared(sessionUserId!,courseId).then(()=>{
+      setIsStared(prevIsStared => !prevIsStared);
+    }).catch((err)=>{
+      if(!sessionUserId){
+        return alert('faça login para continuar')
+      }
+      alert("erro ao favoritar video")
+
+    })
+  }
+
+
+  useEffect(() => {
+    if (stareds && sessionUserId) {
+      const isStared = stareds.find((item) => item.userId === sessionUserId)
+        ? true
+        : false;
+      setIsStared(isStared);
+      console.log("estou stared ?",isStared);
+    }
+  }, [stareds,sessionUserId]);
   return (
     <div className="relative w-full">
       <Link href={url}>
@@ -35,8 +71,13 @@ function CardTop({ courseImageUrl, userImageUrl, instructorName,courseId,url="" 
         <p className="text-white">{instructorName}</p>
       </div>
 
-      <div className="absolute top-5 right-4 bg-orange-600 text-white w-12 h-12 flex items-center justify-center rounded-full text-xl cursor-pointer hover:opacity-85">
-        <AiOutlineHeart />
+      <div
+        onClick={handdleStared}
+        className={`absolute top-5 right-4 ${
+          isStared ? "bg-yellow-600" : "bg-orange-600"
+        }  text-white w-12 h-12 flex items-center justify-center rounded-full text-xl cursor-pointer hover:opacity-85`}
+      >
+        {isStared ? <AiFillHeart/> : <AiOutlineHeart/>}
       </div>
     </div>
   );

@@ -21,6 +21,7 @@ export interface Course {
   updatedAt: Date;
   user: User;
   Module: ModuleType[];
+  Stared:{ userId: string }[];
 }
 
 export interface User {
@@ -46,6 +47,11 @@ export async function GET(req: NextRequest) {
         Module: {
           include: {
             Class: true,
+          },
+        },
+        Stared: {
+          select: {
+            userId: true,
           },
         },
         user: {

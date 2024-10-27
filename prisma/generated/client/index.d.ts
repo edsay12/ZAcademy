@@ -10079,7 +10079,6 @@ export namespace Prisma {
   }
 
   export type StaredMinAggregateOutputType = {
-    id: string | null
     courseId: string | null
     userId: string | null
     createdAt: Date | null
@@ -10087,7 +10086,6 @@ export namespace Prisma {
   }
 
   export type StaredMaxAggregateOutputType = {
-    id: string | null
     courseId: string | null
     userId: string | null
     createdAt: Date | null
@@ -10095,7 +10093,6 @@ export namespace Prisma {
   }
 
   export type StaredCountAggregateOutputType = {
-    id: number
     courseId: number
     userId: number
     createdAt: number
@@ -10105,7 +10102,6 @@ export namespace Prisma {
 
 
   export type StaredMinAggregateInputType = {
-    id?: true
     courseId?: true
     userId?: true
     createdAt?: true
@@ -10113,7 +10109,6 @@ export namespace Prisma {
   }
 
   export type StaredMaxAggregateInputType = {
-    id?: true
     courseId?: true
     userId?: true
     createdAt?: true
@@ -10121,7 +10116,6 @@ export namespace Prisma {
   }
 
   export type StaredCountAggregateInputType = {
-    id?: true
     courseId?: true
     userId?: true
     createdAt?: true
@@ -10202,7 +10196,6 @@ export namespace Prisma {
   }
 
   export type StaredGroupByOutputType = {
-    id: string
     courseId: string
     userId: string
     createdAt: Date
@@ -10227,7 +10220,6 @@ export namespace Prisma {
 
 
   export type StaredSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
     courseId?: boolean
     userId?: boolean
     createdAt?: boolean
@@ -10237,7 +10229,6 @@ export namespace Prisma {
   }, ExtArgs["result"]["stared"]>
 
   export type StaredSelectScalar = {
-    id?: boolean
     courseId?: boolean
     userId?: boolean
     createdAt?: boolean
@@ -10257,7 +10248,6 @@ export namespace Prisma {
       user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
       courseId: string
       userId: string
       createdAt: Date
@@ -10354,8 +10344,8 @@ export namespace Prisma {
      * // Get first 10 Stareds
      * const stareds = await prisma.stared.findMany({ take: 10 })
      * 
-     * // Only select the `id`
-     * const staredWithIdOnly = await prisma.stared.findMany({ select: { id: true } })
+     * // Only select the `courseId`
+     * const staredWithCourseIdOnly = await prisma.stared.findMany({ select: { courseId: true } })
      * 
     **/
     findMany<T extends StaredFindManyArgs<ExtArgs>>(
@@ -10659,7 +10649,6 @@ export namespace Prisma {
    * Fields of the Stared model
    */ 
   interface StaredFieldRefs {
-    readonly id: FieldRef<"Stared", 'String'>
     readonly courseId: FieldRef<"Stared", 'String'>
     readonly userId: FieldRef<"Stared", 'String'>
     readonly createdAt: FieldRef<"Stared", 'DateTime'>
@@ -12046,7 +12035,6 @@ export namespace Prisma {
 
 
   export const StaredScalarFieldEnum: {
-    id: 'id',
     courseId: 'courseId',
     userId: 'userId',
     createdAt: 'createdAt',
@@ -12841,7 +12829,6 @@ export namespace Prisma {
     AND?: StaredWhereInput | StaredWhereInput[]
     OR?: StaredWhereInput[]
     NOT?: StaredWhereInput | StaredWhereInput[]
-    id?: StringFilter<"Stared"> | string
     courseId?: StringFilter<"Stared"> | string
     userId?: StringFilter<"Stared"> | string
     createdAt?: DateTimeFilter<"Stared"> | Date | string
@@ -12851,7 +12838,6 @@ export namespace Prisma {
   }
 
   export type StaredOrderByWithRelationInput = {
-    id?: SortOrder
     courseId?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -12861,7 +12847,7 @@ export namespace Prisma {
   }
 
   export type StaredWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
+    courseId_userId?: StaredCourseIdUserIdCompoundUniqueInput
     AND?: StaredWhereInput | StaredWhereInput[]
     OR?: StaredWhereInput[]
     NOT?: StaredWhereInput | StaredWhereInput[]
@@ -12871,10 +12857,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Stared"> | Date | string
     course?: XOR<CourseRelationFilter, CourseWhereInput>
     user?: XOR<UserRelationFilter, UserWhereInput>
-  }, "id">
+  }, "courseId_userId">
 
   export type StaredOrderByWithAggregationInput = {
-    id?: SortOrder
     courseId?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -12888,7 +12873,6 @@ export namespace Prisma {
     AND?: StaredScalarWhereWithAggregatesInput | StaredScalarWhereWithAggregatesInput[]
     OR?: StaredScalarWhereWithAggregatesInput[]
     NOT?: StaredScalarWhereWithAggregatesInput | StaredScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Stared"> | string
     courseId?: StringWithAggregatesFilter<"Stared"> | string
     userId?: StringWithAggregatesFilter<"Stared"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Stared"> | Date | string
@@ -13651,7 +13635,6 @@ export namespace Prisma {
   }
 
   export type StaredCreateInput = {
-    id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     course: CourseCreateNestedOneWithoutStaredInput
@@ -13659,7 +13642,6 @@ export namespace Prisma {
   }
 
   export type StaredUncheckedCreateInput = {
-    id?: string
     courseId: string
     userId: string
     createdAt?: Date | string
@@ -13667,7 +13649,6 @@ export namespace Prisma {
   }
 
   export type StaredUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     course?: CourseUpdateOneRequiredWithoutStaredNestedInput
@@ -13675,7 +13656,6 @@ export namespace Prisma {
   }
 
   export type StaredUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
     courseId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13683,7 +13663,6 @@ export namespace Prisma {
   }
 
   export type StaredCreateManyInput = {
-    id?: string
     courseId: string
     userId: string
     createdAt?: Date | string
@@ -13691,13 +13670,11 @@ export namespace Prisma {
   }
 
   export type StaredUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StaredUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
     courseId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14444,8 +14421,12 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type StaredCourseIdUserIdCompoundUniqueInput = {
+    courseId: string
+    userId: string
+  }
+
   export type StaredCountOrderByAggregateInput = {
-    id?: SortOrder
     courseId?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -14453,7 +14434,6 @@ export namespace Prisma {
   }
 
   export type StaredMaxOrderByAggregateInput = {
-    id?: SortOrder
     courseId?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -14461,7 +14441,6 @@ export namespace Prisma {
   }
 
   export type StaredMinOrderByAggregateInput = {
-    id?: SortOrder
     courseId?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -15866,14 +15845,12 @@ export namespace Prisma {
   }
 
   export type StaredCreateWithoutUserInput = {
-    id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     course: CourseCreateNestedOneWithoutStaredInput
   }
 
   export type StaredUncheckedCreateWithoutUserInput = {
-    id?: string
     courseId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -16090,7 +16067,6 @@ export namespace Prisma {
     AND?: StaredScalarWhereInput | StaredScalarWhereInput[]
     OR?: StaredScalarWhereInput[]
     NOT?: StaredScalarWhereInput | StaredScalarWhereInput[]
-    id?: StringFilter<"Stared"> | string
     courseId?: StringFilter<"Stared"> | string
     userId?: StringFilter<"Stared"> | string
     createdAt?: DateTimeFilter<"Stared"> | Date | string
@@ -16191,14 +16167,12 @@ export namespace Prisma {
   }
 
   export type StaredCreateWithoutCourseInput = {
-    id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutStaredInput
   }
 
   export type StaredUncheckedCreateWithoutCourseInput = {
-    id?: string
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -17572,7 +17546,6 @@ export namespace Prisma {
   }
 
   export type StaredCreateManyUserInput = {
-    id?: string
     courseId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -17770,21 +17743,18 @@ export namespace Prisma {
   }
 
   export type StaredUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     course?: CourseUpdateOneRequiredWithoutStaredNestedInput
   }
 
   export type StaredUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
     courseId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StaredUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
     courseId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17805,7 +17775,6 @@ export namespace Prisma {
   }
 
   export type StaredCreateManyCourseInput = {
-    id?: string
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -17856,21 +17825,18 @@ export namespace Prisma {
   }
 
   export type StaredUpdateWithoutCourseInput = {
-    id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutStaredNestedInput
   }
 
   export type StaredUncheckedUpdateWithoutCourseInput = {
-    id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StaredUncheckedUpdateManyWithoutCourseInput = {
-    id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

@@ -20,7 +20,7 @@ import { coursesData } from "@/fakeData/CourseCardData";
 import Link from "next/link";
 import { categories } from "@/fakeData/categories";
 
-import { useSession } from "next-auth/react";
+
 import { useQuery } from "react-query";
 
 import { courseService } from "@/services/courses";
@@ -32,6 +32,7 @@ function Home() {
     queryKey: ["courses"],
     queryFn: courseService.getAllCourses,
   });
+  
   const [itens, setItens] = useState<Course | any>([]);
   const [filter, setFilterItens] = useState<Course | any>([]);
 
@@ -68,6 +69,8 @@ function Home() {
                           courseImageUrl={item.image}
                           instructorName={item.user.name!}
                           userImageUrl={item.user.image!}
+                       
+                          stareds={item.Stared}
                         />
                         <CardBotton
                           courseId={item.id}
@@ -149,6 +152,8 @@ function Home() {
                         courseImageUrl={item.image}
                         instructorName={item.user.name ?? ""}
                         userImageUrl={item.user.image ?? ""}
+                        stareds={item.Stared}
+
                       />
                       <CardBotton
                         courseId={item.id}

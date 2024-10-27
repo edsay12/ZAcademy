@@ -38,5 +38,6 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest) {
-  return await db.account.findMany()
+  const users= await db.account.findMany()
+  return NextResponse.json({ users });
 }

@@ -128,13 +128,14 @@ model Shopping {
 }
 
 model Stared {
-  id        String   @id @default(uuid())
   courseId  String
   userId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+   @@id([courseId, userId]) // Define a chave composta
 }
 
 model ClassProgress {
