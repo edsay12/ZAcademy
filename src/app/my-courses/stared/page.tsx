@@ -7,31 +7,61 @@ import SectionContainer from "@/components/Section/SectionContainer";
 import { useQuery, useQueryClient } from "react-query";
 
 import { courseService } from "@/services/courses";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Course, User } from "@/app/api/courses/all/route";
 import Loading from "@/components/Loading";
 import { useSession } from "next-auth/react";
+import { staredCourse } from "@/services/stared";
 const array = [1, 2, 3];
 
 type staredCourses = {
-  course:Course,
-  user:User
-}
+  course: Course;
+  user: User;
+};
 
 function Stared() {
   const session = useSession();
   const userId = session.data?.user.id;
-  const { data: couseApiData = [], isLoading } = useQuery<staredCourses[]>({
-    queryKey: ["userStared"],
-    queryFn: () =>
-      courseService.getStaredCourses({
-        userId: userId!,
-      }),
-    enabled: !!userId,
-  });
-  
-  // Ao apetar o bottão de não stared deve rerenderizar a parte de stared e mostrar apeans oque de fato faz sentido
+  const queryClient = useQueryClient();
 
+  const { data: couseApiData = [] as Course[], isLoading } = useQuery<Course[]>(
+    {
+      queryKey: ["staredCourses"],
+      queryFn: () =>
+        courseService.getStaredCourses({
+          userId: userId!,
+        }),
+      enabled: !!userId,
+      cacheTime: 0, // Desativa o cache
+      staleTime: 0,
+    }
+  );
+
+  const [stared, setStared] = useState<Course[]>([]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      setStared(couseApiData);
+    }
+  }, [isLoading]);
+
+  function removeStared(courseId: string) {
+
+    staredCourse
+      .stared(userId!, courseId)
+      .then(() => {
+        setStared((prev) => prev.filter((item) => item.id !== courseId));
+        queryClient.invalidateQueries(['stared']);
+      })
+      .catch((err) => {
+        if (!userId) {
+          return alert("faça login para continuar");
+        }
+        alert("Erro ao favoritar curso");
+      });
+
+    
+  }
 
   return (
     <SectionContainer className="min-h-[500px] pb-5">
@@ -42,34 +72,38 @@ function Stared() {
       ) : (
         <>
           <CardContainer>
-            {couseApiData.length > 0 &&
-              couseApiData.slice(0, 4).map((item: staredCourses) => {
+            {stared.length > 0 ? (
+              stared.slice(0, 4).map((item) => {
                 return (
-                  <Suspense key={item.course.id} fallback={<Loading isLoading />}>
-                    <Card key={item.course.id}>
+                  <Suspense key={item.id} fallback={<Loading isLoading />}>
+                    <Card key={item.id}>
                       <CardTop
-                        url={`/course/${item.course.id}`}
-                        courseId={item.course.id}
-                        courseImageUrl={item.course.image}
+                        url={`/course/${item.id}`}
+                        courseId={item.id}
+                        courseImageUrl={item.image}
                         instructorName={item.user.name!}
                         userImageUrl={item.user.image!}
-                        
-                        stareds={item.course.Stared}
-
+                        staredItens={[item.id]}
+                        toogleStared={() => removeStared(item.id)}
                       />
                       <CardBotton
-                        courseId={item.course.id}
-                        courseLevel={item.course.level}
-                        coursePrice={item.course.price}
+                        courseId={item.id}
+                        courseLevel={item.level}
+                        coursePrice={item.price}
                         textColor="text-black"
-                        courseStarNumber={item.course.starNumber}
-                        courseTitle={item.course.title}
+                        courseStarNumber={item.starNumber}
+                        courseTitle={item.title}
                         courseTotalTime={10}
                       />
                     </Card>
                   </Suspense>
                 );
-              })}
+              })
+            ) : (
+              <p>
+                Nada aqui ainda adicione itens aos seus favoritos para continuar
+              </p>
+            )}
           </CardContainer>
         </>
       )}
