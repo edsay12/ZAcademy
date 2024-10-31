@@ -2,7 +2,6 @@ import { db } from "@/lib/db";
 
 
 import { NextRequest, NextResponse } from "next/server";
-import { Course } from "../../../all/route";
 
 export async function GET(
   req: NextRequest,
@@ -23,23 +22,18 @@ export async function GET(
     const couses= await db.stared.findMany({
       where: {
         userId: userId,
+        
       },
-      include: {
-        course:{
-          include:{
-            Stared:true
-          }
-        },
-        user:true,
-      },
+      select:{
+        courseId:true
+      }
+      
     });
     
-    const courseDetails = couses.map(stared => ({
-        course: stared.course,
-        user: stared.user,
-      }));
+    const courseStaredDate = couses.map((item)=> item.courseId)
+    
 
-    return NextResponse.json({ data: courseDetails }, { status: 200 });
+    return NextResponse.json({ data: courseStaredDate }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ data: error }, { status: 500 });
   }

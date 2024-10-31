@@ -9,6 +9,14 @@ class Stared {
       throw new Error("Erro ao favoritar");
     }
   }
+  async getstared({userId}:{userId: string}) {
+    try {
+      const response = await Axios.get(`/api/courses/list/${userId}/stared`)
+      return response.data.data;
+    } catch (error) {
+      throw new Error("Erro ao favoritar");
+    }
+  }
 }
 
 export const staredCourse = new Stared();

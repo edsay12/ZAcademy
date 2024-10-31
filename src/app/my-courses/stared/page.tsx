@@ -4,7 +4,7 @@ import CardBotton from "@/components/Card/CardBotton";
 import CardContainer from "@/components/Card/CardContainer";
 import CardTop from "@/components/Card/CardTop";
 import SectionContainer from "@/components/Section/SectionContainer";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 
 import { courseService } from "@/services/courses";
 import { Suspense } from "react";
@@ -29,6 +29,8 @@ function Stared() {
       }),
     enabled: !!userId,
   });
+  
+  // Ao apetar o bottão de não stared deve rerenderizar a parte de stared e mostrar apeans oque de fato faz sentido
 
 
   return (
@@ -51,7 +53,9 @@ function Stared() {
                         courseImageUrl={item.course.image}
                         instructorName={item.user.name!}
                         userImageUrl={item.user.image!}
+                        
                         stareds={item.course.Stared}
+
                       />
                       <CardBotton
                         courseId={item.course.id}

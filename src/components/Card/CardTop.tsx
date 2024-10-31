@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -11,7 +11,8 @@ type PropTypes = {
   userImageUrl: string;
   instructorName: string;
   url: string;
-  stareds: { userId: string }[];
+  toogleStared: (courseId:string) => void;
+  staredItens: string[];
 };
 
 function CardTop({
@@ -19,34 +20,13 @@ function CardTop({
   userImageUrl,
   instructorName,
   courseId,
+  staredItens,
+  toogleStared,
+
   url = "",
-  stareds,
 }: PropTypes) {
-  const session = useSession();
-  const sessionUserId = session.data?.user.id;
-  const [isStared, setIsStared] = useState(false);
-  function handdleStared(){
-    staredCourse.stared(sessionUserId!,courseId).then(()=>{
-      setIsStared(prevIsStared => !prevIsStared);
-    }).catch((err)=>{
-      if(!sessionUserId){
-        return alert('faça login para continuar')
-      }
-      alert("erro ao favoritar video")
-
-    })
-  }
-
-
-  useEffect(() => {
-    if (stareds && sessionUserId) {
-      const isStared = stareds.find((item) => item.userId === sessionUserId)
-        ? true
-        : false;
-      setIsStared(isStared);
-      console.log("estou stared ?",isStared);
-    }
-  }, [stareds,sessionUserId]);
+  console.log(staredItens);
+  const isStared = staredItens ? staredItens.includes(courseId) : false;
   return (
     <div className="relative w-full">
       <Link href={url}>
@@ -72,12 +52,12 @@ function CardTop({
       </div>
 
       <div
-        onClick={handdleStared}
+        onClick={() => toogleStared(courseId)}
         className={`absolute top-5 right-4 ${
           isStared ? "bg-yellow-600" : "bg-orange-600"
         }  text-white w-12 h-12 flex items-center justify-center rounded-full text-xl cursor-pointer hover:opacity-85`}
       >
-        {isStared ? <AiFillHeart/> : <AiOutlineHeart/>}
+        {isStared ? <AiFillHeart /> : <AiOutlineHeart />}
       </div>
     </div>
   );

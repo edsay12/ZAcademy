@@ -14,34 +14,65 @@ import CategoriesButtons from "@/components/CategoriesButtons";
 import TestimonialCard from "@/components/TestimonialCard";
 import Image from "next/image";
 import Button from "@/components/Button";
-import DataFormater from "../../utils/FormateDateDifference";
-import FormateDateDifference from "../../utils/FormateDateDifference";
-import { coursesData } from "@/fakeData/CourseCardData";
+
 import Link from "next/link";
 import { categories } from "@/fakeData/categories";
 
-
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 
 import { courseService } from "@/services/courses";
 import { Course } from "../api/courses/all/route";
 import Loading from "@/components/Loading";
+import { staredCourse } from "@/services/stared";
+import { useSession } from "next-auth/react";
 
 function Home() {
+  const session = useSession();
+  const userId = session.data?.user.id;
   const { data: couseApiData = [], isLoading } = useQuery<Course[]>({
     queryKey: ["courses"],
     queryFn: courseService.getAllCourses,
   });
-  
-  const [itens, setItens] = useState<Course | any>([]);
+
+  const { data: userStared = [], isLoading: isStaredLoading } = useQuery<[]>({
+    queryKey: ["stared"],
+    queryFn: () => staredCourse.getstared({ userId: userId! }),
+    enabled: !!userId,
+  });
+  const [itens, setItens] = useState<Course[] | any>([]);
   const [filter, setFilterItens] = useState<Course | any>([]);
+  const [staredItens, setStaredItens] = useState<string[]>([]);
 
   useEffect(() => {
     if (!isLoading) {
       setItens(couseApiData);
       setFilterItens(couseApiData);
     }
-  }, [couseApiData, isLoading]);
+    if (!isStaredLoading) {
+      setStaredItens(userStared);
+    }
+  }, [couseApiData, isLoading, isStaredLoading, userStared]);
+
+  const toogleStared = (courseId: string) => {
+    staredCourse
+      .stared(userId!, courseId)
+      .then(() => {
+        if (staredItens.includes(courseId)) {
+          // Retorna uma nova lista sem o item
+
+          setStaredItens((prev) => prev.filter((i) => i !== courseId));
+        } else {
+          // Retorna uma nova lista com o item adicionado
+          setStaredItens((prev) => [...prev, courseId]);
+        }
+      })
+      .catch((err) => {
+        if (!userId) {
+          return alert("faça login para continuar");
+        }
+        alert("Erro ao favoritar curso");
+      });
+  };
 
   return (
     <>
@@ -69,8 +100,8 @@ function Home() {
                           courseImageUrl={item.image}
                           instructorName={item.user.name!}
                           userImageUrl={item.user.image!}
-                       
-                          stareds={item.Stared}
+                          staredItens={staredItens}
+                          toogleStared={toogleStared}
                         />
                         <CardBotton
                           courseId={item.id}
@@ -147,13 +178,13 @@ function Home() {
                   return (
                     <Card key={item.id}>
                       <CardTop
-                        url="/course/asdas"
+                        url={`/course/${item.id}`}
                         courseId={item.id}
                         courseImageUrl={item.image}
-                        instructorName={item.user.name ?? ""}
-                        userImageUrl={item.user.image ?? ""}
-                        stareds={item.Stared}
-
+                        instructorName={item.user.name!}
+                        userImageUrl={item.user.image!}
+                        staredItens={staredItens}
+                        toogleStared={toogleStared}
                       />
                       <CardBotton
                         courseId={item.id}
