@@ -1,13 +1,13 @@
+import { Session, User } from "next-auth";
 import { Role } from "../../prisma/generated/client";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-function UserDropdown() {
+function UserDropdown({ user }: { user: User}) {
   const [isOppen, setIsOppen] = useState(false);
-  const session = useSession();
-  const user = session.data?.user;
+  let session = useSession();
   const handdleToggle = () => {
     setIsOppen((state) => !state);
   };
@@ -34,9 +34,7 @@ function UserDropdown() {
 
         <div
           id="dropdownAvatar"
-          className={`z-10   absolute top-8 right-0 ${
-            isOppen ? "" : "hidden"
-          }`}
+          className={`z-10   absolute top-8 right-0 ${isOppen ? "" : "hidden"}`}
         >
           <div className="mt-5  divide-y  rounded-lg shadow w-44  divide-gray-600 bg-gray-700">
             <div className="px-4 py-3 text-sm  text-white">

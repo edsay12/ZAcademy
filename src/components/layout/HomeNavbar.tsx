@@ -128,7 +128,7 @@ function HomeNavbar() {
               {session.data?.user ? (
                 <>
                   <div className="w-14 bg-transparent">
-                    <UserDropdown />
+                    <UserDropdown user={session.data?.user} />
                   </div>
                 </>
               ) : (
